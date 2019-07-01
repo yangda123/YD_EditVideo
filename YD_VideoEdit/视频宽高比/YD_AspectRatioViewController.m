@@ -24,10 +24,26 @@
 - (void)yd_layoutSubViews {
     [super yd_layoutSubViews];
     
-    YD_RatioView *ratioView = [[YD_RatioView alloc] initWithRatio:1.0];
-    self.ratioView = ratioView;
-    ratioView.themeColor = self.model.themeColor;
-    [self.view addSubview:ratioView];
+    {
+        self.player.containView.backgroundColor = UIColor.whiteColor;
+        
+        UIImageView *imgView = [[UIImageView alloc] init];
+        imgView.frame = CGRectMake(0, 0, YD_ScreenWidth, YD_ScreenWidth);
+        imgView.image = self.playModel.coverImage;
+        [self.player.containView insertSubview:imgView atIndex:0];
+        
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
+        effectview.frame = imgView.bounds;
+        [imgView addSubview:effectview];
+    }
+    
+    {
+        YD_RatioView *ratioView = [[YD_RatioView alloc] initWithRatio:1.0];
+        self.ratioView = ratioView;
+        ratioView.themeColor = self.model.themeColor;
+        [self.view addSubview:ratioView];
+    }
 }
 
 - (void)yd_layoutConstraints {

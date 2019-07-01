@@ -7,13 +7,17 @@
 //
 
 #import "ViewController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 #import "YD_RotateViewController.h"
 #import "YD_SpeedViewController.h"
-#import <MobileCoreServices/MobileCoreServices.h>
+#import "YD_UpendViewController.h"
+#import "YD_AspectRatioViewController.h"
 
 @interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, assign) BOOL isSpeed;
+@property (nonatomic, weak) UIButton *currentBtn;
+
+@property (nonatomic, strong) NSArray *classArray;
 
 @end
 
@@ -27,14 +31,21 @@
     self.view.backgroundColor = UIColor.whiteColor;
     self.title = @"首页";
     
+    self.classArray = @[YD_RotateViewController.class,
+                        YD_SpeedViewController.class,
+                        YD_UpendViewController.class,
+                        YD_AspectRatioViewController.class];
+    
     [self yd_createButton:@"旋转" index:0];
     [self yd_createButton:@"变速" index:1];
+    [self yd_createButton:@"倒放" index:2];
+    [self yd_createButton:@"宽高比" index:3];
 }
 
 - (void)yd_createButton:(NSString *)title index:(NSInteger)index {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.tag = index;
-    button.frame = CGRectMake(self.view.bounds.size.width * 0.5 - 60, 100 + index * 100, 120, 60);
+    button.frame = CGRectMake(self.view.bounds.size.width * 0.5 - 60, YD_TopBarHeight + 20 + index * 80, 120, 60);
     button.backgroundColor = UIColor.orangeColor;
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
@@ -44,31 +55,8 @@
 }
 
 - (void)yd_buttonAction:(UIButton *)btn {
-    switch (btn.tag) {
-        case 0:
-            [self yd_rotate];
-            break;
-        case 1:
-            [self yd_changeSpeed];
-            break;
-    }
-}
-
-// 旋转
-- (void)yd_rotate {
-    self.isSpeed = NO;
-    UIImagePickerController *picker = [UIImagePickerController new];
-    picker.delegate = self;
-    picker.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    /// 录制的类型 下面为视频
-    picker.mediaTypes = @[(NSString*)kUTTypeMovie];
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    [self presentViewController:picker animated:YES completion:nil];
-}
-
-// 变速
-- (void)yd_changeSpeed {
-    self.isSpeed = YES;
+    
+    self.currentBtn = btn;
     
     UIImagePickerController *picker = [UIImagePickerController new];
     picker.delegate = self;
@@ -90,22 +78,13 @@
             
             NSURL *url = [info objectForKey:UIImagePickerControllerMediaURL];
             
-            if (self.isSpeed) {
-                YD_SpeedModel *model = [YD_SpeedModel new];
-                model.asset = [AVAsset assetWithURL:url];
-                
-                YD_SpeedViewController *vc = [YD_SpeedViewController new];
-                vc.model = model;
-                [self.navigationController pushViewController:vc animated:YES];
-
-            }else {
-                YD_RotateModel *model = [YD_RotateModel new];
-                model.asset = [AVAsset assetWithURL:url];
-                
-                YD_RotateViewController *vc = [YD_RotateViewController new];
-                vc.model = model;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
+            YD_ConfigModel *model = [YD_ConfigModel new];
+            model.asset = [AVAsset assetWithURL:url];
+            
+            Class class = self.classArray[self.currentBtn.tag];
+            YD_BasePlayerViewController *playerVC = (YD_BasePlayerViewController *)[class new];
+            playerVC.model = model;
+            [self.navigationController pushViewController:playerVC animated:YES];
         }];
     }
 }

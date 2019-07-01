@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 typedef NS_ENUM(NSInteger, YD_PlayStatus) {
-    YD_PlayStatusIdle,
+    YD_PlayStatusPreplay,
     YD_PlayStatusPlay,
     YD_PlayStatusPause,
     YD_PlayStatusStop,

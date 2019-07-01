@@ -1,28 +1,28 @@
 //
-//  YD_RotateViewController.m
+//  YD_UpendViewController.m
 //  YD_VideoEidtManager
 //
-//  Created by mac on 2019/6/26.
+//  Created by mac on 2019/7/1.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "YD_RotateViewController.h"
+#import "YD_UpendViewController.h"
 #import "YD_PlayerView.h"
 #import "YD_DefaultPlayControlView.h"
 #import "YD_AssetManager.h"
 
-@interface YD_RotateViewController ()
+@interface YD_UpendViewController ()
 
 @property (nonatomic, weak) UIView *containView;
-@property (nonatomic, weak) UIButton *rotateBtn;
+@property (nonatomic, weak) UIButton *upendBtn;
 @property (nonatomic, weak) UIButton *restoreBtn;
 @property (nonatomic, weak) UILabel *titleLbl;
 
-@property (nonatomic, assign) YD_Orientation orientation;
+@property (nonatomic, strong) AVAsset *upendAsset;
 
 @end
 
-@implementation YD_RotateViewController
+@implementation YD_UpendViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,21 +31,21 @@
 - (void)yd_layoutSubViews {
     
     [super yd_layoutSubViews];
-    
+
     {
         UIView *view = [UIView new];
         self.containView = view;
         [self.view addSubview:view];
         
         UIButton *rotateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.rotateBtn = rotateBtn;
+        self.upendBtn = rotateBtn;
         rotateBtn.backgroundColor = self.model.themeColor;
         rotateBtn.layer.masksToBounds = YES;
         rotateBtn.layer.cornerRadius = 5;
-        [rotateBtn setTitle:@"立即旋转" forState:UIControlStateNormal];
+        [rotateBtn setTitle:@"立即倒放" forState:UIControlStateNormal];
         [rotateBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         rotateBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-        [rotateBtn addTarget:self action:@selector(yd_rotateAction) forControlEvents:UIControlEventTouchUpInside];
+        [rotateBtn addTarget:self action:@selector(yd_upendAction) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:rotateBtn];
         
         UIButton *restoreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -62,7 +62,7 @@
         
         UILabel *label = [UILabel new];
         self.titleLbl = label;
-        label.text = @"(视频将以90°旋转一次）";
+        label.text = @"(视频倒放后将会没有声）";
         label.textColor = [UIColor colorWithHexString:@"#999999"];
         label.font = [UIFont systemFontOfSize:10];
         [view addSubview:label];
@@ -70,7 +70,7 @@
 }
 
 - (void)yd_layoutConstraints {
-    
+
     [super yd_layoutConstraints];
     
     [self.containView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -79,7 +79,7 @@
         make.bottom.equalTo(self.bottomBar.mas_top);
     }];
     
-    [self.rotateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.upendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.containView);
         make.centerY.equalTo(self.containView).offset(-40);
         make.width.mas_equalTo(132);
@@ -88,19 +88,19 @@
     
     [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.containView);
-        make.top.equalTo(self.rotateBtn.mas_bottom).inset(6);
+        make.top.equalTo(self.upendBtn.mas_bottom).inset(6);
     }];
     
     [self.restoreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.containView);
-        make.size.equalTo(self.rotateBtn);
-        make.top.equalTo(self.rotateBtn.mas_bottom).inset(50);
+        make.size.equalTo(self.upendBtn);
+        make.top.equalTo(self.upendBtn.mas_bottom).inset(50);
     }];
 }
 
 #pragma mark - 重写的方法
 - (NSString *)yd_title {
-    return @"旋转";
+    return @"倒放";
 }
 
 - (NSString *)yd_barIconName {
@@ -109,44 +109,39 @@
 
 - (void)yd_completeItemAction {
     
-    [YD_ProgressHUD yd_showHUD:@"正在保存视频"];
-    
-    [YD_AssetManager  yd_rotateAssetWithAsset:self.model.asset degress:self.orientation finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
-        
-        if (isSuccess) {
-            [YD_AssetManager yd_saveToLibrary:exportPath toView:self.view block:^(BOOL success) {
-                [YD_ProgressHUD yd_hideHUD];
-            }];
-        }else {
-            [YD_ProgressHUD yd_hideHUD];
-            [YD_ProgressHUD yd_showMessage:@"保存失败" toView:self.view];
-        }
-    }];
 }
 
 #pragma mark - UI事件
-- (void)yd_rotateAction {
+- (void)yd_upendAction {
     
-    if (self.orientation == YD_OrientationUp) {
-        self.orientation = YD_OrientationRight;
-    }else if (self.orientation == YD_OrientationRight) {
-        self.orientation = YD_OrientationDown;
-    }else if (self.orientation == YD_OrientationDown) {
-        self.orientation = YD_OrientationLeft;
-    }else if (self.orientation == YD_OrientationLeft) {
-        self.orientation = YD_OrientationUp;
+    [self.player yd_pause];
+    
+    if (self.upendAsset) {
+        [self yd_playWithAsset:self.upendAsset];
+        return;
     }
     
-    [UIView animateWithDuration:0.2 animations:^{
-        self.player.containView.transform = CGAffineTransformRotate(self.player.containView.transform, M_PI * 0.5);
+    [YD_ProgressHUD yd_showHUD:@"正在处理视频"];
+    
+    @weakify(self);
+    [YD_AssetManager yd_upendAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+        @strongify(self);
+        [YD_ProgressHUD yd_hideHUD];
+        self.upendAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:exportPath]];
+        [self yd_playWithAsset:self.upendAsset];
     }];
 }
 
 - (void)yd_restoreAction {
-    self.orientation = YD_OrientationUp;
-    [UIView animateWithDuration:0.2 animations:^{
-        self.player.containView.transform = CGAffineTransformIdentity;
-    }];
+    [self.player yd_pause];
+    [self yd_playWithAsset:self.model.asset];
+}
+
+- (void)yd_playWithAsset:(AVAsset *)asset {
+    self.playModel.asset = asset;
+    self.player.yd_model = self.playModel;
+    [self.player yd_play];
 }
 
 @end
+

@@ -10,7 +10,7 @@
 
 @class YD_SliderView;
 
-@protocol YD_SliderViewwDelegate <NSObject>
+@protocol YD_SliderViewDelegate <NSObject>
 
 @optional
 - (void)speedChange:(YD_SliderView *_Nonnull)slider speed:(CGFloat)speed;
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) CGFloat currentSpeed;
 
-@property (nonatomic, weak) id <YD_SliderViewwDelegate> delegate;
+@property (nonatomic, weak) id <YD_SliderViewDelegate> delegate;
 
 @end
 

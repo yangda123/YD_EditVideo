@@ -17,7 +17,7 @@
 
 @property (nonatomic, weak) UIButton *pointBtn;
 @property (nonatomic, weak) UILabel *progressLbl;
-@property (nonatomic, weak) UIView *pro_left;
+@property (nonatomic, weak) UIView *progressView;
 
 @property (nonatomic, weak) UILabel *leftLbl;
 @property (nonatomic, weak) UILabel *rightLbl;
@@ -52,8 +52,7 @@
     }
     {
         UIView *view = [UIView new];
-        self.pro_left = view;
-        view.backgroundColor = [UIColor colorWithHexString:@"#F61847"];
+        self.progressView = view;
         [self.containView addSubview:view];
     }
     {
@@ -76,7 +75,6 @@
         UILabel *label = [UILabel new];
         self.progressLbl = label;
         label.text = @"1.0x";
-        label.textColor = [UIColor colorWithHexString:@"#F61847"];
         label.font = [UIFont systemFontOfSize:10];
         [self.containView addSubview:label];
     }
@@ -115,7 +113,7 @@
         make.height.mas_equalTo(2);
     }];
     
-    [self.pro_left mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.inset(width * 0.5);
         make.left.offset(width * 0.5);
         make.centerY.equalTo(self.containView);
@@ -149,6 +147,11 @@
     });
 }
 
+- (void)setThemeColor:(UIColor *)themeColor {
+    self.progressView.backgroundColor = themeColor;
+    self.progressLbl.textColor = themeColor;
+}
+
 #pragma mark - UI事件
 - (void)dragGesture:(UIPanGestureRecognizer *)gesture {
     
@@ -165,7 +168,7 @@
     CGFloat left = MIN(width, center_x);
     CGFloat right = MIN(width, self.containView.YD_width - center_x);
     
-    [self.pro_left mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.progressView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.offset(left);
         make.right.inset(right);
     }];

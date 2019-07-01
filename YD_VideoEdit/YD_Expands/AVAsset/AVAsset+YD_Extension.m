@@ -7,6 +7,7 @@
 //
 
 #import "AVAsset+YD_Extension.h"
+#import "YD_CGAffineManager.h"
 
 @implementation AVAsset (YD_Extension)
 
@@ -111,18 +112,7 @@
     if(tracks.count) {
         AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
         CGAffineTransform t = videoTrack.preferredTransform;
-        if(t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0) {
-            degress = 90;
-        }else if(t.a == 0 && t.b == -1.0 && t.c == 1.0 && t.d == 0){
-            // PortraitUpsideDown
-            degress = 270;
-        }else if(t.a == 1.0 && t.b == 0 && t.c == 0 && t.d == 1.0){
-            // LandscapeRight
-            degress = 0;
-        }else if(t.a == -1.0 && t.b == 0 && t.c == 0 && t.d == -1.0){
-            // LandscapeLeft
-            degress = 180;
-        }
+        degress = [YD_CGAffineManager yd_orientation:t];
     }
     
     return degress;

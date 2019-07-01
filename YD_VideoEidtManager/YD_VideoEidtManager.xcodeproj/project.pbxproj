@@ -43,12 +43,15 @@
 		04C697AD22C9E04500035132 /* YD_BottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6977D22C9E04400035132 /* YD_BottomBar.m */; };
 		04C697AE22C9E04500035132 /* YD_BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6978422C9E04400035132 /* YD_BaseView.m */; };
 		04C697AF22C9E04500035132 /* YD_Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6978522C9E04400035132 /* YD_Slider.m */; };
-		04C697B022C9E04500035132 /* YD_BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6978622C9E04400035132 /* YD_BaseModel.m */; };
 		04C697B122C9E04500035132 /* YD_SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6978922C9E04400035132 /* YD_SliderView.m */; };
-		04C697B222C9E04500035132 /* YD_SpeedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6978B22C9E04400035132 /* YD_SpeedModel.m */; };
 		04C697B322C9E04500035132 /* YD_SpeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6978D22C9E04400035132 /* YD_SpeedViewController.m */; };
 		04C697B422C9E04500035132 /* YD_RotateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6978F22C9E04400035132 /* YD_RotateViewController.m */; };
-		04C697B522C9E04500035132 /* YD_RotateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6979122C9E04400035132 /* YD_RotateModel.m */; };
+		04C697B822C9E7C500035132 /* YD_CGAffineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C697B722C9E7C500035132 /* YD_CGAffineManager.m */; };
+		04C697C222C9EC2000035132 /* YD_UpendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C697C122C9EC2000035132 /* YD_UpendViewController.m */; };
+		04C697C522C9EDB100035132 /* YD_BasePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C697C422C9EDB100035132 /* YD_BasePlayerViewController.m */; };
+		04C697D122CA004500035132 /* YD_ConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C697CF22CA004500035132 /* YD_ConfigModel.m */; };
+		04C697D522CA0CC600035132 /* YD_AspectRatioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C697D422CA0CC600035132 /* YD_AspectRatioViewController.m */; };
+		04C697D822CA0DDD00035132 /* YD_RatioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C697D722CA0DDD00035132 /* YD_RatioView.m */; };
 		559022E831A9DF8B390FB6C0 /* libPods-YD_VideoEidtManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A89DFC027EACF199D1CC3F /* libPods-YD_VideoEidtManager.a */; };
 /* End PBXBuildFile section */
 
@@ -102,23 +105,29 @@
 		04C6977D22C9E04400035132 /* YD_BottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_BottomBar.m; sourceTree = "<group>"; };
 		04C6977E22C9E04400035132 /* YD_Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_Slider.h; sourceTree = "<group>"; };
 		04C6977F22C9E04400035132 /* YD_BaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_BaseView.h; sourceTree = "<group>"; };
-		04C6978022C9E04400035132 /* YD_BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_BaseModel.h; sourceTree = "<group>"; };
 		04C6978122C9E04400035132 /* YD_BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_BaseViewController.h; sourceTree = "<group>"; };
 		04C6978222C9E04400035132 /* YD_BottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_BottomBar.h; sourceTree = "<group>"; };
 		04C6978322C9E04400035132 /* YD_VideoEditManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_VideoEditManager.h; sourceTree = "<group>"; };
 		04C6978422C9E04400035132 /* YD_BaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_BaseView.m; sourceTree = "<group>"; };
 		04C6978522C9E04400035132 /* YD_Slider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_Slider.m; sourceTree = "<group>"; };
-		04C6978622C9E04400035132 /* YD_BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_BaseModel.m; sourceTree = "<group>"; };
-		04C6978822C9E04400035132 /* YD_SpeedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_SpeedModel.h; sourceTree = "<group>"; };
 		04C6978922C9E04400035132 /* YD_SliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_SliderView.m; sourceTree = "<group>"; };
 		04C6978A22C9E04400035132 /* YD_SpeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_SpeedViewController.h; sourceTree = "<group>"; };
-		04C6978B22C9E04400035132 /* YD_SpeedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_SpeedModel.m; sourceTree = "<group>"; };
 		04C6978C22C9E04400035132 /* YD_SliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_SliderView.h; sourceTree = "<group>"; };
 		04C6978D22C9E04400035132 /* YD_SpeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_SpeedViewController.m; sourceTree = "<group>"; };
 		04C6978F22C9E04400035132 /* YD_RotateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_RotateViewController.m; sourceTree = "<group>"; };
-		04C6979022C9E04400035132 /* YD_RotateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_RotateModel.h; sourceTree = "<group>"; };
-		04C6979122C9E04400035132 /* YD_RotateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_RotateModel.m; sourceTree = "<group>"; };
 		04C6979222C9E04400035132 /* YD_RotateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_RotateViewController.h; sourceTree = "<group>"; };
+		04C697B622C9E7C500035132 /* YD_CGAffineManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_CGAffineManager.h; sourceTree = "<group>"; };
+		04C697B722C9E7C500035132 /* YD_CGAffineManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_CGAffineManager.m; sourceTree = "<group>"; };
+		04C697C022C9EC2000035132 /* YD_UpendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_UpendViewController.h; sourceTree = "<group>"; };
+		04C697C122C9EC2000035132 /* YD_UpendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_UpendViewController.m; sourceTree = "<group>"; };
+		04C697C322C9EDB100035132 /* YD_BasePlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_BasePlayerViewController.h; sourceTree = "<group>"; };
+		04C697C422C9EDB100035132 /* YD_BasePlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_BasePlayerViewController.m; sourceTree = "<group>"; };
+		04C697CF22CA004500035132 /* YD_ConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_ConfigModel.m; sourceTree = "<group>"; };
+		04C697D022CA004500035132 /* YD_ConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_ConfigModel.h; sourceTree = "<group>"; };
+		04C697D322CA0CC600035132 /* YD_AspectRatioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_AspectRatioViewController.h; sourceTree = "<group>"; };
+		04C697D422CA0CC600035132 /* YD_AspectRatioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_AspectRatioViewController.m; sourceTree = "<group>"; };
+		04C697D622CA0DDD00035132 /* YD_RatioView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_RatioView.h; sourceTree = "<group>"; };
+		04C697D722CA0DDD00035132 /* YD_RatioView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_RatioView.m; sourceTree = "<group>"; };
 		24A89DFC027EACF199D1CC3F /* libPods-YD_VideoEidtManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YD_VideoEidtManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71116BD90830EE257FF48990 /* Pods-YD_VideoEidtManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YD_VideoEidtManager.debug.xcconfig"; path = "Target Support Files/Pods-YD_VideoEidtManager/Pods-YD_VideoEidtManager.debug.xcconfig"; sourceTree = "<group>"; };
 		863A968A4417094A52237F0B /* Pods-YD_VideoEidtManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YD_VideoEidtManager.release.xcconfig"; path = "Target Support Files/Pods-YD_VideoEidtManager/Pods-YD_VideoEidtManager.release.xcconfig"; sourceTree = "<group>"; };
@@ -181,6 +190,8 @@
 				04C6977B22C9E04400035132 /* YD_Base */,
 				04C6978722C9E04400035132 /* 变速视频 */,
 				04C6978E22C9E04400035132 /* 旋转视频 */,
+				04C697B922C9EA4A00035132 /* 视频倒放 */,
+				04C697D222CA0C7B00035132 /* 视频宽高比 */,
 			);
 			name = YD_VideoEdit;
 			path = ../../YD_VideoEdit;
@@ -223,8 +234,8 @@
 		04C6976322C9E04400035132 /* UIButton */ = {
 			isa = PBXGroup;
 			children = (
-				04C6976422C9E04400035132 /* UIButton+YD_Extension.m */,
 				04C6976522C9E04400035132 /* UIButton+YD_Extension.h */,
+				04C6976422C9E04400035132 /* UIButton+YD_Extension.m */,
 			);
 			path = UIButton;
 			sourceTree = "<group>";
@@ -232,8 +243,8 @@
 		04C6976622C9E04400035132 /* UIColor */ = {
 			isa = PBXGroup;
 			children = (
-				04C6976722C9E04400035132 /* UIColor+YDColorChange.m */,
 				04C6976822C9E04400035132 /* UIColor+YDColorChange.h */,
+				04C6976722C9E04400035132 /* UIColor+YDColorChange.m */,
 			);
 			path = UIColor;
 			sourceTree = "<group>";
@@ -250,8 +261,8 @@
 		04C6976C22C9E04400035132 /* AVAsset */ = {
 			isa = PBXGroup;
 			children = (
-				04C6976D22C9E04400035132 /* AVAsset+YD_Extension.m */,
 				04C6976E22C9E04400035132 /* AVAsset+YD_Extension.h */,
+				04C6976D22C9E04400035132 /* AVAsset+YD_Extension.m */,
 			);
 			path = AVAsset;
 			sourceTree = "<group>";
@@ -259,11 +270,13 @@
 		04C6976F22C9E04400035132 /* YD_Tool */ = {
 			isa = PBXGroup;
 			children = (
-				04C6977022C9E04400035132 /* YD_AssetManager.m */,
 				04C6977122C9E04400035132 /* YD_Player */,
 				04C6977822C9E04400035132 /* YD_ProgressHUD.h */,
-				04C6977922C9E04400035132 /* YD_AssetManager.h */,
 				04C6977A22C9E04400035132 /* YD_ProgressHUD.m */,
+				04C6977922C9E04400035132 /* YD_AssetManager.h */,
+				04C6977022C9E04400035132 /* YD_AssetManager.m */,
+				04C697B622C9E7C500035132 /* YD_CGAffineManager.h */,
+				04C697B722C9E7C500035132 /* YD_CGAffineManager.m */,
 			);
 			path = YD_Tool;
 			sourceTree = "<group>";
@@ -271,12 +284,12 @@
 		04C6977122C9E04400035132 /* YD_Player */ = {
 			isa = PBXGroup;
 			children = (
-				04C6977222C9E04400035132 /* YD_PlayerView.m */,
-				04C6977322C9E04400035132 /* YD_DefaultPlayControlView.h */,
-				04C6977422C9E04400035132 /* YD_BasePlayControlView.m */,
-				04C6977522C9E04400035132 /* YD_DefaultPlayControlView.m */,
 				04C6977622C9E04400035132 /* YD_PlayerView.h */,
+				04C6977222C9E04400035132 /* YD_PlayerView.m */,
 				04C6977722C9E04400035132 /* YD_BasePlayControlView.h */,
+				04C6977422C9E04400035132 /* YD_BasePlayControlView.m */,
+				04C6977322C9E04400035132 /* YD_DefaultPlayControlView.h */,
+				04C6977522C9E04400035132 /* YD_DefaultPlayControlView.m */,
 			);
 			path = YD_Player;
 			sourceTree = "<group>";
@@ -284,17 +297,19 @@
 		04C6977B22C9E04400035132 /* YD_Base */ = {
 			isa = PBXGroup;
 			children = (
-				04C6977C22C9E04400035132 /* YD_BaseViewController.m */,
-				04C6977D22C9E04400035132 /* YD_BottomBar.m */,
-				04C6977E22C9E04400035132 /* YD_Slider.h */,
-				04C6977F22C9E04400035132 /* YD_BaseView.h */,
-				04C6978022C9E04400035132 /* YD_BaseModel.h */,
-				04C6978122C9E04400035132 /* YD_BaseViewController.h */,
-				04C6978222C9E04400035132 /* YD_BottomBar.h */,
 				04C6978322C9E04400035132 /* YD_VideoEditManager.h */,
+				04C6978122C9E04400035132 /* YD_BaseViewController.h */,
+				04C6977C22C9E04400035132 /* YD_BaseViewController.m */,
+				04C6977F22C9E04400035132 /* YD_BaseView.h */,
 				04C6978422C9E04400035132 /* YD_BaseView.m */,
+				04C6978222C9E04400035132 /* YD_BottomBar.h */,
+				04C6977D22C9E04400035132 /* YD_BottomBar.m */,
 				04C6978522C9E04400035132 /* YD_Slider.m */,
-				04C6978622C9E04400035132 /* YD_BaseModel.m */,
+				04C6977E22C9E04400035132 /* YD_Slider.h */,
+				04C697C322C9EDB100035132 /* YD_BasePlayerViewController.h */,
+				04C697C422C9EDB100035132 /* YD_BasePlayerViewController.m */,
+				04C697D022CA004500035132 /* YD_ConfigModel.h */,
+				04C697CF22CA004500035132 /* YD_ConfigModel.m */,
 			);
 			path = YD_Base;
 			sourceTree = "<group>";
@@ -302,12 +317,10 @@
 		04C6978722C9E04400035132 /* 变速视频 */ = {
 			isa = PBXGroup;
 			children = (
-				04C6978822C9E04400035132 /* YD_SpeedModel.h */,
-				04C6978922C9E04400035132 /* YD_SliderView.m */,
 				04C6978A22C9E04400035132 /* YD_SpeedViewController.h */,
-				04C6978B22C9E04400035132 /* YD_SpeedModel.m */,
-				04C6978C22C9E04400035132 /* YD_SliderView.h */,
 				04C6978D22C9E04400035132 /* YD_SpeedViewController.m */,
+				04C6978C22C9E04400035132 /* YD_SliderView.h */,
+				04C6978922C9E04400035132 /* YD_SliderView.m */,
 			);
 			path = "变速视频";
 			sourceTree = "<group>";
@@ -315,12 +328,30 @@
 		04C6978E22C9E04400035132 /* 旋转视频 */ = {
 			isa = PBXGroup;
 			children = (
-				04C6978F22C9E04400035132 /* YD_RotateViewController.m */,
-				04C6979022C9E04400035132 /* YD_RotateModel.h */,
-				04C6979122C9E04400035132 /* YD_RotateModel.m */,
 				04C6979222C9E04400035132 /* YD_RotateViewController.h */,
+				04C6978F22C9E04400035132 /* YD_RotateViewController.m */,
 			);
 			path = "旋转视频";
+			sourceTree = "<group>";
+		};
+		04C697B922C9EA4A00035132 /* 视频倒放 */ = {
+			isa = PBXGroup;
+			children = (
+				04C697C022C9EC2000035132 /* YD_UpendViewController.h */,
+				04C697C122C9EC2000035132 /* YD_UpendViewController.m */,
+			);
+			path = "视频倒放";
+			sourceTree = "<group>";
+		};
+		04C697D222CA0C7B00035132 /* 视频宽高比 */ = {
+			isa = PBXGroup;
+			children = (
+				04C697D322CA0CC600035132 /* YD_AspectRatioViewController.h */,
+				04C697D422CA0CC600035132 /* YD_AspectRatioViewController.m */,
+				04C697D622CA0DDD00035132 /* YD_RatioView.h */,
+				04C697D722CA0DDD00035132 /* YD_RatioView.m */,
+			);
+			path = "视频宽高比";
 			sourceTree = "<group>";
 		};
 		20CF21E1A1D6D6D07F4374D0 /* Frameworks */ = {
@@ -455,8 +486,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				04C697A622C9E04500035132 /* AVAsset+YD_Extension.m in Sources */,
-				04C697B522C9E04500035132 /* YD_RotateModel.m in Sources */,
-				04C697B022C9E04500035132 /* YD_BaseModel.m in Sources */,
+				04C697D822CA0DDD00035132 /* YD_RatioView.m in Sources */,
+				04C697D122CA004500035132 /* YD_ConfigModel.m in Sources */,
+				04C697C222C9EC2000035132 /* YD_UpendViewController.m in Sources */,
 				04C697AD22C9E04500035132 /* YD_BottomBar.m in Sources */,
 				04C697AA22C9E04500035132 /* YD_DefaultPlayControlView.m in Sources */,
 				04C697B122C9E04500035132 /* YD_SliderView.m in Sources */,
@@ -465,15 +497,17 @@
 				04C697AF22C9E04500035132 /* YD_Slider.m in Sources */,
 				04C697A722C9E04500035132 /* YD_AssetManager.m in Sources */,
 				04C697AB22C9E04500035132 /* YD_ProgressHUD.m in Sources */,
+				04C697C522C9EDB100035132 /* YD_BasePlayerViewController.m in Sources */,
 				04072E6422C35FDB0045772E /* ViewController.m in Sources */,
 				04C697B322C9E04500035132 /* YD_SpeedViewController.m in Sources */,
 				04C697B422C9E04500035132 /* YD_RotateViewController.m in Sources */,
 				04C697AE22C9E04500035132 /* YD_BaseView.m in Sources */,
 				04072E6F22C35FDD0045772E /* main.m in Sources */,
-				04C697B222C9E04500035132 /* YD_SpeedModel.m in Sources */,
 				04C697AC22C9E04500035132 /* YD_BaseViewController.m in Sources */,
 				04C697A422C9E04500035132 /* UIColor+YDColorChange.m in Sources */,
+				04C697D522CA0CC600035132 /* YD_AspectRatioViewController.m in Sources */,
 				04072E6122C35FDB0045772E /* AppDelegate.m in Sources */,
+				04C697B822C9E7C500035132 /* YD_CGAffineManager.m in Sources */,
 				04C697A922C9E04500035132 /* YD_BasePlayControlView.m in Sources */,
 				04C697A822C9E04500035132 /* YD_PlayerView.m in Sources */,
 			);

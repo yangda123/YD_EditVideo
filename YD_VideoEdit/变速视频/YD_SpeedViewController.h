@@ -6,14 +6,11 @@
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "YD_BaseViewController.h"
-#import "YD_SpeedModel.h"
+#import "YD_BasePlayerViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YD_SpeedViewController : YD_BaseViewController
-
-@property (nonatomic, strong) YD_SpeedModel *model;
+@interface YD_SpeedViewController : YD_BasePlayerViewController
 
 @end
 

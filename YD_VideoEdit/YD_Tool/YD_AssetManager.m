@@ -10,7 +10,7 @@
 #import "YD_VideoEditManager.h"
 
 @implementation YD_AssetManager
-
+/// 调整播放速度
 + (AVAsset *)yd_speedAssetWithAsset:(AVAsset *)asset speed:(CGFloat)speed {
     
     CMTimeRange range = CMTimeRangeMake(kCMTimeZero, asset.duration);
@@ -50,7 +50,7 @@
     
     return mixComposition;
 }
-
+/// 视频旋转
 + (void)yd_rotateAssetWithAsset:(AVAsset *)asset degress:(NSInteger)degress finish:(YD_ExportFinishBlock)finishBlock {
 
     AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
@@ -122,6 +122,69 @@
     videoComposition.instructions = [NSArray arrayWithObject:mainInstruction];
     
     [self yd_exporter:mixComposition videoComposition:videoComposition finish:finishBlock];
+}
+
++ (void)yd_upendAsset:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock {
+    
+    dispatch_async(dispatch_queue_create("UpendMovieQueue", DISPATCH_QUEUE_SERIAL), ^{
+        NSError *error;
+        AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:asset error:&error];
+        AVAssetTrack *videoTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+        NSDictionary *readerOutputSettings = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange], kCVPixelBufferPixelFormatTypeKey, nil];
+        AVAssetReaderTrackOutput *readerOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:videoTrack outputSettings:readerOutputSettings];
+        readerOutput.alwaysCopiesSampleData = NO;
+        // 在开始读取之前给reader指定一个output
+        [reader addOutput:readerOutput];
+        [reader startReading];
+        
+        NSMutableArray *samples = [[NSMutableArray alloc] init];
+        CMSampleBufferRef sample;
+        while ((sample = [readerOutput copyNextSampleBuffer])) {
+            [samples addObject:(__bridge id)sample];
+            CFRelease(sample);
+        }
+        
+        NSString *outputPath = [YD_PathCache stringByAppendingString:@"upendMovie.mp4"];
+        // 删除当前该路径下的文件
+        unlink([outputPath UTF8String]);
+        NSURL *outputURL = [NSURL fileURLWithPath:outputPath];
+        
+        AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:outputURL fileType:AVFileTypeMPEG4 error:&error];
+        NSDictionary *videoCompressionProps = [NSDictionary dictionaryWithObjectsAndKeys:@(videoTrack.estimatedDataRate), AVVideoAverageBitRateKey, nil];
+        NSDictionary *writerOutputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                              AVVideoCodecH264, AVVideoCodecKey,
+                                              [NSNumber numberWithInt:videoTrack.naturalSize.width], AVVideoWidthKey,
+                                              [NSNumber numberWithInt:videoTrack.naturalSize.height], AVVideoHeightKey,
+                                              videoCompressionProps, AVVideoCompressionPropertiesKey, nil];
+        AVAssetWriterInput *writerInput = [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeVideo outputSettings:writerOutputSettings sourceFormatHint:(__bridge CMFormatDescriptionRef)[videoTrack.formatDescriptions lastObject]];
+        [writerInput setExpectsMediaDataInRealTime:NO];
+        writerInput.transform = videoTrack.preferredTransform;
+        
+        AVAssetWriterInputPixelBufferAdaptor *pixelBufferAdaptor = [[AVAssetWriterInputPixelBufferAdaptor alloc] initWithAssetWriterInput:writerInput sourcePixelBufferAttributes:nil];
+        [writer addInput:writerInput];
+        [writer startWriting];
+        [writer startSessionAtSourceTime:CMSampleBufferGetPresentationTimeStamp((__bridge CMSampleBufferRef)samples[0])];
+        for (NSInteger i = 0; i < samples.count; i ++) {
+            CMTime presentationTime = CMSampleBufferGetPresentationTimeStamp((__bridge CMSampleBufferRef)samples[i]);
+            CVPixelBufferRef imageBufferRef = CMSampleBufferGetImageBuffer((__bridge CMSampleBufferRef)samples[samples.count - i - 1]);
+            while (!writerInput.readyForMoreMediaData) {
+                [NSThread sleepForTimeInterval:0.1];
+            }
+            [pixelBufferAdaptor appendPixelBuffer:imageBufferRef withPresentationTime:presentationTime];
+        }
+        
+        [writer finishWritingWithCompletionHandler:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (finishBlock) {
+                    finishBlock(!error, outputPath);
+                    
+                    if (error) {
+                        NSLog(@"----- %@", error);
+                    }
+                }
+            });
+        }];
+    });
 }
 
 + (void)yd_exporter:(AVAsset *)asset

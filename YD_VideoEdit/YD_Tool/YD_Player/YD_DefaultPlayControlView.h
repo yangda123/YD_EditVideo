@@ -8,12 +8,9 @@
 
 #import "YD_BasePlayControlView.h"
 
-typedef void(^YD_PlayBlock)(void);
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YD_DefaultPlayControlView : YD_BasePlayControlView
-
-@property (nonatomic, copy) YD_PlayBlock playBlock;
 
 @end
 

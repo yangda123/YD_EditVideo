@@ -1,8 +1,8 @@
 //
-//  YD_RotateViewController.h
+//  YD_AspectRatioViewController.h
 //  YD_VideoEidtManager
 //
-//  Created by mac on 2019/6/26.
+//  Created by mac on 2019/7/1.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YD_RotateViewController : YD_BasePlayerViewController
+@interface YD_AspectRatioViewController : YD_BasePlayerViewController
 
 @end
 

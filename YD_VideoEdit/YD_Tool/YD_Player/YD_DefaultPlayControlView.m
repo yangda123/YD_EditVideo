@@ -76,7 +76,6 @@
         [slider setThumbImage:[UIImage imageNamed:@"yd_slider_2"] forState:UIControlStateNormal];
         [slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
         slider.maximumTrackTintColor = [UIColor colorWithHexString:@"#999999"];
-        slider.minimumTrackTintColor = [UIColor colorWithHexString:@"#F61847"];
         [self.containView addSubview:slider];
     }
 }
@@ -110,6 +109,10 @@
     }];
 }
 
+- (void)setThemeColor:(UIColor *)themeColor {
+    self.slider.minimumTrackTintColor = themeColor;
+}
+
 #pragma mark - UI事件
 - (void)yd_tapGesture {
     self.containView.hidden = !self.containView.hidden;
@@ -117,11 +120,6 @@
 }
 
 - (void)yd_playBtnAction {
-    if (self.playBlock) {
-        self.playBlock();
-        return;
-    }
-    
     if (self.player.yd_playStatus == YD_PlayStatusPlay) {
         [self.player yd_pause];
     }else if (self.player.yd_playStatus == YD_PlayStatusFinish) {

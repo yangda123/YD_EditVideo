@@ -35,6 +35,7 @@
 #import "YD_ProgressHUD.h"
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <Masonry/Masonry.h>
+#import "YD_CGAffineManager.h"
 
 #import "UIView+YDExtension.h"
 #import "UIColor+YDColorChange.h"

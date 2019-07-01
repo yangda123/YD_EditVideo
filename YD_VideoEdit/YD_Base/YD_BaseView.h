@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YD_BaseView : UIView
 
+@property (nonatomic, strong) UIColor *themeColor;
+
 /// 初始化UI
 - (void)yd_layoutSubViews;
 /// 布局UI

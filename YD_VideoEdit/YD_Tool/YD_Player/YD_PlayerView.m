@@ -35,8 +35,7 @@
         
         [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
         [AVAudioSession.sharedInstance setActive:true error:NULL];
-        
-        self.yd_playStatus = YD_PlayStatusIdle;
+
         [self yd_addObserver];
         [self yd_layoutSubViews];
     }
@@ -130,6 +129,8 @@
 
 - (void)setYd_model:(YD_PlayerModel *)yd_model {
     _yd_model = yd_model;
+    
+    self.yd_playStatus = YD_PlayStatusPreplay;
     
     if (self.player.currentItem) {
         [self.player.currentItem removeObserver:self forKeyPath:@"status"];

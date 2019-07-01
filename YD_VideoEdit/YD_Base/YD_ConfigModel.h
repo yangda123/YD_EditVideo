@@ -1,27 +1,27 @@
 //
-//  YD_BaseModel.h
+//  YD_ConfigModel.h
 //  YD_VideoEidtManager
 //
-//  Created by mac on 2019/6/26.
+//  Created by mac on 2019/7/1.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "YD_VideoEditManager.h"
+#import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YD_BaseModel : NSObject
-/// 顶部偏移:如果有需要，根据自己的要求设置
-@property (nonatomic, assign) CGFloat yd_topOffsetY;
+@interface YD_ConfigModel : NSObject
+
 /// 当前控制器的背景色
 @property (nonatomic, strong) UIColor *controllerColor;
 /// 播放器背景色
 @property (nonatomic, strong) UIColor *playerBackColor;
-/// 导航栏的标题
-@property (nonatomic, copy) NSString *title;
-
+/// 主体的颜色
+@property (nonatomic, strong) UIColor *themeColor;
+/// 底部bar图标的名称: 默认有图标，如果需要修改，自己传入icon名称
+@property (nonatomic, copy) NSString *barIconName;
+/// 视频播放
 @property (nonatomic, strong) AVAsset *asset;
 
 @end

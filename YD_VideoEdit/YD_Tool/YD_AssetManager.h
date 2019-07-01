@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)yd_rotateAssetWithAsset:(AVAsset *)asset degress:(NSInteger)degress finish:(YD_ExportFinishBlock)finishBlock;
 /// 视频倒放
 + (void)yd_upendAsset:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock;
+/// 视频宽高比
++ (void)yd_aspectRatioAsset:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock;
 
 /// 导出视频
 + (void)yd_exporter:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock;

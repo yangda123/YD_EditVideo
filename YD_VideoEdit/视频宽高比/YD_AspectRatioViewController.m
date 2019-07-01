@@ -8,6 +8,7 @@
 
 #import "YD_AspectRatioViewController.h"
 #import "YD_RatioView.h"
+#import "YD_AssetManager.h"
 
 @interface YD_AspectRatioViewController ()
 
@@ -67,6 +68,21 @@
 
 - (void)yd_completeItemAction {
     
+    [YD_ProgressHUD yd_showHUD:@"正在保存视频"];
+    
+    [YD_AssetManager yd_aspectRatioAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+        
+        if (isSuccess) {
+            
+            [YD_ProgressHUD yd_hideHUD];
+//            [YD_AssetManager yd_saveToLibrary:exportPath toView:self.view block:^(BOOL success) {
+//                [YD_ProgressHUD yd_hideHUD];
+//            }];
+        }else {
+            [YD_ProgressHUD yd_hideHUD];
+            [YD_ProgressHUD yd_showMessage:@"保存失败" toView:self.view];
+        }
+    }];
 }
 
 #pragma mark - UI事件

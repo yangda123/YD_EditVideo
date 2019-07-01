@@ -90,10 +90,6 @@
     mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, videoTrack.asset.duration);
     
     AVMutableVideoCompositionLayerInstruction *videolayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
-
-    if ([asset yd_assetReviseDirection]) {
-        videoTrack.preferredTransform =  CGAffineTransformMakeRotation(-M_PI_2);
-    }
     
     degress = ([asset yd_getAssetDegress] + degress) % 360;
     
@@ -118,12 +114,12 @@
         videoComposition.renderSize = naturalSize;
     }
     
-    mainInstruction.layerInstructions = [NSArray arrayWithObjects:videolayerInstruction,nil];
+    mainInstruction.layerInstructions = [NSArray arrayWithObjects:videolayerInstruction, nil];
     videoComposition.instructions = [NSArray arrayWithObject:mainInstruction];
     
     [self yd_exporter:mixComposition videoComposition:videoComposition finish:finishBlock];
 }
-
+/// 视频倒放
 + (void)yd_upendAsset:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock {
     
     dispatch_async(dispatch_queue_create("UpendMovieQueue", DISPATCH_QUEUE_SERIAL), ^{
@@ -177,14 +173,58 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (finishBlock) {
                     finishBlock(!error, outputPath);
-                    
-                    if (error) {
-                        NSLog(@"----- %@", error);
-                    }
+                    if (error) {  NSLog(@"----- %@", error); }
                 }
             });
         }];
     });
+}
+/// 视频宽高比
++ (void)yd_aspectRatioAsset:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock {
+
+    AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
+    
+    AVAssetTrack *videoAssetTrack = nil;
+    AVAssetTrack *audioAssetTrack = nil;
+    
+    if ([asset tracksWithMediaType:AVMediaTypeVideo].count) {
+        videoAssetTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+    }
+    if ([asset tracksWithMediaType:AVMediaTypeAudio].count) {
+        audioAssetTrack = [asset tracksWithMediaType:AVMediaTypeAudio].firstObject;
+    }
+    
+    //1 视频通道
+    AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    if (videoAssetTrack) {
+        [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
+                            ofTrack:videoAssetTrack
+                             atTime:kCMTimeZero error:nil];
+    }
+    
+    //2 音频通道
+    if (audioAssetTrack) {
+        AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+        [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
+                            ofTrack:audioAssetTrack
+                             atTime:kCMTimeZero error:nil];
+    }
+    
+    
+    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
+    videoComposition.frameDuration = CMTimeMake(1, 30);
+//    videoComposition.renderSize = videoAssetTrack.naturalSize;
+    videoComposition.renderSize = CGSizeMake(300, 800);
+    
+    AVMutableVideoCompositionInstruction *mainInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+    mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, videoTrack.asset.duration);
+    
+    AVMutableVideoCompositionLayerInstruction *videolayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
+    
+    mainInstruction.layerInstructions = [NSArray arrayWithObjects:videolayerInstruction, nil];
+    videoComposition.instructions = [NSArray arrayWithObject:mainInstruction];
+    
+    [self yd_exporter:mixComposition videoComposition:videoComposition finish:finishBlock];
 }
 
 + (void)yd_exporter:(AVAsset *)asset

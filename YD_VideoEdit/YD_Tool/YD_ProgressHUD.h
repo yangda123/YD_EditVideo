@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MBProgressHUD.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 typedef void(^YD_TodayBlock)(void);
 NS_ASSUME_NONNULL_BEGIN

@@ -1,0 +1,1 @@
+../../../JPImageresizerView/JPImageresizerView/Classes/UIImage+JPExtension.h

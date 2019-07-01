@@ -1,0 +1,11 @@
+platform :ios, ‘8.0’
+inhibit_all_warnings!
+
+target 'YD_VideoEidtManager' do
+
+pod 'JPImageresizerView'
+pod 'ReactiveObjC'
+pod 'MBProgressHUD'
+pod 'Masonry'
+
+end

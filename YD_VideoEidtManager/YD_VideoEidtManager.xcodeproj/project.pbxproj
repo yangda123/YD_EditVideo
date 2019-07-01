@@ -1,0 +1,677 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04072E6122C35FDB0045772E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04072E6022C35FDB0045772E /* AppDelegate.m */; };
+		04072E6422C35FDB0045772E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04072E6322C35FDB0045772E /* ViewController.m */; };
+		04072E6722C35FDB0045772E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04072E6522C35FDB0045772E /* Main.storyboard */; };
+		04072E6922C35FDD0045772E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04072E6822C35FDD0045772E /* Assets.xcassets */; };
+		04072E6C22C35FDD0045772E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04072E6A22C35FDD0045772E /* LaunchScreen.storyboard */; };
+		04072E6F22C35FDD0045772E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04072E6E22C35FDD0045772E /* main.m */; };
+		04970E6822C3822F001B3A68 /* DreamHouseClip.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */; };
+		04C6972D22C9DA1500035132 /* yd_change_speed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696EC22C9DA1500035132 /* yd_change_speed@3x.png */; };
+		04C6972E22C9DA1500035132 /* yd_big_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696ED22C9DA1500035132 /* yd_big_play@3x.png */; };
+		04C6972F22C9DA1500035132 /* yd_big_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696EE22C9DA1500035132 /* yd_big_play@2x.png */; };
+		04C6973022C9DA1500035132 /* yd_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696EF22C9DA1500035132 /* yd_play.png */; };
+		04C6973122C9DA1500035132 /* yd_change_speed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696F022C9DA1500035132 /* yd_change_speed@2x.png */; };
+		04C6973222C9DA1500035132 /* yd_pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696F122C9DA1500035132 /* yd_pause@3x.png */; };
+		04C6973322C9DA1500035132 /* yd_slider_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696F222C9DA1500035132 /* yd_slider_2@3x.png */; };
+		04C6973422C9DA1500035132 /* yd_rotate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696F322C9DA1500035132 /* yd_rotate@2x.png */; };
+		04C6973522C9DA1500035132 /* yd_rotate@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696F422C9DA1500035132 /* yd_rotate@3x.png */; };
+		04C6973622C9DA1500035132 /* yd_slider_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696F522C9DA1500035132 /* yd_slider_2@2x.png */; };
+		04C6973722C9DA1500035132 /* yd_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696F622C9DA1500035132 /* yd_pause@2x.png */; };
+		04C6973822C9DA1500035132 /* yd_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696F722C9DA1500035132 /* yd_play@3x.png */; };
+		04C6973922C9DA1500035132 /* yd_slider_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696F822C9DA1500035132 /* yd_slider_1@2x.png */; };
+		04C6973A22C9DA1500035132 /* yd_big_pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696F922C9DA1500035132 /* yd_big_pause@3x.png */; };
+		04C6973B22C9DA1500035132 /* yd_big_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696FA22C9DA1500035132 /* yd_big_pause@2x.png */; };
+		04C6973C22C9DA1500035132 /* yd_slider_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C696FB22C9DA1500035132 /* yd_slider_1@3x.png */; };
+		04C6973D22C9DA1500035132 /* UIButton+YD_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C696FE22C9DA1500035132 /* UIButton+YD_Extension.m */; };
+		04C6973E22C9DA1500035132 /* UIColor+YDColorChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6970122C9DA1500035132 /* UIColor+YDColorChange.m */; };
+		04C6973F22C9DA1500035132 /* UIView+YDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6970522C9DA1500035132 /* UIView+YDExtension.m */; };
+		04C6974022C9DA1500035132 /* AVAsset+YD_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6970722C9DA1500035132 /* AVAsset+YD_Extension.m */; };
+		04C6974122C9DA1500035132 /* YD_AssetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6970A22C9DA1500035132 /* YD_AssetManager.m */; };
+		04C6974222C9DA1500035132 /* YD_PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6970C22C9DA1500035132 /* YD_PlayerView.m */; };
+		04C6974322C9DA1500035132 /* YD_BasePlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6970E22C9DA1500035132 /* YD_BasePlayControlView.m */; };
+		04C6974422C9DA1500035132 /* YD_DefaultPlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6970F22C9DA1500035132 /* YD_DefaultPlayControlView.m */; };
+		04C6974522C9DA1500035132 /* YD_ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6971422C9DA1500035132 /* YD_ProgressHUD.m */; };
+		04C6974622C9DA1500035132 /* YD_BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6971622C9DA1500035132 /* YD_BaseViewController.m */; };
+		04C6974722C9DA1500035132 /* YD_BottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6971722C9DA1500035132 /* YD_BottomBar.m */; };
+		04C6974822C9DA1500035132 /* YD_BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6971E22C9DA1500035132 /* YD_BaseView.m */; };
+		04C6974922C9DA1500035132 /* YD_Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6971F22C9DA1500035132 /* YD_Slider.m */; };
+		04C6974A22C9DA1500035132 /* YD_BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6972022C9DA1500035132 /* YD_BaseModel.m */; };
+		04C6974B22C9DA1500035132 /* YD_SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6972322C9DA1500035132 /* YD_SliderView.m */; };
+		04C6974C22C9DA1500035132 /* YD_SpeedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6972522C9DA1500035132 /* YD_SpeedModel.m */; };
+		04C6974D22C9DA1500035132 /* YD_SpeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6972722C9DA1500035132 /* YD_SpeedViewController.m */; };
+		04C6974E22C9DA1500035132 /* YD_RotateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6972922C9DA1500035132 /* YD_RotateViewController.m */; };
+		04C6974F22C9DA1500035132 /* YD_RotateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6972B22C9DA1500035132 /* YD_RotateModel.m */; };
+		559022E831A9DF8B390FB6C0 /* libPods-YD_VideoEidtManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A89DFC027EACF199D1CC3F /* libPods-YD_VideoEidtManager.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		04072E5C22C35FDB0045772E /* YD_VideoEidtManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YD_VideoEidtManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04072E5F22C35FDB0045772E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		04072E6022C35FDB0045772E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		04072E6222C35FDB0045772E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		04072E6322C35FDB0045772E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		04072E6622C35FDB0045772E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		04072E6822C35FDD0045772E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04072E6B22C35FDD0045772E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		04072E6D22C35FDD0045772E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04072E6E22C35FDD0045772E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DreamHouseClip.mp4; sourceTree = "<group>"; };
+		04C696EC22C9DA1500035132 /* yd_change_speed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_change_speed@3x.png"; sourceTree = "<group>"; };
+		04C696ED22C9DA1500035132 /* yd_big_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_big_play@3x.png"; sourceTree = "<group>"; };
+		04C696EE22C9DA1500035132 /* yd_big_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_big_play@2x.png"; sourceTree = "<group>"; };
+		04C696EF22C9DA1500035132 /* yd_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yd_play.png; sourceTree = "<group>"; };
+		04C696F022C9DA1500035132 /* yd_change_speed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_change_speed@2x.png"; sourceTree = "<group>"; };
+		04C696F122C9DA1500035132 /* yd_pause@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_pause@3x.png"; sourceTree = "<group>"; };
+		04C696F222C9DA1500035132 /* yd_slider_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_slider_2@3x.png"; sourceTree = "<group>"; };
+		04C696F322C9DA1500035132 /* yd_rotate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_rotate@2x.png"; sourceTree = "<group>"; };
+		04C696F422C9DA1500035132 /* yd_rotate@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_rotate@3x.png"; sourceTree = "<group>"; };
+		04C696F522C9DA1500035132 /* yd_slider_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_slider_2@2x.png"; sourceTree = "<group>"; };
+		04C696F622C9DA1500035132 /* yd_pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_pause@2x.png"; sourceTree = "<group>"; };
+		04C696F722C9DA1500035132 /* yd_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_play@3x.png"; sourceTree = "<group>"; };
+		04C696F822C9DA1500035132 /* yd_slider_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_slider_1@2x.png"; sourceTree = "<group>"; };
+		04C696F922C9DA1500035132 /* yd_big_pause@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_big_pause@3x.png"; sourceTree = "<group>"; };
+		04C696FA22C9DA1500035132 /* yd_big_pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_big_pause@2x.png"; sourceTree = "<group>"; };
+		04C696FB22C9DA1500035132 /* yd_slider_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd_slider_1@3x.png"; sourceTree = "<group>"; };
+		04C696FE22C9DA1500035132 /* UIButton+YD_Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+YD_Extension.m"; sourceTree = "<group>"; };
+		04C696FF22C9DA1500035132 /* UIButton+YD_Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+YD_Extension.h"; sourceTree = "<group>"; };
+		04C6970122C9DA1500035132 /* UIColor+YDColorChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+YDColorChange.m"; sourceTree = "<group>"; };
+		04C6970222C9DA1500035132 /* UIColor+YDColorChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+YDColorChange.h"; sourceTree = "<group>"; };
+		04C6970422C9DA1500035132 /* UIView+YDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YDExtension.h"; sourceTree = "<group>"; };
+		04C6970522C9DA1500035132 /* UIView+YDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YDExtension.m"; sourceTree = "<group>"; };
+		04C6970722C9DA1500035132 /* AVAsset+YD_Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVAsset+YD_Extension.m"; sourceTree = "<group>"; };
+		04C6970822C9DA1500035132 /* AVAsset+YD_Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVAsset+YD_Extension.h"; sourceTree = "<group>"; };
+		04C6970A22C9DA1500035132 /* YD_AssetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_AssetManager.m; sourceTree = "<group>"; };
+		04C6970C22C9DA1500035132 /* YD_PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_PlayerView.m; sourceTree = "<group>"; };
+		04C6970D22C9DA1500035132 /* YD_DefaultPlayControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_DefaultPlayControlView.h; sourceTree = "<group>"; };
+		04C6970E22C9DA1500035132 /* YD_BasePlayControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_BasePlayControlView.m; sourceTree = "<group>"; };
+		04C6970F22C9DA1500035132 /* YD_DefaultPlayControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_DefaultPlayControlView.m; sourceTree = "<group>"; };
+		04C6971022C9DA1500035132 /* YD_PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_PlayerView.h; sourceTree = "<group>"; };
+		04C6971122C9DA1500035132 /* YD_BasePlayControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_BasePlayControlView.h; sourceTree = "<group>"; };
+		04C6971222C9DA1500035132 /* YD_ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_ProgressHUD.h; sourceTree = "<group>"; };
+		04C6971322C9DA1500035132 /* YD_AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_AssetManager.h; sourceTree = "<group>"; };
+		04C6971422C9DA1500035132 /* YD_ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_ProgressHUD.m; sourceTree = "<group>"; };
+		04C6971622C9DA1500035132 /* YD_BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_BaseViewController.m; sourceTree = "<group>"; };
+		04C6971722C9DA1500035132 /* YD_BottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_BottomBar.m; sourceTree = "<group>"; };
+		04C6971822C9DA1500035132 /* YD_Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_Slider.h; sourceTree = "<group>"; };
+		04C6971922C9DA1500035132 /* YD_BaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_BaseView.h; sourceTree = "<group>"; };
+		04C6971A22C9DA1500035132 /* YD_BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_BaseModel.h; sourceTree = "<group>"; };
+		04C6971B22C9DA1500035132 /* YD_BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_BaseViewController.h; sourceTree = "<group>"; };
+		04C6971C22C9DA1500035132 /* YD_BottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_BottomBar.h; sourceTree = "<group>"; };
+		04C6971D22C9DA1500035132 /* YD_VideoEditManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_VideoEditManager.h; sourceTree = "<group>"; };
+		04C6971E22C9DA1500035132 /* YD_BaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_BaseView.m; sourceTree = "<group>"; };
+		04C6971F22C9DA1500035132 /* YD_Slider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_Slider.m; sourceTree = "<group>"; };
+		04C6972022C9DA1500035132 /* YD_BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_BaseModel.m; sourceTree = "<group>"; };
+		04C6972222C9DA1500035132 /* YD_SpeedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_SpeedModel.h; sourceTree = "<group>"; };
+		04C6972322C9DA1500035132 /* YD_SliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_SliderView.m; sourceTree = "<group>"; };
+		04C6972422C9DA1500035132 /* YD_SpeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_SpeedViewController.h; sourceTree = "<group>"; };
+		04C6972522C9DA1500035132 /* YD_SpeedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_SpeedModel.m; sourceTree = "<group>"; };
+		04C6972622C9DA1500035132 /* YD_SliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_SliderView.h; sourceTree = "<group>"; };
+		04C6972722C9DA1500035132 /* YD_SpeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_SpeedViewController.m; sourceTree = "<group>"; };
+		04C6972922C9DA1500035132 /* YD_RotateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_RotateViewController.m; sourceTree = "<group>"; };
+		04C6972A22C9DA1500035132 /* YD_RotateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_RotateModel.h; sourceTree = "<group>"; };
+		04C6972B22C9DA1500035132 /* YD_RotateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_RotateModel.m; sourceTree = "<group>"; };
+		04C6972C22C9DA1500035132 /* YD_RotateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_RotateViewController.h; sourceTree = "<group>"; };
+		24A89DFC027EACF199D1CC3F /* libPods-YD_VideoEidtManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YD_VideoEidtManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		71116BD90830EE257FF48990 /* Pods-YD_VideoEidtManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YD_VideoEidtManager.debug.xcconfig"; path = "Target Support Files/Pods-YD_VideoEidtManager/Pods-YD_VideoEidtManager.debug.xcconfig"; sourceTree = "<group>"; };
+		863A968A4417094A52237F0B /* Pods-YD_VideoEidtManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YD_VideoEidtManager.release.xcconfig"; path = "Target Support Files/Pods-YD_VideoEidtManager/Pods-YD_VideoEidtManager.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04072E5922C35FDB0045772E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				559022E831A9DF8B390FB6C0 /* libPods-YD_VideoEidtManager.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04072E5322C35FDB0045772E = {
+			isa = PBXGroup;
+			children = (
+				04072E5E22C35FDB0045772E /* YD_VideoEidtManager */,
+				04072E5D22C35FDB0045772E /* Products */,
+				3B9A9DF3C470907569AD4AC3 /* Pods */,
+				20CF21E1A1D6D6D07F4374D0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		04072E5D22C35FDB0045772E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04072E5C22C35FDB0045772E /* YD_VideoEidtManager.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04072E5E22C35FDB0045772E /* YD_VideoEidtManager */ = {
+			isa = PBXGroup;
+			children = (
+				04C696EA22C9DA1500035132 /* YD_VideoEdit */,
+				04072E5F22C35FDB0045772E /* AppDelegate.h */,
+				04072E6022C35FDB0045772E /* AppDelegate.m */,
+				04072E6222C35FDB0045772E /* ViewController.h */,
+				04072E6322C35FDB0045772E /* ViewController.m */,
+				04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */,
+				04072E6522C35FDB0045772E /* Main.storyboard */,
+				04072E6822C35FDD0045772E /* Assets.xcassets */,
+				04072E6A22C35FDD0045772E /* LaunchScreen.storyboard */,
+				04072E6D22C35FDD0045772E /* Info.plist */,
+				04072E6E22C35FDD0045772E /* main.m */,
+			);
+			path = YD_VideoEidtManager;
+			sourceTree = "<group>";
+		};
+		04C696EA22C9DA1500035132 /* YD_VideoEdit */ = {
+			isa = PBXGroup;
+			children = (
+				04C696EB22C9DA1500035132 /* YD_Resource */,
+				04C696FC22C9DA1500035132 /* YD_Expands */,
+				04C6970922C9DA1500035132 /* YD_Tool */,
+				04C6971522C9DA1500035132 /* YD_Base */,
+				04C6972122C9DA1500035132 /* 变速视频 */,
+				04C6972822C9DA1500035132 /* 旋转视频 */,
+			);
+			path = YD_VideoEdit;
+			sourceTree = "<group>";
+		};
+		04C696EB22C9DA1500035132 /* YD_Resource */ = {
+			isa = PBXGroup;
+			children = (
+				04C696EC22C9DA1500035132 /* yd_change_speed@3x.png */,
+				04C696ED22C9DA1500035132 /* yd_big_play@3x.png */,
+				04C696EE22C9DA1500035132 /* yd_big_play@2x.png */,
+				04C696EF22C9DA1500035132 /* yd_play.png */,
+				04C696F022C9DA1500035132 /* yd_change_speed@2x.png */,
+				04C696F122C9DA1500035132 /* yd_pause@3x.png */,
+				04C696F222C9DA1500035132 /* yd_slider_2@3x.png */,
+				04C696F322C9DA1500035132 /* yd_rotate@2x.png */,
+				04C696F422C9DA1500035132 /* yd_rotate@3x.png */,
+				04C696F522C9DA1500035132 /* yd_slider_2@2x.png */,
+				04C696F622C9DA1500035132 /* yd_pause@2x.png */,
+				04C696F722C9DA1500035132 /* yd_play@3x.png */,
+				04C696F822C9DA1500035132 /* yd_slider_1@2x.png */,
+				04C696F922C9DA1500035132 /* yd_big_pause@3x.png */,
+				04C696FA22C9DA1500035132 /* yd_big_pause@2x.png */,
+				04C696FB22C9DA1500035132 /* yd_slider_1@3x.png */,
+			);
+			path = YD_Resource;
+			sourceTree = "<group>";
+		};
+		04C696FC22C9DA1500035132 /* YD_Expands */ = {
+			isa = PBXGroup;
+			children = (
+				04C696FD22C9DA1500035132 /* UIButton */,
+				04C6970022C9DA1500035132 /* UIColor */,
+				04C6970322C9DA1500035132 /* UIView */,
+				04C6970622C9DA1500035132 /* AVAsset */,
+			);
+			path = YD_Expands;
+			sourceTree = "<group>";
+		};
+		04C696FD22C9DA1500035132 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				04C696FE22C9DA1500035132 /* UIButton+YD_Extension.m */,
+				04C696FF22C9DA1500035132 /* UIButton+YD_Extension.h */,
+			);
+			path = UIButton;
+			sourceTree = "<group>";
+		};
+		04C6970022C9DA1500035132 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				04C6970122C9DA1500035132 /* UIColor+YDColorChange.m */,
+				04C6970222C9DA1500035132 /* UIColor+YDColorChange.h */,
+			);
+			path = UIColor;
+			sourceTree = "<group>";
+		};
+		04C6970322C9DA1500035132 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				04C6970422C9DA1500035132 /* UIView+YDExtension.h */,
+				04C6970522C9DA1500035132 /* UIView+YDExtension.m */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		04C6970622C9DA1500035132 /* AVAsset */ = {
+			isa = PBXGroup;
+			children = (
+				04C6970722C9DA1500035132 /* AVAsset+YD_Extension.m */,
+				04C6970822C9DA1500035132 /* AVAsset+YD_Extension.h */,
+			);
+			path = AVAsset;
+			sourceTree = "<group>";
+		};
+		04C6970922C9DA1500035132 /* YD_Tool */ = {
+			isa = PBXGroup;
+			children = (
+				04C6970A22C9DA1500035132 /* YD_AssetManager.m */,
+				04C6970B22C9DA1500035132 /* YD_Player */,
+				04C6971222C9DA1500035132 /* YD_ProgressHUD.h */,
+				04C6971322C9DA1500035132 /* YD_AssetManager.h */,
+				04C6971422C9DA1500035132 /* YD_ProgressHUD.m */,
+			);
+			path = YD_Tool;
+			sourceTree = "<group>";
+		};
+		04C6970B22C9DA1500035132 /* YD_Player */ = {
+			isa = PBXGroup;
+			children = (
+				04C6970C22C9DA1500035132 /* YD_PlayerView.m */,
+				04C6970D22C9DA1500035132 /* YD_DefaultPlayControlView.h */,
+				04C6970E22C9DA1500035132 /* YD_BasePlayControlView.m */,
+				04C6970F22C9DA1500035132 /* YD_DefaultPlayControlView.m */,
+				04C6971022C9DA1500035132 /* YD_PlayerView.h */,
+				04C6971122C9DA1500035132 /* YD_BasePlayControlView.h */,
+			);
+			path = YD_Player;
+			sourceTree = "<group>";
+		};
+		04C6971522C9DA1500035132 /* YD_Base */ = {
+			isa = PBXGroup;
+			children = (
+				04C6971622C9DA1500035132 /* YD_BaseViewController.m */,
+				04C6971722C9DA1500035132 /* YD_BottomBar.m */,
+				04C6971822C9DA1500035132 /* YD_Slider.h */,
+				04C6971922C9DA1500035132 /* YD_BaseView.h */,
+				04C6971A22C9DA1500035132 /* YD_BaseModel.h */,
+				04C6971B22C9DA1500035132 /* YD_BaseViewController.h */,
+				04C6971C22C9DA1500035132 /* YD_BottomBar.h */,
+				04C6971D22C9DA1500035132 /* YD_VideoEditManager.h */,
+				04C6971E22C9DA1500035132 /* YD_BaseView.m */,
+				04C6971F22C9DA1500035132 /* YD_Slider.m */,
+				04C6972022C9DA1500035132 /* YD_BaseModel.m */,
+			);
+			path = YD_Base;
+			sourceTree = "<group>";
+		};
+		04C6972122C9DA1500035132 /* 变速视频 */ = {
+			isa = PBXGroup;
+			children = (
+				04C6972222C9DA1500035132 /* YD_SpeedModel.h */,
+				04C6972322C9DA1500035132 /* YD_SliderView.m */,
+				04C6972422C9DA1500035132 /* YD_SpeedViewController.h */,
+				04C6972522C9DA1500035132 /* YD_SpeedModel.m */,
+				04C6972622C9DA1500035132 /* YD_SliderView.h */,
+				04C6972722C9DA1500035132 /* YD_SpeedViewController.m */,
+			);
+			path = "变速视频";
+			sourceTree = "<group>";
+		};
+		04C6972822C9DA1500035132 /* 旋转视频 */ = {
+			isa = PBXGroup;
+			children = (
+				04C6972922C9DA1500035132 /* YD_RotateViewController.m */,
+				04C6972A22C9DA1500035132 /* YD_RotateModel.h */,
+				04C6972B22C9DA1500035132 /* YD_RotateModel.m */,
+				04C6972C22C9DA1500035132 /* YD_RotateViewController.h */,
+			);
+			path = "旋转视频";
+			sourceTree = "<group>";
+		};
+		20CF21E1A1D6D6D07F4374D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24A89DFC027EACF199D1CC3F /* libPods-YD_VideoEidtManager.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3B9A9DF3C470907569AD4AC3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				71116BD90830EE257FF48990 /* Pods-YD_VideoEidtManager.debug.xcconfig */,
+				863A968A4417094A52237F0B /* Pods-YD_VideoEidtManager.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04072E5B22C35FDB0045772E /* YD_VideoEidtManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04072E7222C35FDD0045772E /* Build configuration list for PBXNativeTarget "YD_VideoEidtManager" */;
+			buildPhases = (
+				9D7A695A3D1A246657CF08B9 /* [CP] Check Pods Manifest.lock */,
+				04072E5822C35FDB0045772E /* Sources */,
+				04072E5922C35FDB0045772E /* Frameworks */,
+				04072E5A22C35FDB0045772E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YD_VideoEidtManager;
+			productName = YD_VideoEidtManager;
+			productReference = 04072E5C22C35FDB0045772E /* YD_VideoEidtManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04072E5422C35FDB0045772E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = YD_;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = mac;
+				TargetAttributes = {
+					04072E5B22C35FDB0045772E = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 04072E5722C35FDB0045772E /* Build configuration list for PBXProject "YD_VideoEidtManager" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04072E5322C35FDB0045772E;
+			productRefGroup = 04072E5D22C35FDB0045772E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04072E5B22C35FDB0045772E /* YD_VideoEidtManager */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04072E5A22C35FDB0045772E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04C6973022C9DA1500035132 /* yd_play.png in Resources */,
+				04C6973922C9DA1500035132 /* yd_slider_1@2x.png in Resources */,
+				04C6972D22C9DA1500035132 /* yd_change_speed@3x.png in Resources */,
+				04C6973122C9DA1500035132 /* yd_change_speed@2x.png in Resources */,
+				04C6973522C9DA1500035132 /* yd_rotate@3x.png in Resources */,
+				04072E6C22C35FDD0045772E /* LaunchScreen.storyboard in Resources */,
+				04C6973622C9DA1500035132 /* yd_slider_2@2x.png in Resources */,
+				04C6973C22C9DA1500035132 /* yd_slider_1@3x.png in Resources */,
+				04072E6922C35FDD0045772E /* Assets.xcassets in Resources */,
+				04C6973222C9DA1500035132 /* yd_pause@3x.png in Resources */,
+				04C6972E22C9DA1500035132 /* yd_big_play@3x.png in Resources */,
+				04C6973322C9DA1500035132 /* yd_slider_2@3x.png in Resources */,
+				04C6973422C9DA1500035132 /* yd_rotate@2x.png in Resources */,
+				04C6973B22C9DA1500035132 /* yd_big_pause@2x.png in Resources */,
+				04C6972F22C9DA1500035132 /* yd_big_play@2x.png in Resources */,
+				04C6973722C9DA1500035132 /* yd_pause@2x.png in Resources */,
+				04C6973A22C9DA1500035132 /* yd_big_pause@3x.png in Resources */,
+				04970E6822C3822F001B3A68 /* DreamHouseClip.mp4 in Resources */,
+				04C6973822C9DA1500035132 /* yd_play@3x.png in Resources */,
+				04072E6722C35FDB0045772E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9D7A695A3D1A246657CF08B9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YD_VideoEidtManager-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04072E5822C35FDB0045772E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04C6974022C9DA1500035132 /* AVAsset+YD_Extension.m in Sources */,
+				04C6974F22C9DA1500035132 /* YD_RotateModel.m in Sources */,
+				04C6974A22C9DA1500035132 /* YD_BaseModel.m in Sources */,
+				04C6974722C9DA1500035132 /* YD_BottomBar.m in Sources */,
+				04C6974422C9DA1500035132 /* YD_DefaultPlayControlView.m in Sources */,
+				04C6974B22C9DA1500035132 /* YD_SliderView.m in Sources */,
+				04C6973D22C9DA1500035132 /* UIButton+YD_Extension.m in Sources */,
+				04C6973F22C9DA1500035132 /* UIView+YDExtension.m in Sources */,
+				04C6974922C9DA1500035132 /* YD_Slider.m in Sources */,
+				04C6974122C9DA1500035132 /* YD_AssetManager.m in Sources */,
+				04C6974522C9DA1500035132 /* YD_ProgressHUD.m in Sources */,
+				04072E6422C35FDB0045772E /* ViewController.m in Sources */,
+				04C6974D22C9DA1500035132 /* YD_SpeedViewController.m in Sources */,
+				04C6974E22C9DA1500035132 /* YD_RotateViewController.m in Sources */,
+				04C6974822C9DA1500035132 /* YD_BaseView.m in Sources */,
+				04072E6F22C35FDD0045772E /* main.m in Sources */,
+				04C6974C22C9DA1500035132 /* YD_SpeedModel.m in Sources */,
+				04C6974622C9DA1500035132 /* YD_BaseViewController.m in Sources */,
+				04C6973E22C9DA1500035132 /* UIColor+YDColorChange.m in Sources */,
+				04072E6122C35FDB0045772E /* AppDelegate.m in Sources */,
+				04C6974322C9DA1500035132 /* YD_BasePlayControlView.m in Sources */,
+				04C6974222C9DA1500035132 /* YD_PlayerView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		04072E6522C35FDB0045772E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04072E6622C35FDB0045772E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		04072E6A22C35FDD0045772E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04072E6B22C35FDD0045772E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		04072E7022C35FDD0045772E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		04072E7122C35FDD0045772E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		04072E7322C35FDD0045772E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71116BD90830EE257FF48990 /* Pods-YD_VideoEidtManager.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R4STM4Y9HA;
+				INFOPLIST_FILE = YD_VideoEidtManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ruirui.manager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		04072E7422C35FDD0045772E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 863A968A4417094A52237F0B /* Pods-YD_VideoEidtManager.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R4STM4Y9HA;
+				INFOPLIST_FILE = YD_VideoEidtManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ruirui.manager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04072E5722C35FDB0045772E /* Build configuration list for PBXProject "YD_VideoEidtManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04072E7022C35FDD0045772E /* Debug */,
+				04072E7122C35FDD0045772E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04072E7222C35FDD0045772E /* Build configuration list for PBXNativeTarget "YD_VideoEidtManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04072E7322C35FDD0045772E /* Debug */,
+				04072E7422C35FDD0045772E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04072E5422C35FDB0045772E /* Project object */;
+}

@@ -181,7 +181,7 @@
 }
 /// 视频宽高比
 + (void)yd_aspectRatioAsset:(AVAsset *)asset ratio:(CGFloat)ratio finish:(YD_ExportFinishBlock)finishBlock {
-
+    
     AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
     
     AVAssetTrack *videoAssetTrack = nil;
@@ -210,11 +210,17 @@
                              atTime:kCMTimeZero error:nil];
     }
     
-    CGSize naturalSize = CGSizeMake(videoAssetTrack.naturalSize.height, videoAssetTrack.naturalSize.height);
+    CGSize naturalSize = videoAssetTrack.naturalSize;
+    /// 当宽大于等于高
+    CGSize resultSize = CGSizeMake(videoAssetTrack.naturalSize.width, videoAssetTrack.naturalSize.width / ratio);
+    /// 当高大于宽
+    if (naturalSize.width < naturalSize.height) {
+        resultSize = CGSizeMake(videoAssetTrack.naturalSize.height * ratio, videoAssetTrack.naturalSize.height);
+    }
     
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
     videoComposition.frameDuration = CMTimeMake(1, 30);
-    videoComposition.renderSize = naturalSize;
+    videoComposition.renderSize = resultSize;
     
     AVMutableVideoCompositionInstruction *mainInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, videoTrack.asset.duration);
@@ -225,12 +231,21 @@
     videoComposition.instructions = [NSArray arrayWithObject:mainInstruction];
     
     CALayer *parentLayer = [CALayer layer];
-    parentLayer.backgroundColor = UIColor.redColor.CGColor;
     CALayer *videoLayer = [CALayer layer];
-    videoLayer.backgroundColor = UIColor.yellowColor.CGColor;
-    parentLayer.frame = CGRectMake(0, 0, naturalSize.width, naturalSize.height);
-    videoLayer.frame = CGRectMake(0, 0, videoAssetTrack.naturalSize.width, naturalSize.height);
-    parentLayer.contentsGravity = kCAGravityResizeAspect;
+    /// 当高大于宽
+    if (naturalSize.width < naturalSize.height) {
+        CGFloat height = resultSize.height;
+        CGFloat width = height * naturalSize.width / naturalSize.height;
+        parentLayer.frame = CGRectMake(resultSize.width * 0.5 - width * 0.5, 0, width, height);
+    }else {
+        /// 当宽大于等于高
+        CGFloat width = resultSize.width;
+        CGFloat height = width * naturalSize.height / naturalSize.width;
+        parentLayer.frame = CGRectMake(0, height * 0.5 - resultSize.height * 0.5, width, height);
+    }
+    
+    videoLayer.frame = CGRectMake(0, 0, resultSize.width, resultSize.height);
+    videoLayer.contentsGravity = kCAGravityResizeAspect;
     [parentLayer addSublayer:videoLayer];
     // 单个画面播放
     videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];

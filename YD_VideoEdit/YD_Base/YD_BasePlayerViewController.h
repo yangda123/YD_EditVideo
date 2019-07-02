@@ -10,6 +10,7 @@
 #import "YD_DefaultPlayControlView.h"
 #import "YD_PlayerView.h"
 #import "YD_ConfigModel.h"
+#import "YD_PreViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, readonly) YD_PlayerView *player;
 @property (nonatomic, weak, readonly) YD_BottomBar *bottomBar;
 
+#pragma mark - 分享和保存的回掉
+@property (nonatomic, copy) YD_SaveBlock  saveBlock;
+@property (nonatomic, copy) YD_ShareBlock shareBlock;
+
 #pragma mark - 子类需要重写的方法
 /// 标题
 - (NSString *)yd_title;
@@ -29,6 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)yd_barIconName;
 /// 点击完成的处理
 - (void)yd_completeItemAction;
+
+#pragma mark - 跳到预览界面
+- (void)yd_pushPreview:(NSString *)urlPath;
 
 @end
 

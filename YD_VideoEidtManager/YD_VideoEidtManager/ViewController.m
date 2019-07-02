@@ -85,6 +85,14 @@
             YD_BasePlayerViewController *playerVC = (YD_BasePlayerViewController *)[class new];
             playerVC.model = model;
             [self.navigationController pushViewController:playerVC animated:YES];
+            
+            playerVC.saveBlock = ^(UIViewController * _Nonnull controller, NSString * _Nonnull urlPaht) {
+                NSLog(@"--- 保存");
+            };
+            
+            playerVC.shareBlock = ^(UIViewController * _Nonnull controller, NSString * _Nonnull urlPaht) {
+                NSLog(@"--- 分享");
+            };
         }];
     }
 }

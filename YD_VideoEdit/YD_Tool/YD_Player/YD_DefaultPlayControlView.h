@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YD_DefaultPlayControlView : YD_BasePlayControlView
+/// 是否隐藏底部控制bar
+@property (nonatomic, assign) BOOL yd_hiddenBar;
 
 @end
 

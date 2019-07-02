@@ -76,7 +76,7 @@
     
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
-    self.playerLayer.frame = self.bounds;
+    self.playerLayer.frame = self.containView.bounds;
     [CATransaction commit];
 }
 

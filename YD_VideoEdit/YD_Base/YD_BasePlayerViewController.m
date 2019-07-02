@@ -68,8 +68,8 @@
         self.playControl = playControl;
     
         YD_PlayerView *player = [YD_PlayerView new];
-        player.backgroundColor = self.model.playerBackColor;
         self.player = player;
+        player.backgroundColor = self.model.playerBackColor;
         player.yd_model = self.playModel;
         player.yd_controlView = playControl;
         [self.view addSubview:player];
@@ -110,6 +110,16 @@
 /// 点击完成的处理
 - (void)yd_completeItemAction {
     
+}
+
+#pragma mark - 跳到预览界面
+- (void)yd_pushPreview:(NSString *)urlPath {
+    YD_PreViewController *vc = [YD_PreViewController new];
+    vc.themeColor = self.model.themeColor;
+    vc.urlPath = urlPath;
+    vc.saveBlock = self.saveBlock;
+    vc.shareBlock = self.shareBlock;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

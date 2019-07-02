@@ -109,14 +109,24 @@
     }];
 }
 
+#pragma mark - setter
 - (void)setThemeColor:(UIColor *)themeColor {
     self.slider.minimumTrackTintColor = themeColor;
 }
 
+- (void)setYd_hiddenBar:(BOOL)yd_hiddenBar {
+    _yd_hiddenBar = yd_hiddenBar;
+    self.containView.hidden = YES;
+}
+
 #pragma mark - UI事件
 - (void)yd_tapGesture {
-    self.containView.hidden = !self.containView.hidden;
-    self.bigPlayBtn.hidden = self.containView.hidden;
+    if (_yd_hiddenBar) {
+        self.containView.hidden = YES;
+    }else {
+        self.containView.hidden = !self.containView.hidden;
+    }
+    self.bigPlayBtn.hidden = !self.bigPlayBtn.hidden;
 }
 
 - (void)yd_playBtnAction {

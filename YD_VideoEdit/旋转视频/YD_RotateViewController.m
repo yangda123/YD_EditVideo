@@ -109,17 +109,18 @@
 
 - (void)yd_completeItemAction {
     
-    [YD_ProgressHUD yd_showHUD:@"正在保存视频"];
+    [self.player yd_pause];
     
+    [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
+    
+    @weakify(self);
     [YD_AssetManager  yd_rotateAssetWithAsset:self.model.asset degress:self.orientation finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
-        
+        @strongify(self);
+        [YD_ProgressHUD yd_hideHUD];
         if (isSuccess) {
-            [YD_AssetManager yd_saveToLibrary:exportPath toView:self.view block:^(BOOL success) {
-                [YD_ProgressHUD yd_hideHUD];
-            }];
+            [self yd_pushPreview:exportPath];
         }else {
-            [YD_ProgressHUD yd_hideHUD];
-            [YD_ProgressHUD yd_showMessage:@"保存失败" toView:self.view];
+            [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
         }
     }];
 }

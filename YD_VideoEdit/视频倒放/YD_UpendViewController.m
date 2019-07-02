@@ -104,11 +104,25 @@
 }
 
 - (NSString *)yd_barIconName {
-    return self.model.barIconName ?: @"yd_rotate";
+    return self.model.barIconName ?: @"yd_upend";
 }
 
 - (void)yd_completeItemAction {
     
+    [self.player yd_pause];
+    
+    [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
+    
+    @weakify(self);
+    [YD_AssetManager yd_upendAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+        @strongify(self);
+        [YD_ProgressHUD yd_hideHUD];
+        if (isSuccess) {
+            [self yd_pushPreview:exportPath];
+        }else {
+            [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
+        }
+    }];
 }
 
 #pragma mark - UI事件
@@ -121,14 +135,18 @@
         return;
     }
     
-    [YD_ProgressHUD yd_showHUD:@"正在处理视频"];
+    [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
     
     @weakify(self);
     [YD_AssetManager yd_upendAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
         @strongify(self);
         [YD_ProgressHUD yd_hideHUD];
-        self.upendAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:exportPath]];
-        [self yd_playWithAsset:self.upendAsset];
+        if (isSuccess) {
+            self.upendAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:exportPath]];
+            [self yd_playWithAsset:self.upendAsset];
+        }else {
+            [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
+        }
     }];
 }
 

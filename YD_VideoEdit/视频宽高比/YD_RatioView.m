@@ -90,6 +90,10 @@
     self.customView.selectView.hidden = YES;
     view.selectView.hidden = NO;
     self.customView = view;
+    
+    if (self.ratioBlock) {
+        self.ratioBlock(view.ratio);
+    }
 }
 
 @end
@@ -100,6 +104,7 @@
 @property (nonatomic, weak) UILabel *ratioLabel;
 @property (nonatomic, weak) UIView *selectView;
 
+@property (nonatomic, copy  ) NSString *title;
 @property (nonatomic, assign) CGFloat ratio;
 
 @end
@@ -109,37 +114,21 @@
 - (instancetype)initWithRatio:(CGFloat)ratio title:(NSString *)title {
     self = [super init];
     if (self) {
+        self.title = title;
         self.ratio = ratio;
-        [self yd_setup:title];
+        [self yd_layoutSubViews];
     }
     return self;
 }
 
-- (void)yd_setup:(NSString *)title {
+- (void)yd_layoutSubViews {
     {
         UIView *view = [UIView new];
         self.borderView = view;
         [self addSubview:view];
         
-        if ([title isEqualToString:@""]) {
-            CAShapeLayer *border = [CAShapeLayer layer];
-            //虚线的颜色
-            border.strokeColor = [UIColor redColor].CGColor;
-            //填充的颜色
-            border.fillColor = [UIColor clearColor].CGColor;
-            //设置路径
-//            border.path = [UIBezierPath bezierPathWithRect:self.lineButton.bounds].CGPath;
-//            border.frame = self.lineButton.bounds;
-            //虚线的宽度
-            border.lineWidth = 1.5f;
-            //虚线的间隔
-            border.lineDashPattern = @[@4, @2];
-            
-            [view.layer addSublayer:border];
-        }else {
-            view.layer.borderColor = UIColor.blackColor.CGColor;
-            view.layer.borderWidth = 1.5;
-        }
+        view.layer.borderColor = UIColor.blackColor.CGColor;
+        view.layer.borderWidth = 1.5;
     }
     {
         UIView *view = [UIView new];
@@ -151,7 +140,7 @@
         UILabel *label = [UILabel new];
         self.ratioLabel = label;
         label.textAlignment = 1;
-        label.text = title;
+        label.text = self.title;
         label.textColor = [UIColor colorWithHexString:@"#000000"];
         label.font = [UIFont systemFontOfSize:14];
         [self addSubview:label];
@@ -162,8 +151,13 @@
     CGFloat margin = 8;
     CGFloat width = self.YD_width - margin * 2;
     
-    CGFloat border_w = self.ratio > 1 ? width : width * self.ratio;
-    CGFloat border_h = self.ratio < 1 ? width : width / self.ratio;
+    CGFloat ratio = self.ratio;
+    if ([self.title isEqualToString:@"原图"]) {
+        ratio = 1.0;
+    }
+    
+    CGFloat border_w = ratio > 1 ? width : width * ratio;
+    CGFloat border_h = ratio < 1 ? width : width / ratio;
     
     self.borderView.frame = CGRectMake(margin + width * 0.5 - border_w * 0.5, margin + width * 0.5 - border_h * 0.5, border_w, border_h);
     self.selectView.frame = CGRectMake(0, 0, self.YD_width, self.YD_width);

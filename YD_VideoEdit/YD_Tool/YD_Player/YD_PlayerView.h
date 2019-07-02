@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic, readonly) YD_PlayStatus yd_playStatus;
 /// 控制界面
 @property (nonatomic, strong) YD_BasePlayControlView *yd_controlView;
+/// 播放界面layer
+@property (nonatomic, weak, readonly) AVPlayerLayer *playerLayer;
 /// 代理
 @property (nonatomic, weak) id<YD_PlayerViewDelegate> delegate;
 /// 注意：：：在controller显示和消失的时候设置 

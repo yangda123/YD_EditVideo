@@ -65,7 +65,7 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         self.pointBtn = button;
         button.adjustsImageWhenHighlighted = NO;
-        [button setImage:[UIImage imageNamed:@"YD_Images.bundle/yd_slider_1"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"yd_slider_1"] forState:UIControlStateNormal];
         [self.containView addSubview:button];
         
         [button addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragGesture:)]];

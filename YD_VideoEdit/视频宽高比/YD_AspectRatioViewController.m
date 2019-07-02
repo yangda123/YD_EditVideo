@@ -84,7 +84,7 @@
 }
 
 - (NSString *)yd_barIconName {
-    return self.model.barIconName ?: @"YD_Images.bundle/yd_aspectRatio";
+    return self.model.barIconName ?: @"yd_aspectRatio";
 }
 
 - (void)yd_completeItemAction {

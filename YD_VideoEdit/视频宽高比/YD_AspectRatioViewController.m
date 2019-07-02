@@ -70,7 +70,7 @@
     
     [YD_ProgressHUD yd_showHUD:@"正在保存视频"];
     
-    [YD_AssetManager yd_aspectRatioAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+    [YD_AssetManager yd_aspectRatioAsset:self.model.asset ratio:1.0 finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
         
         if (isSuccess) {
             

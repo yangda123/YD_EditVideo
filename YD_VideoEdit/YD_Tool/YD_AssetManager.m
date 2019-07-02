@@ -180,7 +180,7 @@
     });
 }
 /// 视频宽高比
-+ (void)yd_aspectRatioAsset:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock {
++ (void)yd_aspectRatioAsset:(AVAsset *)asset ratio:(CGFloat)ratio finish:(YD_ExportFinishBlock)finishBlock {
 
     AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
     
@@ -210,11 +210,11 @@
                              atTime:kCMTimeZero error:nil];
     }
     
+    CGSize naturalSize = CGSizeMake(videoAssetTrack.naturalSize.height, videoAssetTrack.naturalSize.height);
     
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
     videoComposition.frameDuration = CMTimeMake(1, 30);
-//    videoComposition.renderSize = videoAssetTrack.naturalSize;
-    videoComposition.renderSize = CGSizeMake(300, 800);
+    videoComposition.renderSize = naturalSize;
     
     AVMutableVideoCompositionInstruction *mainInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, videoTrack.asset.duration);
@@ -223,6 +223,17 @@
     
     mainInstruction.layerInstructions = [NSArray arrayWithObjects:videolayerInstruction, nil];
     videoComposition.instructions = [NSArray arrayWithObject:mainInstruction];
+    
+    CALayer *parentLayer = [CALayer layer];
+    parentLayer.backgroundColor = UIColor.redColor.CGColor;
+    CALayer *videoLayer = [CALayer layer];
+    videoLayer.backgroundColor = UIColor.yellowColor.CGColor;
+    parentLayer.frame = CGRectMake(0, 0, naturalSize.width, naturalSize.height);
+    videoLayer.frame = CGRectMake(0, 0, videoAssetTrack.naturalSize.width, naturalSize.height);
+    parentLayer.contentsGravity = kCAGravityResizeAspect;
+    [parentLayer addSublayer:videoLayer];
+    // 单个画面播放
+    videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
     
     [self yd_exporter:mixComposition videoComposition:videoComposition finish:finishBlock];
 }

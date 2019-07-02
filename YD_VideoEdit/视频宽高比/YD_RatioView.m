@@ -119,9 +119,27 @@
     {
         UIView *view = [UIView new];
         self.borderView = view;
-        view.layer.borderColor = UIColor.blackColor.CGColor;
-        view.layer.borderWidth = 1.5;
         [self addSubview:view];
+        
+        if ([title isEqualToString:@""]) {
+            CAShapeLayer *border = [CAShapeLayer layer];
+            //虚线的颜色
+            border.strokeColor = [UIColor redColor].CGColor;
+            //填充的颜色
+            border.fillColor = [UIColor clearColor].CGColor;
+            //设置路径
+//            border.path = [UIBezierPath bezierPathWithRect:self.lineButton.bounds].CGPath;
+//            border.frame = self.lineButton.bounds;
+            //虚线的宽度
+            border.lineWidth = 1.5f;
+            //虚线的间隔
+            border.lineDashPattern = @[@4, @2];
+            
+            [view.layer addSublayer:border];
+        }else {
+            view.layer.borderColor = UIColor.blackColor.CGColor;
+            view.layer.borderWidth = 1.5;
+        }
     }
     {
         UIView *view = [UIView new];

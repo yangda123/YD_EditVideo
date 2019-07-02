@@ -103,6 +103,7 @@
 @property (nonatomic, weak) UIView *borderView;
 @property (nonatomic, weak) UILabel *ratioLabel;
 @property (nonatomic, weak) UIView *selectView;
+@property (nonatomic, weak) CAShapeLayer *border;
 
 @property (nonatomic, copy  ) NSString *title;
 @property (nonatomic, assign) CGFloat ratio;
@@ -126,9 +127,19 @@
         UIView *view = [UIView new];
         self.borderView = view;
         [self addSubview:view];
-        
-        view.layer.borderColor = UIColor.blackColor.CGColor;
-        view.layer.borderWidth = 1.5;
+
+        CGFloat margin = [self.title isEqualToString:@"原图"] ? 2 : 0;
+        CAShapeLayer *border = [CAShapeLayer layer];
+        self.border = border;
+        //虚线的颜色
+        border.strokeColor = UIColor.blackColor.CGColor;
+        //填充的颜色
+        border.fillColor = UIColor.clearColor.CGColor;
+        //虚线的宽度
+        border.lineWidth = 1.5;
+        //虚线的间隔
+        border.lineDashPattern = @[@6, @(margin)];
+        [view.layer addSublayer:border];
     }
     {
         UIView *view = [UIView new];
@@ -162,6 +173,9 @@
     self.borderView.frame = CGRectMake(margin + width * 0.5 - border_w * 0.5, margin + width * 0.5 - border_h * 0.5, border_w, border_h);
     self.selectView.frame = CGRectMake(0, 0, self.YD_width, self.YD_width);
     self.ratioLabel.frame = CGRectMake(0, self.YD_height - 20, self.YD_width, 20);
+    
+    self.border.path = [UIBezierPath bezierPathWithRect:self.borderView.bounds].CGPath;
+    self.border.frame = self.borderView.bounds;
 }
 
 @end

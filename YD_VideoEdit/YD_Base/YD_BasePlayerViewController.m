@@ -119,6 +119,7 @@
     vc.urlPath = urlPath;
     vc.saveBlock = self.saveBlock;
     vc.shareBlock = self.shareBlock;
+    vc.backHomeIcon = self.model.backHomeIcon;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

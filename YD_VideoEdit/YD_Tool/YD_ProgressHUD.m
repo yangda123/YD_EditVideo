@@ -32,7 +32,8 @@
     hud.margin = 15.0;
     hud.offset = CGPointMake(hud.bezelView.YD_x, hud.bezelView.YD_y - 60);
     hud.minSize = CGSizeMake(90, 90);
-    hud.label.text = message;
+    hud.label.numberOfLines = 0;
+    hud.label.text = [NSString stringWithFormat:@"\n%@", message];
     return hud;
 }
 

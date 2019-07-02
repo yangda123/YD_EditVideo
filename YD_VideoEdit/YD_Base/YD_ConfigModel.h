@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *themeColor;
 /// 底部bar图标的名称: 默认有图标，如果需要修改，自己传入icon名称
 @property (nonatomic, copy) NSString *barIconName;
+/// 返回首页b图标名称: 默认有图标，如果需要修改，自己传入icon名称
+@property (nonatomic, copy) NSString *backHomeIcon;
 /// 视频播放
 @property (nonatomic, strong) AVAsset *asset;
 

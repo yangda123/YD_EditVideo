@@ -42,7 +42,8 @@
 
 - (void)yd_layoutSubViews {
     {
-        UIImage *image = [[UIImage imageNamed:@"yd_pre_home"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        NSString *imgName = self.backHomeIcon ?: @"yd_pre_home";
+        UIImage *image = [[UIImage imageNamed:imgName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(yd_homeItemAction)];
         self.navigationItem.rightBarButtonItem = rightItem;
     }

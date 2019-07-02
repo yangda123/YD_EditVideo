@@ -26,8 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.translucent = YES;
-    
     self.view.backgroundColor = UIColor.whiteColor;
     self.title = @"首页";
     

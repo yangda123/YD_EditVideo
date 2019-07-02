@@ -104,7 +104,7 @@
 }
 
 - (NSString *)yd_barIconName {
-    return self.model.barIconName ?: @"yd_rotate";
+    return self.model.barIconName ?: @"YD_Images.bundle/yd_rotate";
 }
 
 - (void)yd_completeItemAction {

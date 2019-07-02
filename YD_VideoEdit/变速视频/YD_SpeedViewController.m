@@ -66,7 +66,7 @@
 }
 
 - (NSString *)yd_barIconName {
-    return self.model.barIconName ?: @"yd_change_speed";
+    return self.model.barIconName ?: @"YD_Images.bundle/yd_change_speed";
 }
 
 - (void)yd_completeItemAction {

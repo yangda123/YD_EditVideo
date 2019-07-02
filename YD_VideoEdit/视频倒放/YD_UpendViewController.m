@@ -104,7 +104,7 @@
 }
 
 - (NSString *)yd_barIconName {
-    return self.model.barIconName ?: @"yd_upend";
+    return self.model.barIconName ?: @"YD_Images.bundle/yd_upend";
 }
 
 - (void)yd_completeItemAction {

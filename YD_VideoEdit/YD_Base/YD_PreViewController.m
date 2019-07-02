@@ -42,7 +42,7 @@
 
 - (void)yd_layoutSubViews {
     {
-        NSString *imgName = self.backHomeIcon ?: @"yd_pre_home";
+        NSString *imgName = self.backHomeIcon ?: @"YD_Images.bundle/yd_pre_home";
         UIImage *image = [[UIImage imageNamed:imgName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(yd_homeItemAction)];
         self.navigationItem.rightBarButtonItem = rightItem;
@@ -52,11 +52,11 @@
         self.bottomView = view;
         [self.view addSubview:view];
         
-        self.saveBtn = [self yd_createButton:@"保存" imgName:@"yd_pre_save"];
+        self.saveBtn = [self yd_createButton:@"保存" imgName:@"YD_Images.bundle/yd_pre_save"];
         [self.saveBtn addTarget:self action:@selector(yd_saveAction) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:self.saveBtn];
         
-        self.shareBtn = [self yd_createButton:@"分享" imgName:@"yd_pre_share"];
+        self.shareBtn = [self yd_createButton:@"分享" imgName:@"YD_Images.bundle/yd_pre_share"];
         [self.shareBtn addTarget:self action:@selector(yd_shareAction) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:self.shareBtn];
     }

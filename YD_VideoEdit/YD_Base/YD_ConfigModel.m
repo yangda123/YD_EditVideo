@@ -17,6 +17,7 @@
         self.controllerColor = [UIColor colorWithHexString:@"#E8E8E8"];
         self.playerBackColor = [UIColor colorWithHexString:@"#BABABA"];
         self.themeColor = [UIColor colorWithHexString:@"#F61847"];
+        self.btnTitleColor = [UIColor colorWithHexString:@"#000000"];
     }
     return self;
 }

@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YD_PreViewController : YD_BaseViewController
 /// 主体的颜色
 @property (nonatomic, strong) UIColor *themeColor;
+/// 保存和分享字体的颜色
+@property (nonatomic, strong) UIColor *btnTitleColor;
 /// 视频播放URL
 @property (nonatomic, copy  ) NSString *urlPath;
 /// 返回首页图标

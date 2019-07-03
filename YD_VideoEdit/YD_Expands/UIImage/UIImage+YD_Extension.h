@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIImage *)yd_imageWithName:(NSString *)imgName;
 
+- (UIImage *)imageChangeColor:(UIColor *)color;
+
 @end
 
 NS_ASSUME_NONNULL_END

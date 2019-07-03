@@ -12,6 +12,7 @@
 #import "YD_SpeedViewController.h"
 #import "YD_UpendViewController.h"
 #import "YD_AspectRatioViewController.h"
+#import "YD_VolumeViewController.h"
 
 @interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -32,18 +33,26 @@
     self.classArray = @[YD_RotateViewController.class,
                         YD_SpeedViewController.class,
                         YD_UpendViewController.class,
-                        YD_AspectRatioViewController.class];
+                        YD_AspectRatioViewController.class,
+                        
+                        YD_AspectRatioViewController.class,
+                        YD_AspectRatioViewController.class,
+                        YD_VolumeViewController.class];
     
     [self yd_createButton:@"旋转" index:0];
     [self yd_createButton:@"变速" index:1];
     [self yd_createButton:@"倒放" index:2];
     [self yd_createButton:@"宽高比" index:3];
+    
+    [self yd_createButton:@"复制" index:4];
+    [self yd_createButton:@"压缩" index:5];
+    [self yd_createButton:@"音量" index:6];
 }
 
 - (void)yd_createButton:(NSString *)title index:(NSInteger)index {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.tag = index;
-    button.frame = CGRectMake(self.view.bounds.size.width * 0.5 - 60, YD_TopBarHeight + 20 + index * 80, 120, 60);
+    button.frame = CGRectMake(self.view.bounds.size.width * 0.5 - 60, YD_TopBarHeight + 20 + index * 64, 120, 44);
     button.backgroundColor = UIColor.orangeColor;
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];

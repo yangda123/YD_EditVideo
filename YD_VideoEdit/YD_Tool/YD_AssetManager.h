@@ -22,7 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)yd_upendAsset:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock;
 /// 视频宽高比 ratio = 宽 / 高
 + (void)yd_aspectRatioAsset:(AVAsset *)asset ratio:(CGFloat)ratio finish:(YD_ExportFinishBlock)finishBlock;
-
+/// 设置音量
++ (void)yd_volumeAsset:(AVAsset *)asset volume:(CGFloat)volume finish:(YD_ExportFinishBlock)finishBlock;
 /// 导出视频
 + (void)yd_exporter:(AVAsset *)asset
            fileName:(NSString *)fileName

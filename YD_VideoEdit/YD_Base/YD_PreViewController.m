@@ -82,13 +82,16 @@
 }
 
 - (UIButton *)yd_createButton:(NSString *)title imgName:(NSString *)imgName {
+    
+    UIImage *image = [[UIImage yd_imageWithName:imgName] imageChangeColor:self.btnTitleColor];
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.layer.cornerRadius = 5.0;
     button.layer.masksToBounds = YES;
     button.backgroundColor = self.themeColor;
     [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
-    [button setImage:[UIImage yd_imageWithName:imgName] forState:UIControlStateNormal];
+    [button setTitleColor:self.btnTitleColor forState:UIControlStateNormal];
+    [button setImage:image forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     dispatch_async(dispatch_get_main_queue(), ^{
         [button layoutButtonWithEdgeInsetsStyle:YD_ButtonEdgeInsetsStyleLeft imageTitleSpace:10];

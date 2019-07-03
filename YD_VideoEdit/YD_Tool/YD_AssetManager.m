@@ -253,6 +253,45 @@
     [self yd_exporter:mixComposition videoComposition:videoComposition finish:finishBlock];
 }
 
++ (void)yd_volumeAsset:(AVAsset *)asset volume:(CGFloat)volume finish:(YD_ExportFinishBlock)finishBlock {
+    
+    CMTimeRange range = CMTimeRangeMake(kCMTimeZero, asset.duration);
+    
+    AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
+    
+    AVAssetTrack *videoAssetTrack = nil;
+    AVAssetTrack *audioAssetTrack = nil;
+    
+    if ([asset tracksWithMediaType:AVMediaTypeVideo].count) {
+        videoAssetTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+    }
+    if ([asset tracksWithMediaType:AVMediaTypeAudio].count) {
+        audioAssetTrack = [asset tracksWithMediaType:AVMediaTypeAudio].firstObject;
+    }
+
+    //1 视频通道
+    AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    if (videoAssetTrack) {
+        [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
+                            ofTrack:videoAssetTrack
+                             atTime:kCMTimeZero error:nil];
+    }
+    
+    //2 音频通道
+    if (audioAssetTrack) {
+        AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+        [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
+                            ofTrack:audioAssetTrack
+                             atTime:kCMTimeZero error:nil];
+        
+        AVMutableAudioMixInputParameters *newAudioInputParams = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:audioTrack] ;
+        [newAudioInputParams setVolumeRampFromStartVolume:volume toEndVolume:.0f timeRange:range];
+        [newAudioInputParams setTrackID:audioTrack.trackID];
+    }
+    
+    [self yd_exporter:mixComposition fileName:@"volume.mp4" finish:finishBlock];
+}
+
 + (void)yd_exporter:(AVAsset *)asset
    videoComposition:(AVMutableVideoComposition *)videoComposition
              finish:(YD_ExportFinishBlock)finishBlock {

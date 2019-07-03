@@ -14,8 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YD_BottomBar : YD_BaseView
 
-+ (instancetype)addBar:(NSString *)title
-               imgName:(NSString *)imgName;
++ (instancetype)addBar:(NSString *)title image:(UIImage *)image;
 
 @end
 

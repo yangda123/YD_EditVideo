@@ -77,7 +77,7 @@
         [player yd_play];
     }
     {
-        YD_BottomBar *bar = [YD_BottomBar addBar:[self yd_title] imgName:[self yd_barIconName]];
+        YD_BottomBar *bar = [YD_BottomBar addBar:[self yd_title] image:[self yd_barIconImage]];
         self.bottomBar = bar;
         [self.view addSubview:bar];
     }
@@ -104,8 +104,8 @@
     return @"";
 }
 
-- (NSString *)yd_barIconName {
-    return @"";
+- (UIImage *)yd_barIconImage {
+    return nil;
 }
 /// 点击完成的处理
 - (void)yd_completeItemAction {
@@ -119,7 +119,7 @@
     vc.urlPath = urlPath;
     vc.saveBlock = self.saveBlock;
     vc.shareBlock = self.shareBlock;
-    vc.backHomeIcon = self.model.backHomeIcon;
+//    vc.backHomeIcon = self.model.backHomeIcon;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

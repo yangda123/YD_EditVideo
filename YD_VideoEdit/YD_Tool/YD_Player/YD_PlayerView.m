@@ -140,6 +140,7 @@
     self.imgView.image = yd_model.coverImage;
     
     AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:yd_model.asset];
+    item.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
     [item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     self.player = [AVPlayer playerWithPlayerItem:item];
     self.playerLayer.player = self.player;

@@ -1,21 +1,22 @@
 //
-//  NSBundle+YD_Extension.m
+//  UIImage+YD_Extension.m
 //  YD_VideoEidtManager
 //
-//  Created by mac on 2019/7/2.
+//  Created by mac on 2019/7/3.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "NSBundle+YD_Extension.h"
+#import "UIImage+YD_Extension.h"
 #import "YD_BaseViewController.h"
 
-@implementation NSBundle (YD_Extension)
+@implementation UIImage (YD_Extension)
 
-+ (NSString *)yd_imageFilePath:(NSString *)imgName {
++ (UIImage *)yd_imageWithName:(NSString *)imgName {
     NSBundle *mainBundle = [NSBundle bundleForClass:[YD_BaseViewController class]];
     NSBundle *resourcesBundle = [NSBundle bundleWithPath:[mainBundle pathForResource:@"YD_Images" ofType:@"bundle"]];
     NSString *imgPath = [resourcesBundle pathForResource:imgName ofType:@"png"];
-    return imgPath;
+    UIImage *image = [UIImage imageWithContentsOfFile:imgPath];
+    return image;
 }
 
 @end

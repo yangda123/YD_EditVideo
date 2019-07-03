@@ -65,8 +65,8 @@
     return @"变速";
 }
 
-- (NSString *)yd_barIconName {
-    return self.model.barIconName ?: @"yd_change_speed";
+- (UIImage *)yd_barIconImage {
+    return self.model.barIconImage ?: [UIImage yd_imageWithName:@"yd_change_speed@3x"];
 }
 
 - (void)yd_completeItemAction {

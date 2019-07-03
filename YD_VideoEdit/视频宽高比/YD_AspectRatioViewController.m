@@ -83,8 +83,9 @@
     return @"宽高比";
 }
 
-- (NSString *)yd_barIconName {
-    return self.model.barIconName ?: @"yd_aspectRatio";
+- (UIImage *)yd_barIconImage {
+    
+    return self.model.barIconImage ?: [UIImage yd_imageWithName:@"yd_aspectRatio@3x"];
 }
 
 - (void)yd_completeItemAction {

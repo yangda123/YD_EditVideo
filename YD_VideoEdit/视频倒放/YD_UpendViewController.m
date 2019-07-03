@@ -103,8 +103,8 @@
     return @"倒放";
 }
 
-- (NSString *)yd_barIconName {
-    return self.model.barIconName ?: @"yd_upend";
+- (UIImage *)yd_barIconImage {
+    return self.model.barIconImage ?: [UIImage yd_imageWithName:@"yd_upend@3x"];
 }
 
 - (void)yd_completeItemAction {

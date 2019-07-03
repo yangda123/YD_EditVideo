@@ -19,10 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *playerBackColor;
 /// 主体的颜色
 @property (nonatomic, strong) UIColor *themeColor;
-/// 底部bar图标的名称: 默认有图标，如果需要修改，自己传入icon名称
-@property (nonatomic, copy) NSString *barIconName;
-/// 返回首页b图标名称: 默认有图标，如果需要修改，自己传入icon名称
-@property (nonatomic, copy) NSString *backHomeIcon;
+
+/// 底部bar图标: 默认有图标，如果需要修改，自己传入Image
+@property (nonatomic, strong) UIImage *barIconImage;
+/// 返回首页b图标: 默认有图标，如果需要修改，自己传入Image
+@property (nonatomic, strong) UIImage *backHomeImage;
+
 /// 视频播放
 @property (nonatomic, strong) AVAsset *asset;
 

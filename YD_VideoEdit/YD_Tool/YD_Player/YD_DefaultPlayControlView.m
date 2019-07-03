@@ -39,8 +39,8 @@
 
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         self.bigPlayBtn = button;
-        [button setImage:[UIImage imageNamed:@"yd_big_pause"] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@"yd_big_play"] forState:UIControlStateSelected];
+        [button setImage:[UIImage yd_imageWithName:@"yd_big_pause@3x"] forState:UIControlStateNormal];
+        [button setImage:[UIImage yd_imageWithName:@"yd_big_play@3x"] forState:UIControlStateSelected];
         [button addTarget:self action:@selector(yd_playBtnAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
     }
@@ -53,8 +53,8 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         self.playBtn = button;
         button.imageEdgeInsets = UIEdgeInsetsMake(1, 0, -1, 0);
-        [button setImage:[UIImage imageNamed:@"yd_pause"] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@"yd_play"] forState:UIControlStateSelected];
+        [button setImage:[UIImage yd_imageWithName:@"yd_pause@3x"] forState:UIControlStateNormal];
+        [button setImage:[UIImage yd_imageWithName:@"yd_play@3x"] forState:UIControlStateSelected];
         [button addTarget:self action:@selector(yd_playBtnAction) forControlEvents:UIControlEventTouchUpInside];
         [self.containView addSubview:button];
     }
@@ -74,7 +74,7 @@
         slider.right_offset = 4;
         slider.minimumValue = 0;
         slider.maximumValue = 1;
-        [slider setThumbImage:[UIImage imageNamed:@"yd_slider_2"] forState:UIControlStateNormal];
+        [slider setThumbImage:[UIImage yd_imageWithName:@"yd_slider_2@3x"] forState:UIControlStateNormal];
         [slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
         slider.maximumTrackTintColor = [UIColor colorWithHexString:@"#999999"];
         [self.containView addSubview:slider];

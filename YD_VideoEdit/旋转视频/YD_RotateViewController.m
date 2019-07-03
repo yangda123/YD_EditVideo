@@ -103,8 +103,8 @@
     return @"旋转";
 }
 
-- (NSString *)yd_barIconName {
-    return self.model.barIconName ?: @"yd_rotate";
+- (UIImage *)yd_barIconImage {
+    return self.model.barIconImage ?: [UIImage yd_imageWithName:@"yd_rotate@3x"];
 }
 
 - (void)yd_completeItemAction {

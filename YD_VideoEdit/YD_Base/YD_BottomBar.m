@@ -14,22 +14,21 @@
 
 @implementation YD_BottomBar
 
-+ (instancetype)addBar:(NSString *)title
-               imgName:(NSString *)imgName {
-    YD_BottomBar *bar = [[YD_BottomBar alloc] initTitle:title imgName:imgName];
++ (instancetype)addBar:(NSString *)title image:(UIImage *)image {
+    YD_BottomBar *bar = [[YD_BottomBar alloc] initTitle:title image:image];
     return bar;
 }
 
-- (instancetype)initTitle:(NSString *)title imgName:(NSString *)name {
+- (instancetype)initTitle:(NSString *)title image:(UIImage *)image {
     self = [super init];
     if (self) {
         self.backgroundColor = UIColor.whiteColor;
-        [self yd_layoutSubView:title imgName:name];
+        [self yd_layoutSubView:title image:image];
     }
     return self;
 }
 
-- (void)yd_layoutSubView:(NSString *)title imgName:(NSString *)name {
+- (void)yd_layoutSubView:(NSString *)title image:(UIImage *)image {
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.userInteractionEnabled = NO;
@@ -37,7 +36,7 @@
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:10];
-    [button setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
+    [button setImage:image forState:UIControlStateNormal];
     [self addSubview:button];
     
     [button layoutButtonWithEdgeInsetsStyle:0 imageTitleSpace:8];

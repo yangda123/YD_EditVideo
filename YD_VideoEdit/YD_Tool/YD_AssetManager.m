@@ -279,9 +279,11 @@
     }];
 }
 
-+ (void)yd_exporter:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock {
++ (void)yd_exporter:(AVAsset *)asset
+           fileName:(NSString *)fileName
+             finish:(YD_ExportFinishBlock)finishBlock {
  
-    NSString *outputPath = [YD_PathCache stringByAppendingString:@"speedVideo.mp4"];
+    NSString *outputPath = [YD_PathCache stringByAppendingString:fileName];
     unlink([outputPath UTF8String]);
     /// 导出
     AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetMediumQuality];

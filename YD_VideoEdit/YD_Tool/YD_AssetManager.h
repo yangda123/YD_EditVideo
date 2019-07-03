@@ -24,7 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)yd_aspectRatioAsset:(AVAsset *)asset ratio:(CGFloat)ratio finish:(YD_ExportFinishBlock)finishBlock;
 
 /// 导出视频
-+ (void)yd_exporter:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock;
++ (void)yd_exporter:(AVAsset *)asset
+           fileName:(NSString *)fileName
+             finish:(YD_ExportFinishBlock)finishBlock;
 /// 保存到相册
 + (void)yd_saveToLibrary:(NSString *)savePath toView:(UIView *)view block:(void(^)(BOOL success))block;
 

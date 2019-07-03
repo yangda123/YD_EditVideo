@@ -19,6 +19,8 @@
 @property (nonatomic, weak) UILabel *titleLbl;
 
 @property (nonatomic, strong) AVAsset *upendAsset;
+/// 是否是倒放
+@property (nonatomic, assign) BOOL isUpend;
 
 @end
 
@@ -114,20 +116,33 @@
     [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
     
     @weakify(self);
-    [YD_AssetManager yd_upendAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
-        @strongify(self);
-        [YD_ProgressHUD yd_hideHUD];
-        if (isSuccess) {
-            [self yd_pushPreview:exportPath];
-        }else {
-            [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
-        }
-    }];
+    if (self.isUpend) {
+        [YD_AssetManager yd_upendAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+            @strongify(self);
+            [YD_ProgressHUD yd_hideHUD];
+            if (isSuccess) {
+                [self yd_pushPreview:exportPath];
+            }else {
+                [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
+            }
+        }];
+    }else {
+        [YD_AssetManager yd_exporter:self.model.asset fileName:@"upend.mp4" finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+            @strongify(self);
+            [YD_ProgressHUD yd_hideHUD];
+            if (isSuccess) {
+                [self yd_pushPreview:exportPath];
+            }else {
+                [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
+            }
+        }];
+    }
 }
 
 #pragma mark - UI事件
 - (void)yd_upendAction {
     
+    self.isUpend = YES;
     [self.player yd_pause];
     
     if (self.upendAsset) {
@@ -151,6 +166,7 @@
 }
 
 - (void)yd_restoreAction {
+    self.isUpend = NO;
     [self.player yd_pause];
     [self yd_playWithAsset:self.model.asset];
 }

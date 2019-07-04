@@ -368,7 +368,7 @@
         AVAssetTrack *mixCompositionTrack = [[mixComposition tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
         //初始化音频混合器导出配置参数
         AVMutableAudioMixInputParameters *exportAudioMixInputParameters = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:mixCompositionTrack];
-        
+    
 #pragma mark - 设置音量大小和淡入淡出的效果
         if (fadeIn == NO && fadeOut == NO) {
             [exportAudioMixInputParameters setVolumeRampFromStartVolume:volume toEndVolume:volume timeRange:range];

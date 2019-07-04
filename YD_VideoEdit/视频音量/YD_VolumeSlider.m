@@ -26,6 +26,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.currentValue = 1.0;
         [self yd_layoutSubViews];
         [self yd_layoutConstraints];
     }

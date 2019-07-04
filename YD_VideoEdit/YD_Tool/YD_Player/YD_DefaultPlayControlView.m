@@ -149,15 +149,10 @@
     
     self.slider.value = currentTime / totalTime;
     
-    NSInteger curr_time = roundf(currentTime);
-    NSInteger curr_min = roundf(curr_time / 60);
-    NSInteger curr_sec = curr_time - (curr_min * 60);
+    NSString *current_time = [NSString timeToString:currentTime format:@"%zd:%02zd"];
+    NSString *total_time = [NSString timeToString:totalTime format:@"%zd:%02zd"];
     
-    NSInteger total_time = roundf(totalTime);
-    NSInteger total_min = roundf(total_time / 60);
-    NSInteger total_sec = total_time - (total_min * 60);
-    
-    self.timeLbl.text = [NSString stringWithFormat:@"%zd:%02zd/%zd:%02zd",curr_min,curr_sec,total_min,total_sec];
+    self.timeLbl.text = [NSString stringWithFormat:@"%@/%@",current_time, total_time];
 }
 
 - (void)yd_player:(YD_PlayerView *_Nonnull)player playStateChanged:(YD_PlayStatus)status {

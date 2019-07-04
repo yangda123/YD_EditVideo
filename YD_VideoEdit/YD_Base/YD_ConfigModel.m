@@ -9,6 +9,12 @@
 #import "YD_ConfigModel.h"
 #import "UIColor+YDColorChange.h"
 
+@interface YD_ConfigModel ()
+/// 视频播放
+@property (nonatomic, strong) AVAsset *asset;
+
+@end
+
 @implementation YD_ConfigModel
 
 - (instancetype)init {
@@ -20,6 +26,11 @@
         self.btnTitleColor = [UIColor colorWithHexString:@"#000000"];
     }
     return self;
+}
+
+- (void)setVideoURL:(NSURL *)videoURL {
+    _videoURL = videoURL;
+    self.asset = [AVAsset assetWithURL:videoURL];
 }
 
 @end

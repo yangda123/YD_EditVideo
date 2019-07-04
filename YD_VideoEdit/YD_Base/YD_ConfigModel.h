@@ -27,8 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 返回首页b图标: 默认有图标，如果需要修改，自己传入Image
 @property (nonatomic, strong) UIImage *backHomeImage;
 
-/// 视频播放
-@property (nonatomic, strong) AVAsset *asset;
+/// 视频播放（注意:这个我自己使用的）
+@property (nonatomic, strong, readonly) AVAsset *asset;
+/// 本地视频播放URL：这个是需要传入的
+@property (nonatomic, strong) NSURL *videoURL;
 
 @end
 

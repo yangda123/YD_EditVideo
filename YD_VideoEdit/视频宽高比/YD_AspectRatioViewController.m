@@ -8,7 +8,6 @@
 
 #import "YD_AspectRatioViewController.h"
 #import "YD_RatioView.h"
-#import "YD_AssetManager.h"
 
 @interface YD_AspectRatioViewController ()
 

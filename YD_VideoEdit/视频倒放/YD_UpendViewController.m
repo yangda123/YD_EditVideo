@@ -9,7 +9,6 @@
 #import "YD_UpendViewController.h"
 #import "YD_PlayerView.h"
 #import "YD_DefaultPlayControlView.h"
-#import "YD_AssetManager.h"
 
 @interface YD_UpendViewController ()
 

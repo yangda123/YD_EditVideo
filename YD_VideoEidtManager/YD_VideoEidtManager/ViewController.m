@@ -13,6 +13,8 @@
 #import "YD_UpendViewController.h"
 #import "YD_AspectRatioViewController.h"
 #import "YD_VolumeViewController.h"
+#import "YD_CompressViewController.h"
+#import "YD_CopyViewController.h"
 
 @interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -35,8 +37,8 @@
                         YD_UpendViewController.class,
                         YD_AspectRatioViewController.class,
                         
-                        YD_AspectRatioViewController.class,
-                        YD_AspectRatioViewController.class,
+                        YD_CopyViewController.class,
+                        YD_CompressViewController.class,
                         YD_VolumeViewController.class];
     
     [self yd_createButton:@"旋转" index:0];
@@ -86,7 +88,7 @@
             NSURL *url = [info objectForKey:UIImagePickerControllerMediaURL];
             
             YD_ConfigModel *model = [YD_ConfigModel new];
-            model.asset = [AVAsset assetWithURL:url];
+            model.videoURL = url;
             
             Class class = self.classArray[self.currentBtn.tag];
             YD_BasePlayerViewController *playerVC = (YD_BasePlayerViewController *)[class new];

@@ -7,7 +7,6 @@
 //
 
 #import "YD_VolumeViewController.h"
-#import "YD_AssetManager.h"
 #import "YD_VolumeSlider.h"
 #import "YD_VolumeSwitchView.h"
 
@@ -92,7 +91,7 @@
 
 - (UIImage *)yd_barIconImage {
     
-    return self.model.barIconImage ?: [UIImage yd_imageWithName:@"yd_aspectRatio@3x"];
+    return self.model.barIconImage ?: [UIImage yd_imageWithName:@"yd_volume@3x"];
 }
 
 - (void)yd_completeItemAction {
@@ -102,7 +101,7 @@
     [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
     
     @weakify(self);
-    [YD_AssetManager yd_volumeAsset:self.model.asset volume:self.volumeSlider.currentValue finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+    [YD_AssetManager yd_volumeAsset:self.model.asset volume:self.volumeSlider.currentValue fadeIn:self.switchView_1.yd_switch.isOn fadeOut:self.switchView_2.yd_switch.isOn finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
         @strongify(self);
         [YD_ProgressHUD yd_hideHUD];
         if (isSuccess) {
@@ -111,26 +110,6 @@
             [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
         }
     }];
-}
-
--(void)fadeOutVolume
-{
-    // AVPlayerObject is a property which points to an AVPlayer
-    AVPlayerItem *myAVPlayerItem = [[AVPlayerItem alloc] initWithURL:NSURL.new];
-    AVAsset *myAVAsset = myAVPlayerItem.asset;
-    NSArray *audioTracks = [myAVAsset tracksWithMediaType:AVMediaTypeAudio];
-    
-    NSMutableArray *allAudioParams = [NSMutableArray array];
-    for (AVAssetTrack *track in audioTracks) {
-        
-        AVMutableAudioMixInputParameters *audioInputParams = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:track];
-        [audioInputParams setVolumeRampFromStartVolume:1.0 toEndVolume:0 timeRange:CMTimeRangeMake(CMTimeMake(0, 1), CMTimeMake(5, 1))];
-        [allAudioParams addObject:audioInputParams];
-        
-    }
-    
-    AVMutableAudioMix *audioMix = [AVMutableAudioMix audioMix];
-    [audioMix setInputParameters:allAudioParams];
 }
 
 @end

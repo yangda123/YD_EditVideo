@@ -8,6 +8,7 @@
 
 #import "YD_AssetManager.h"
 #import "YD_VideoEditManager.h"
+#import "YD_PlayerView.h"
 
 @implementation YD_AssetManager
 /// 调整播放速度
@@ -50,6 +51,86 @@
     
     return mixComposition;
 }
+
+/// 视频复制拼接
++ (void)yd_copyAsset:(NSArray *)array finish:(YD_ExportFinishBlock)finishBlock {
+    
+    AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
+    //1 视频通道
+    AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    //2 音频通道
+    AVMutableCompositionTrack *audioTrack;
+    
+    Float64 tmpDuration = 0.0;
+    
+    for (int i = 0; i < array.count; i++) {
+        YD_PlayerModel *model = array[i];
+        AVAsset *asset = model.asset;
+        CMTimeRange range = CMTimeRangeMake(kCMTimeZero, asset.duration);
+        
+        AVAssetTrack *videoAssetTrack = nil;
+        AVAssetTrack *audioAssetTrack = nil;
+        
+        if ([asset tracksWithMediaType:AVMediaTypeVideo].count) {
+            videoAssetTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+        }
+        
+        if ([asset tracksWithMediaType:AVMediaTypeAudio].count) {
+            audioAssetTrack = [asset tracksWithMediaType:AVMediaTypeAudio].firstObject;
+        }
+        
+        //1 视频通道
+        if (videoAssetTrack) {
+            [videoTrack insertTimeRange:range
+                                ofTrack:videoAssetTrack
+                                 atTime:CMTimeMakeWithSeconds(tmpDuration, 0) error:nil];
+        }
+        
+        //2 音频通道
+        if (audioAssetTrack) {
+            if (!audioTrack) {
+                audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+            }
+            
+            [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
+                                ofTrack:audioAssetTrack
+                                 atTime:CMTimeMakeWithSeconds(tmpDuration, 0) error:nil];
+            
+        }
+        
+        tmpDuration += CMTimeGetSeconds(asset.duration);
+    }
+    
+    [self yd_exporter:mixComposition fileName:@"copy.mp4" finish:finishBlock];
+}
+
+/// 视频压缩
++ (void)yd_compressAsset:(AVAsset *)asset exportPreset:(NSString *)exportPreset finish:(YD_ExportFinishBlock)finishBlock {
+    
+    NSString *outputPath = [YD_PathCache stringByAppendingString:@"compress.mp4"];
+    unlink([outputPath UTF8String]);
+    /// 导出
+    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:exportPreset];
+    
+    exporter.outputURL = [NSURL fileURLWithPath:outputPath isDirectory:YES];
+    exporter.outputFileType = AVFileTypeQuickTimeMovie;
+    exporter.shouldOptimizeForNetworkUse = YES;
+    exporter.timeRange = CMTimeRangeMake(kCMTimeZero, asset.duration);
+    [exporter exportAsynchronouslyWithCompletionHandler:^{
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (finishBlock) {
+                BOOL isOk = (!exporter.error && exporter.status == AVAssetExportSessionStatusCompleted);
+                finishBlock(isOk, outputPath);
+                
+                if (exporter.error) {
+                    NSLog(@"----- %@", exporter.error);
+                }
+            }
+        });
+    }];
+}
+
 /// 视频旋转
 + (void)yd_rotateAssetWithAsset:(AVAsset *)asset degress:(NSInteger)degress finish:(YD_ExportFinishBlock)finishBlock {
 
@@ -119,6 +200,7 @@
     
     [self yd_exporter:mixComposition videoComposition:videoComposition finish:finishBlock];
 }
+
 /// 视频倒放
 + (void)yd_upendAsset:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock {
     
@@ -253,43 +335,93 @@
     [self yd_exporter:mixComposition videoComposition:videoComposition finish:finishBlock];
 }
 
-+ (void)yd_volumeAsset:(AVAsset *)asset volume:(CGFloat)volume finish:(YD_ExportFinishBlock)finishBlock {
-    
++ (void)yd_volumeAsset:(AVAsset *)asset
+                volume:(CGFloat)volume
+                fadeIn:(BOOL)fadeIn
+               fadeOut:(BOOL)fadeOut
+                finish:(YD_ExportFinishBlock)finishBlock {
+  
+    //创建可变的音频视频组合
+    AVMutableComposition *mixComposition = [AVMutableComposition composition];
+    //视频音频range
     CMTimeRange range = CMTimeRangeMake(kCMTimeZero, asset.duration);
     
-    AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
-    
-    AVAssetTrack *videoAssetTrack = nil;
-    AVAssetTrack *audioAssetTrack = nil;
-    
+    //1 视频通道
     if ([asset tracksWithMediaType:AVMediaTypeVideo].count) {
-        videoAssetTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
-    }
-    if ([asset tracksWithMediaType:AVMediaTypeAudio].count) {
-        audioAssetTrack = [asset tracksWithMediaType:AVMediaTypeAudio].firstObject;
+        AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+        AVMutableCompositionTrack *videoCompositionTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+        [videoCompositionTrack insertTimeRange:range ofTrack:videoTrack atTime:kCMTimeZero error:nil];
     }
 
-    //1 视频通道
-    AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
-    if (videoAssetTrack) {
-        [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
-                            ofTrack:videoAssetTrack
-                             atTime:kCMTimeZero error:nil];
-    }
-    
     //2 音频通道
-    if (audioAssetTrack) {
-        AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
-        [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
-                            ofTrack:audioAssetTrack
-                             atTime:kCMTimeZero error:nil];
+    AVMutableAudioMix *exportAudioMix = nil;
+    if ([asset tracksWithMediaType:AVMediaTypeAudio].count) {
+        //获取视频中的音频轨道
+        AVAssetTrack *audioTrack = [[asset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
+        //初始化一个音频容器
+        AVMutableCompositionTrack *audioCompositionTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+        //插入音频到容器
+        [audioCompositionTrack insertTimeRange:range ofTrack:audioTrack atTime:kCMTimeZero error:nil];
+        //初始化音频混合器
+        exportAudioMix = [AVMutableAudioMix audioMix];
+        //获取混合后的音轨
+        AVAssetTrack *mixCompositionTrack = [[mixComposition tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
+        //初始化音频混合器导出配置参数
+        AVMutableAudioMixInputParameters *exportAudioMixInputParameters = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:mixCompositionTrack];
         
-        AVMutableAudioMixInputParameters *newAudioInputParams = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:audioTrack] ;
-        [newAudioInputParams setVolumeRampFromStartVolume:volume toEndVolume:.0f timeRange:range];
-        [newAudioInputParams setTrackID:audioTrack.trackID];
+#pragma mark - 设置音量大小和淡入淡出的效果
+        if (fadeIn == NO && fadeOut == NO) {
+            [exportAudioMixInputParameters setVolumeRampFromStartVolume:volume toEndVolume:volume timeRange:range];
+        }else {
+            CGFloat length = [asset yd_getSeconds];
+            NSInteger fade_length = MIN(6, length * 0.3);
+            CMTime continueTime = CMTimeMakeWithSeconds(fade_length, 1);
+            //设置音乐淡入
+            if (fadeIn) {
+                [exportAudioMixInputParameters setVolumeRampFromStartVolume:0 toEndVolume:volume timeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(0, 1), continueTime)];
+            }
+            //设置音乐淡出
+            if (fadeOut) {
+                //计算开始淡出的时间
+                CMTime fadeOutStartTime = CMTimeSubtract(asset.duration, continueTime);
+                [exportAudioMixInputParameters setVolumeRampFromStartVolume:volume toEndVolume:0 timeRange:CMTimeRangeMake(fadeOutStartTime, continueTime)];
+            }
+        }
+        
+        //设置音频混合器参数
+        NSArray *audioMixParameters = @[exportAudioMixInputParameters];
+        exportAudioMix.inputParameters = audioMixParameters;
     }
     
-    [self yd_exporter:mixComposition fileName:@"volume.mp4" finish:finishBlock];
+    [self yd_exporter:mixComposition audioMix:exportAudioMix finish:finishBlock];
+}
+
++ (void)yd_exporter:(AVAsset *)asset
+           audioMix:(AVMutableAudioMix *)audioMix
+             finish:(YD_ExportFinishBlock)finishBlock {
+    
+    NSString *outputPath = [YD_PathCache stringByAppendingString:@"volume.mp4"];
+    unlink([outputPath UTF8String]);
+    /// 导出
+    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetMediumQuality];
+    if (audioMix) {
+        exporter.audioMix = audioMix;
+    }
+    exporter.outputURL = [NSURL fileURLWithPath:outputPath isDirectory:YES];
+    exporter.outputFileType = AVFileTypeQuickTimeMovie;
+    exporter.shouldOptimizeForNetworkUse = YES;
+    [exporter exportAsynchronouslyWithCompletionHandler:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (finishBlock) {
+                BOOL isOk = (!exporter.error && exporter.status == AVAssetExportSessionStatusCompleted);
+                finishBlock(isOk, outputPath);
+                
+                if (exporter.error) {
+                    NSLog(@"----- %@", exporter.error);
+                }
+            }
+        });
+    }];
 }
 
 + (void)yd_exporter:(AVAsset *)asset
@@ -336,7 +468,6 @@
             if (finishBlock) {
                 BOOL isOk = (!exporter.error && exporter.status == AVAssetExportSessionStatusCompleted);
                 finishBlock(isOk, outputPath);
-                
                 if (exporter.error) {
                     NSLog(@"----- %@", exporter.error);
                 }

@@ -40,9 +40,11 @@
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <Masonry/Masonry.h>
 #import "YD_CGAffineManager.h"
+#import "YD_AssetManager.h"
 
 #import "UIView+YDExtension.h"
 #import "UIColor+YDColorChange.h"
 #import "UIButton+YD_Extension.h"
 #import "AVAsset+YD_Extension.h"
 #import "UIImage+YD_Extension.h"
+#import "NSString+YD_Extension.h"

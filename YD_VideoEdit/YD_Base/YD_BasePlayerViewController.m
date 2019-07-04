@@ -42,6 +42,7 @@
     self.playModel = [YD_PlayerModel new];
     self.playModel.asset = self.model.asset;
     self.playModel.coverImage = [self.model.asset yd_getVideoImage:0];
+    self.playModel.smallImage = [UIImage scaleImageWith:self.playModel.coverImage targetWidth:100];
     
     self.title = [self yd_title];
     self.view.backgroundColor = self.model.controllerColor;

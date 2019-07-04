@@ -18,13 +18,11 @@
 		0408EC1F22CCBD8B00D66241 /* YD_VolumeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408EC1E22CCBD8B00D66241 /* YD_VolumeSlider.m */; };
 		04970E6822C3822F001B3A68 /* DreamHouseClip.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */; };
 		04ADEC7622CC467B007D07BE /* UIImage+YD_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ADEC7522CC467B007D07BE /* UIImage+YD_Extension.m */; };
-		04C664C022CCC68200A56500 /* YD_Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04C664BF22CCC68200A56500 /* YD_Images.bundle */; };
 		04C664C322CCCB0100A56500 /* YD_VolumeSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C664C222CCCB0100A56500 /* YD_VolumeSwitchView.m */; };
 		04C697A322C9E04500035132 /* UIButton+YD_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6976422C9E04400035132 /* UIButton+YD_Extension.m */; };
 		04C697A422C9E04500035132 /* UIColor+YDColorChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6976722C9E04400035132 /* UIColor+YDColorChange.m */; };
 		04C697A522C9E04500035132 /* UIView+YDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6976B22C9E04400035132 /* UIView+YDExtension.m */; };
 		04C697A622C9E04500035132 /* AVAsset+YD_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6976D22C9E04400035132 /* AVAsset+YD_Extension.m */; };
-		04C697A722C9E04500035132 /* YD_AssetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6977022C9E04400035132 /* YD_AssetManager.m */; };
 		04C697A822C9E04500035132 /* YD_PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6977222C9E04400035132 /* YD_PlayerView.m */; };
 		04C697A922C9E04500035132 /* YD_BasePlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6977422C9E04400035132 /* YD_BasePlayControlView.m */; };
 		04C697AA22C9E04500035132 /* YD_DefaultPlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6977522C9E04400035132 /* YD_DefaultPlayControlView.m */; };
@@ -42,6 +40,17 @@
 		04C697D122CA004500035132 /* YD_ConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C697CF22CA004500035132 /* YD_ConfigModel.m */; };
 		04C697D522CA0CC600035132 /* YD_AspectRatioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C697D422CA0CC600035132 /* YD_AspectRatioViewController.m */; };
 		04C697D822CA0DDD00035132 /* YD_RatioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C697D722CA0DDD00035132 /* YD_RatioView.m */; };
+		04C80CDC22CD97FB0021BF23 /* YD_CompressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80CDB22CD97FB0021BF23 /* YD_CompressViewController.m */; };
+		04C80CDF22CD98120021BF23 /* YD_CopyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80CDE22CD98120021BF23 /* YD_CopyViewController.m */; };
+		04C80CE222CD9CFE0021BF23 /* YD_CompressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80CE122CD9CFE0021BF23 /* YD_CompressView.m */; };
+		04C80CF822CD9F560021BF23 /* YD_Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04C80CF722CD9F560021BF23 /* YD_Images.bundle */; };
+		04C80CFB22CDA09F0021BF23 /* YD_CompressItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80CFA22CDA09F0021BF23 /* YD_CompressItem.m */; };
+		04C80CFE22CDC68D0021BF23 /* YD_CopyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80CFD22CDC68D0021BF23 /* YD_CopyView.m */; };
+		04C80D0122CDC7EB0021BF23 /* YD_CopyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D0022CDC7EB0021BF23 /* YD_CopyCell.m */; };
+		04C80D0522CDE4570021BF23 /* NSString+YD_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D0322CDE4570021BF23 /* NSString+YD_Extension.m */; };
+		04C80D0E22CDE83E0021BF23 /* YD_AssetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D0A22CDE83E0021BF23 /* YD_AssetManager.m */; };
+		04C80D0F22CDE83E0021BF23 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D0B22CDE83E0021BF23 /* SDAVAssetExportSession.m */; };
+		04C80D1222CDE91D0021BF23 /* YD_AssetHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D1122CDE91D0021BF23 /* YD_AssetHandle.m */; };
 		04D4EFA222CB3E1A00004781 /* YD_PreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D4EFA122CB3E1A00004781 /* YD_PreViewController.m */; };
 		559022E831A9DF8B390FB6C0 /* libPods-YD_VideoEidtManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A89DFC027EACF199D1CC3F /* libPods-YD_VideoEidtManager.a */; };
 /* End PBXBuildFile section */
@@ -66,7 +75,6 @@
 		04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DreamHouseClip.mp4; sourceTree = "<group>"; };
 		04ADEC7422CC467B007D07BE /* UIImage+YD_Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+YD_Extension.h"; sourceTree = "<group>"; };
 		04ADEC7522CC467B007D07BE /* UIImage+YD_Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YD_Extension.m"; sourceTree = "<group>"; };
-		04C664BF22CCC68200A56500 /* YD_Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YD_Images.bundle; sourceTree = "<group>"; };
 		04C664C122CCCB0100A56500 /* YD_VolumeSwitchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_VolumeSwitchView.h; sourceTree = "<group>"; };
 		04C664C222CCCB0100A56500 /* YD_VolumeSwitchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_VolumeSwitchView.m; sourceTree = "<group>"; };
 		04C6976422C9E04400035132 /* UIButton+YD_Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+YD_Extension.m"; sourceTree = "<group>"; };
@@ -77,7 +85,6 @@
 		04C6976B22C9E04400035132 /* UIView+YDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YDExtension.m"; sourceTree = "<group>"; };
 		04C6976D22C9E04400035132 /* AVAsset+YD_Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVAsset+YD_Extension.m"; sourceTree = "<group>"; };
 		04C6976E22C9E04400035132 /* AVAsset+YD_Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVAsset+YD_Extension.h"; sourceTree = "<group>"; };
-		04C6977022C9E04400035132 /* YD_AssetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_AssetManager.m; sourceTree = "<group>"; };
 		04C6977222C9E04400035132 /* YD_PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_PlayerView.m; sourceTree = "<group>"; };
 		04C6977322C9E04400035132 /* YD_DefaultPlayControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_DefaultPlayControlView.h; sourceTree = "<group>"; };
 		04C6977422C9E04400035132 /* YD_BasePlayControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_BasePlayControlView.m; sourceTree = "<group>"; };
@@ -85,7 +92,6 @@
 		04C6977622C9E04400035132 /* YD_PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_PlayerView.h; sourceTree = "<group>"; };
 		04C6977722C9E04400035132 /* YD_BasePlayControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_BasePlayControlView.h; sourceTree = "<group>"; };
 		04C6977822C9E04400035132 /* YD_ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_ProgressHUD.h; sourceTree = "<group>"; };
-		04C6977922C9E04400035132 /* YD_AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_AssetManager.h; sourceTree = "<group>"; };
 		04C6977A22C9E04400035132 /* YD_ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_ProgressHUD.m; sourceTree = "<group>"; };
 		04C6977C22C9E04400035132 /* YD_BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_BaseViewController.m; sourceTree = "<group>"; };
 		04C6977D22C9E04400035132 /* YD_BottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_BottomBar.m; sourceTree = "<group>"; };
@@ -114,6 +120,27 @@
 		04C697D422CA0CC600035132 /* YD_AspectRatioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_AspectRatioViewController.m; sourceTree = "<group>"; };
 		04C697D622CA0DDD00035132 /* YD_RatioView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_RatioView.h; sourceTree = "<group>"; };
 		04C697D722CA0DDD00035132 /* YD_RatioView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_RatioView.m; sourceTree = "<group>"; };
+		04C80CDA22CD97FB0021BF23 /* YD_CompressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_CompressViewController.h; sourceTree = "<group>"; };
+		04C80CDB22CD97FB0021BF23 /* YD_CompressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_CompressViewController.m; sourceTree = "<group>"; };
+		04C80CDD22CD98120021BF23 /* YD_CopyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_CopyViewController.h; sourceTree = "<group>"; };
+		04C80CDE22CD98120021BF23 /* YD_CopyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_CopyViewController.m; sourceTree = "<group>"; };
+		04C80CE022CD9CFE0021BF23 /* YD_CompressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_CompressView.h; sourceTree = "<group>"; };
+		04C80CE122CD9CFE0021BF23 /* YD_CompressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_CompressView.m; sourceTree = "<group>"; };
+		04C80CF722CD9F560021BF23 /* YD_Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YD_Images.bundle; sourceTree = "<group>"; };
+		04C80CF922CDA09F0021BF23 /* YD_CompressItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_CompressItem.h; sourceTree = "<group>"; };
+		04C80CFA22CDA09F0021BF23 /* YD_CompressItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_CompressItem.m; sourceTree = "<group>"; };
+		04C80CFC22CDC68D0021BF23 /* YD_CopyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_CopyView.h; sourceTree = "<group>"; };
+		04C80CFD22CDC68D0021BF23 /* YD_CopyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_CopyView.m; sourceTree = "<group>"; };
+		04C80CFF22CDC7EB0021BF23 /* YD_CopyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_CopyCell.h; sourceTree = "<group>"; };
+		04C80D0022CDC7EB0021BF23 /* YD_CopyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_CopyCell.m; sourceTree = "<group>"; };
+		04C80D0322CDE4570021BF23 /* NSString+YD_Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+YD_Extension.m"; sourceTree = "<group>"; };
+		04C80D0422CDE4570021BF23 /* NSString+YD_Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+YD_Extension.h"; sourceTree = "<group>"; };
+		04C80D0A22CDE83E0021BF23 /* YD_AssetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_AssetManager.m; sourceTree = "<group>"; };
+		04C80D0B22CDE83E0021BF23 /* SDAVAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAVAssetExportSession.m; sourceTree = "<group>"; };
+		04C80D0C22CDE83E0021BF23 /* YD_AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_AssetManager.h; sourceTree = "<group>"; };
+		04C80D0D22CDE83E0021BF23 /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAVAssetExportSession.h; sourceTree = "<group>"; };
+		04C80D1022CDE91D0021BF23 /* YD_AssetHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_AssetHandle.h; sourceTree = "<group>"; };
+		04C80D1122CDE91D0021BF23 /* YD_AssetHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_AssetHandle.m; sourceTree = "<group>"; };
 		04D4EFA022CB3E1A00004781 /* YD_PreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_PreViewController.h; sourceTree = "<group>"; };
 		04D4EFA122CB3E1A00004781 /* YD_PreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_PreViewController.m; sourceTree = "<group>"; };
 		24A89DFC027EACF199D1CC3F /* libPods-YD_VideoEidtManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YD_VideoEidtManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +230,8 @@
 				04C697B922C9EA4A00035132 /* 视频倒放 */,
 				04C697D222CA0C7B00035132 /* 视频宽高比 */,
 				0408EC1622CCA9C100D66241 /* 视频音量 */,
+				04C80CD922CD97DB0021BF23 /* 压缩视频 */,
+				04C80CD822CD97D30021BF23 /* 复制视频 */,
 			);
 			name = YD_VideoEdit;
 			path = ../../YD_VideoEdit;
@@ -211,7 +240,7 @@
 		04C6975122C9E04400035132 /* YD_Resource */ = {
 			isa = PBXGroup;
 			children = (
-				04C664BF22CCC68200A56500 /* YD_Images.bundle */,
+				04C80CF722CD9F560021BF23 /* YD_Images.bundle */,
 			);
 			path = YD_Resource;
 			sourceTree = "<group>";
@@ -219,6 +248,7 @@
 		04C6976222C9E04400035132 /* YD_Expands */ = {
 			isa = PBXGroup;
 			children = (
+				04C80D0222CDE4570021BF23 /* NSString */,
 				04ADEC7322CC4669007D07BE /* UIImage */,
 				04C6976322C9E04400035132 /* UIButton */,
 				04C6976622C9E04400035132 /* UIColor */,
@@ -267,11 +297,10 @@
 		04C6976F22C9E04400035132 /* YD_Tool */ = {
 			isa = PBXGroup;
 			children = (
+				04C80D0922CDE83E0021BF23 /* YD_Export */,
 				04C6977122C9E04400035132 /* YD_Player */,
 				04C6977822C9E04400035132 /* YD_ProgressHUD.h */,
 				04C6977A22C9E04400035132 /* YD_ProgressHUD.m */,
-				04C6977922C9E04400035132 /* YD_AssetManager.h */,
-				04C6977022C9E04400035132 /* YD_AssetManager.m */,
 				04C697B622C9E7C500035132 /* YD_CGAffineManager.h */,
 				04C697B722C9E7C500035132 /* YD_CGAffineManager.m */,
 			);
@@ -355,6 +384,54 @@
 			path = "视频宽高比";
 			sourceTree = "<group>";
 		};
+		04C80CD822CD97D30021BF23 /* 复制视频 */ = {
+			isa = PBXGroup;
+			children = (
+				04C80CDD22CD98120021BF23 /* YD_CopyViewController.h */,
+				04C80CDE22CD98120021BF23 /* YD_CopyViewController.m */,
+				04C80CFC22CDC68D0021BF23 /* YD_CopyView.h */,
+				04C80CFD22CDC68D0021BF23 /* YD_CopyView.m */,
+				04C80CFF22CDC7EB0021BF23 /* YD_CopyCell.h */,
+				04C80D0022CDC7EB0021BF23 /* YD_CopyCell.m */,
+			);
+			path = "复制视频";
+			sourceTree = "<group>";
+		};
+		04C80CD922CD97DB0021BF23 /* 压缩视频 */ = {
+			isa = PBXGroup;
+			children = (
+				04C80CDA22CD97FB0021BF23 /* YD_CompressViewController.h */,
+				04C80CDB22CD97FB0021BF23 /* YD_CompressViewController.m */,
+				04C80CE022CD9CFE0021BF23 /* YD_CompressView.h */,
+				04C80CE122CD9CFE0021BF23 /* YD_CompressView.m */,
+				04C80CF922CDA09F0021BF23 /* YD_CompressItem.h */,
+				04C80CFA22CDA09F0021BF23 /* YD_CompressItem.m */,
+			);
+			path = "压缩视频";
+			sourceTree = "<group>";
+		};
+		04C80D0222CDE4570021BF23 /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				04C80D0422CDE4570021BF23 /* NSString+YD_Extension.h */,
+				04C80D0322CDE4570021BF23 /* NSString+YD_Extension.m */,
+			);
+			path = NSString;
+			sourceTree = "<group>";
+		};
+		04C80D0922CDE83E0021BF23 /* YD_Export */ = {
+			isa = PBXGroup;
+			children = (
+				04C80D0D22CDE83E0021BF23 /* SDAVAssetExportSession.h */,
+				04C80D0B22CDE83E0021BF23 /* SDAVAssetExportSession.m */,
+				04C80D0C22CDE83E0021BF23 /* YD_AssetManager.h */,
+				04C80D0A22CDE83E0021BF23 /* YD_AssetManager.m */,
+				04C80D1022CDE91D0021BF23 /* YD_AssetHandle.h */,
+				04C80D1122CDE91D0021BF23 /* YD_AssetHandle.m */,
+			);
+			path = YD_Export;
+			sourceTree = "<group>";
+		};
 		20CF21E1A1D6D6D07F4374D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,7 +511,7 @@
 				04072E6C22C35FDD0045772E /* LaunchScreen.storyboard in Resources */,
 				04072E6922C35FDD0045772E /* Assets.xcassets in Resources */,
 				04970E6822C3822F001B3A68 /* DreamHouseClip.mp4 in Resources */,
-				04C664C022CCC68200A56500 /* YD_Images.bundle in Resources */,
+				04C80CF822CD9F560021BF23 /* YD_Images.bundle in Resources */,
 				04072E6722C35FDB0045772E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -474,20 +551,27 @@
 				04C697A622C9E04500035132 /* AVAsset+YD_Extension.m in Sources */,
 				04C697D822CA0DDD00035132 /* YD_RatioView.m in Sources */,
 				04C697D122CA004500035132 /* YD_ConfigModel.m in Sources */,
+				04C80D1222CDE91D0021BF23 /* YD_AssetHandle.m in Sources */,
+				04C80CE222CD9CFE0021BF23 /* YD_CompressView.m in Sources */,
 				04C697C222C9EC2000035132 /* YD_UpendViewController.m in Sources */,
+				04C80D0E22CDE83E0021BF23 /* YD_AssetManager.m in Sources */,
 				04C697AD22C9E04500035132 /* YD_BottomBar.m in Sources */,
 				04C697AA22C9E04500035132 /* YD_DefaultPlayControlView.m in Sources */,
 				04C697B122C9E04500035132 /* YD_SliderView.m in Sources */,
 				04C697A322C9E04500035132 /* UIButton+YD_Extension.m in Sources */,
 				04C697A522C9E04500035132 /* UIView+YDExtension.m in Sources */,
 				04C697AF22C9E04500035132 /* YD_Slider.m in Sources */,
-				04C697A722C9E04500035132 /* YD_AssetManager.m in Sources */,
 				04D4EFA222CB3E1A00004781 /* YD_PreViewController.m in Sources */,
 				04C664C322CCCB0100A56500 /* YD_VolumeSwitchView.m in Sources */,
+				04C80D0522CDE4570021BF23 /* NSString+YD_Extension.m in Sources */,
+				04C80CFE22CDC68D0021BF23 /* YD_CopyView.m in Sources */,
+				04C80D0F22CDE83E0021BF23 /* SDAVAssetExportSession.m in Sources */,
 				04C697AB22C9E04500035132 /* YD_ProgressHUD.m in Sources */,
 				04C697C522C9EDB100035132 /* YD_BasePlayerViewController.m in Sources */,
 				04072E6422C35FDB0045772E /* ViewController.m in Sources */,
 				04C697B322C9E04500035132 /* YD_SpeedViewController.m in Sources */,
+				04C80CDF22CD98120021BF23 /* YD_CopyViewController.m in Sources */,
+				04C80D0122CDC7EB0021BF23 /* YD_CopyCell.m in Sources */,
 				04C697B422C9E04500035132 /* YD_RotateViewController.m in Sources */,
 				04C697AE22C9E04500035132 /* YD_BaseView.m in Sources */,
 				04ADEC7622CC467B007D07BE /* UIImage+YD_Extension.m in Sources */,
@@ -500,8 +584,10 @@
 				04C697B822C9E7C500035132 /* YD_CGAffineManager.m in Sources */,
 				04C697A922C9E04500035132 /* YD_BasePlayControlView.m in Sources */,
 				0408EC1F22CCBD8B00D66241 /* YD_VolumeSlider.m in Sources */,
+				04C80CDC22CD97FB0021BF23 /* YD_CompressViewController.m in Sources */,
 				04C697A822C9E04500035132 /* YD_PlayerView.m in Sources */,
 				0408EC1922CCA9EC00D66241 /* YD_VolumeViewController.m in Sources */,
+				04C80CFB22CDA09F0021BF23 /* YD_CompressItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

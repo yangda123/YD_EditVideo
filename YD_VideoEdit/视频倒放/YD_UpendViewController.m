@@ -150,18 +150,22 @@
     }
     
     [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
+//
+//    @weakify(self);
+//    [YD_AssetManager yd_upendAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+//        @strongify(self);
+//        [YD_ProgressHUD yd_hideHUD];
+//        if (isSuccess) {
+//            self.upendAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:exportPath]];
+//            [self yd_playWithAsset:self.upendAsset];
+//        }else {
+//            [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
+//        }
+//    }];
     
-    @weakify(self);
-    [YD_AssetManager yd_upendAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
-        @strongify(self);
-        [YD_ProgressHUD yd_hideHUD];
-        if (isSuccess) {
-            self.upendAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:exportPath]];
-            [self yd_playWithAsset:self.upendAsset];
-        }else {
-            [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
-        }
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self nativeTransferMovie:self.model.asset];
+    });
 }
 
 - (void)yd_restoreAction {
@@ -174,6 +178,122 @@
     self.playModel.asset = asset;
     self.player.yd_model = self.playModel;
     [self.player yd_play];
+}
+
+- (void)nativeTransferMovie:(AVAsset *)asset {
+
+    AVAssetImageGenerator *generator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    CMTime time = asset.duration;
+    NSUInteger totalFrameCount = CMTimeGetSeconds(time) * [asset yd_getFPS];
+    NSMutableArray *timesArray = [NSMutableArray arrayWithCapacity:totalFrameCount];
+    
+    for (NSUInteger i = totalFrameCount - 1; i >= 0; i--) {
+        CMTime timeFrame = CMTimeMake(i, [asset yd_getFPS]);
+        NSValue *timeValue = [NSValue valueWithCMTime:timeFrame];
+        [timesArray addObject:timeValue];
+    }
+    
+////////////////////////////////////////////////////////////////////////////////////////////////
+    NSError *error;
+    AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:asset error:&error];
+    AVAssetTrack *videoTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+    NSDictionary *readerOutputSettings = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange], kCVPixelBufferPixelFormatTypeKey, nil];
+    AVAssetReaderTrackOutput *readerOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:videoTrack outputSettings:readerOutputSettings];
+    readerOutput.alwaysCopiesSampleData = NO;
+    // 在开始读取之前给reader指定一个output
+    [reader addOutput:readerOutput];
+    [reader startReading];
+    
+    NSString *outputPath = [YD_PathCache stringByAppendingString:@"upendMovie.mp4"];
+    // 删除当前该路径下的文件
+    unlink([outputPath UTF8String]);
+    NSURL *outputURL = [NSURL fileURLWithPath:outputPath];
+    
+    AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:outputURL fileType:AVFileTypeMPEG4 error:&error];
+    NSDictionary *videoCompressionProps = [NSDictionary dictionaryWithObjectsAndKeys:@(videoTrack.estimatedDataRate), AVVideoAverageBitRateKey, nil];
+    NSDictionary *writerOutputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          AVVideoCodecH264, AVVideoCodecKey,
+                                          [NSNumber numberWithInt:videoTrack.naturalSize.width], AVVideoWidthKey,
+                                          [NSNumber numberWithInt:videoTrack.naturalSize.height], AVVideoHeightKey,
+                                          videoCompressionProps, AVVideoCompressionPropertiesKey, nil];
+    AVAssetWriterInput *writerInput = [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeVideo outputSettings:writerOutputSettings sourceFormatHint:(__bridge CMFormatDescriptionRef)[videoTrack.formatDescriptions lastObject]];
+    [writerInput setExpectsMediaDataInRealTime:NO];
+    writerInput.transform = videoTrack.preferredTransform;
+    
+    AVAssetWriterInputPixelBufferAdaptor *pixelBufferAdaptor = [[AVAssetWriterInputPixelBufferAdaptor alloc] initWithAssetWriterInput:writerInput sourcePixelBufferAttributes:nil];
+    [writer addInput:writerInput];
+    [writer startWriting];
+    
+    [writer finishWritingWithCompletionHandler:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [YD_ProgressHUD yd_hideHUD];
+            NSLog(@"0000 ");
+        });
+    }];
+    
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+    generator.requestedTimeToleranceBefore = kCMTimeZero;
+    generator.requestedTimeToleranceAfter = kCMTimeZero;
+    [generator generateCGImagesAsynchronouslyForTimes:timesArray completionHandler:^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * _Nullable error) {
+    
+        [writer startSessionAtSourceTime:requestedTime];
+       
+        CVPixelBufferRef imageBufferRef = [self pixelBufferFromCGImage:image];
+        while (!writerInput.readyForMoreMediaData) {
+            [NSThread sleepForTimeInterval:0.1];
+        }
+        [pixelBufferAdaptor appendPixelBuffer:imageBufferRef withPresentationTime:requestedTime];
+    }];
+}
+
+- (CVPixelBufferRef)pixelBufferFromCGImage:(CGImageRef)image {
+    
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], kCVPixelBufferCGImageCompatibilityKey,
+                             [NSNumber numberWithBool:YES], kCVPixelBufferCGBitmapContextCompatibilityKey,
+                             nil];
+    
+    CVPixelBufferRef pxbuffer = NULL;
+    
+    CGFloat frameWidth = CGImageGetWidth(image);
+    CGFloat frameHeight = CGImageGetHeight(image);
+    
+    CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault,
+                                          frameWidth,
+                                          frameHeight,
+                                          kCVPixelFormatType_32ARGB,
+                                          (__bridge CFDictionaryRef) options,
+                                          &pxbuffer);
+    
+    NSParameterAssert(status == kCVReturnSuccess && pxbuffer != NULL);
+    
+    CVPixelBufferLockBaseAddress(pxbuffer, 0);
+    void *pxdata = CVPixelBufferGetBaseAddress(pxbuffer);
+    NSParameterAssert(pxdata != NULL);
+    
+    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+    
+    CGContextRef context = CGBitmapContextCreate(pxdata,
+                                                 frameWidth,
+                                                 frameHeight,
+                                                 8,
+                                                 CVPixelBufferGetBytesPerRow(pxbuffer),
+                                                 rgbColorSpace,
+                                                 (CGBitmapInfo)kCGImageAlphaNoneSkipFirst);
+    NSParameterAssert(context);
+    CGContextConcatCTM(context, CGAffineTransformIdentity);
+    CGContextDrawImage(context, CGRectMake(0,
+                                           0,
+                                           frameWidth,
+                                           frameHeight),
+                       image);
+    CGColorSpaceRelease(rgbColorSpace);
+    CGContextRelease(context);
+    
+    CVPixelBufferUnlockBaseAddress(pxbuffer, 0);
+    
+    return pxbuffer;
 }
 
 @end

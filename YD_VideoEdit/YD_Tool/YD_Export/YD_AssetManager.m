@@ -215,13 +215,6 @@
         [reader addOutput:readerOutput];
         [reader startReading];
         
-        NSMutableArray *samples = [[NSMutableArray alloc] init];
-        CMSampleBufferRef sample;
-        while ((sample = [readerOutput copyNextSampleBuffer])) {
-            [samples addObject:(__bridge id)sample];
-            CFRelease(sample);
-        }
-        
         NSString *outputPath = [YD_PathCache stringByAppendingString:@"upendMovie.mp4"];
         // 删除当前该路径下的文件
         unlink([outputPath UTF8String]);
@@ -229,6 +222,7 @@
         
         AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:outputURL fileType:AVFileTypeMPEG4 error:&error];
         NSDictionary *videoCompressionProps = [NSDictionary dictionaryWithObjectsAndKeys:@(videoTrack.estimatedDataRate), AVVideoAverageBitRateKey, nil];
+        
         NSDictionary *writerOutputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
                                               AVVideoCodecH264, AVVideoCodecKey,
                                               [NSNumber numberWithInt:videoTrack.naturalSize.width], AVVideoWidthKey,
@@ -241,7 +235,16 @@
         AVAssetWriterInputPixelBufferAdaptor *pixelBufferAdaptor = [[AVAssetWriterInputPixelBufferAdaptor alloc] initWithAssetWriterInput:writerInput sourcePixelBufferAttributes:nil];
         [writer addInput:writerInput];
         [writer startWriting];
+        
+        NSMutableArray *samples = [[NSMutableArray alloc] init];
+        CMSampleBufferRef sample;
+        while ((sample = [readerOutput copyNextSampleBuffer])) {
+            [samples addObject:(__bridge id)sample];
+            CFRelease(sample);
+        }
+        
         [writer startSessionAtSourceTime:CMSampleBufferGetPresentationTimeStamp((__bridge CMSampleBufferRef)samples[0])];
+        
         for (NSInteger i = 0; i < samples.count; i ++) {
             CMTime presentationTime = CMSampleBufferGetPresentationTimeStamp((__bridge CMSampleBufferRef)samples[i]);
             CVPixelBufferRef imageBufferRef = CMSampleBufferGetImageBuffer((__bridge CMSampleBufferRef)samples[samples.count - i - 1]);

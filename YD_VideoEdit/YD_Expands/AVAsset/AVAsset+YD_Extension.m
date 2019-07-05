@@ -66,6 +66,42 @@
     }];
 }
 
+- (void)yd_getAllImagesBlock:(void (^)(CGImageRef imageRef, UIImage *resultImg, CMTime actualTime))imageBackBlock {
+    
+    Float64 durationSeconds = [self yd_getSeconds];
+    // 获取视频的帧数
+    float fps = [self yd_getFPS];
+    
+    NSMutableArray *times = [NSMutableArray array];
+    Float64 totalFrames = durationSeconds * fps; //获得视频总帧数
+
+    for (int i = 1; i < totalFrames; i++) {
+        CMTime timeFrame = CMTimeMake(i, fps); //第i帧  帧率
+        NSValue *timeValue = [NSValue valueWithCMTime:timeFrame];
+        [times addObject:timeValue];
+    }
+    
+    AVAssetImageGenerator *imgGenerator = [[AVAssetImageGenerator alloc] initWithAsset:self];
+    // 防止时间出现偏差
+    imgGenerator.requestedTimeToleranceBefore = kCMTimeZero;
+    imgGenerator.requestedTimeToleranceAfter = kCMTimeZero;
+    imgGenerator.appliesPreferredTrackTransform = YES;  // 截图的时候调整到正确的方向
+    
+    [imgGenerator generateCGImagesAsynchronouslyForTimes:times completionHandler:^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * _Nullable error) {
+        switch (result) {
+            case AVAssetImageGeneratorCancelled:
+                break;
+            case AVAssetImageGeneratorFailed:
+                break;
+            case AVAssetImageGeneratorSucceeded: {
+                UIImage *img = [UIImage imageWithCGImage:image];
+                !imageBackBlock ? : imageBackBlock(image, img, actualTime);
+            }
+                break;
+        }
+    }];
+}
+
 - (Float64)yd_getSeconds {
     CMTime cmtime = self.duration; //视频时间信息结构体
     Float64 duration = CMTimeGetSeconds(cmtime);

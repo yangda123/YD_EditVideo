@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param imageCount     需要获取的图片个数
  *  @param imageBackBlock 得到一个图片时返回的block
  */
-- (void)yd_getImagesCount:(NSUInteger)imageCount imageBackBlock:(void (^)(UIImage *))imageBackBlock;
+- (void)yd_getImagesCount:(NSUInteger)imageCount imageBackBlock:(void (^)(UIImage *image, CMTime actualTime))imageBackBlock;
 
 /**
  *  获取视频的总秒数

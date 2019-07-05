@@ -25,7 +25,7 @@
     return img;
 }
 
-- (void)yd_getImagesCount:(NSUInteger)imageCount imageBackBlock:(void (^)(UIImage *))imageBackBlock {
+- (void)yd_getImagesCount:(NSUInteger)imageCount imageBackBlock:(void (^)(UIImage *image, CMTime actualTime))imageBackBlock {
     Float64 durationSeconds = [self yd_getSeconds];
     
     // 获取视频的帧数
@@ -59,7 +59,7 @@
                 break;
             case AVAssetImageGeneratorSucceeded: {
                 UIImage *displayImage = [UIImage imageWithCGImage:image];
-                !imageBackBlock ? : imageBackBlock(displayImage);
+                !imageBackBlock ? : imageBackBlock(displayImage, actualTime);
             }
                 break;
         }

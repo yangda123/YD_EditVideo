@@ -149,23 +149,27 @@
         return;
     }
     
-    [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
+//    CMTime time = self.model.asset.duration;
+//    NSUInteger totalFrameCount = CMTimeGetSeconds(time) * [self.model.asset yd_getFPS];
+//    [self.model.asset yd_getImagesCount:totalFrameCount imageBackBlock:^(UIImage * _Nonnull image, CMTime actualTime) {
 //
-//    @weakify(self);
-//    [YD_AssetManager yd_upendAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
-//        @strongify(self);
-//        [YD_ProgressHUD yd_hideHUD];
-//        if (isSuccess) {
-//            self.upendAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:exportPath]];
-//            [self yd_playWithAsset:self.upendAsset];
-//        }else {
-//            [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
-//        }
 //    }];
+//
+//    NSLog(@"========== %ld", totalFrameCount);
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self nativeTransferMovie:self.model.asset];
-    });
+    [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
+
+    @weakify(self);
+    [YD_AssetManager yd_upendAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+        @strongify(self);
+        [YD_ProgressHUD yd_hideHUD];
+        if (isSuccess) {
+            self.upendAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:exportPath]];
+            [self yd_playWithAsset:self.upendAsset];
+        }else {
+            [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
+        }
+    }];
 }
 
 - (void)yd_restoreAction {
@@ -179,6 +183,106 @@
     self.player.yd_model = self.playModel;
     [self.player yd_play];
 }
+
+/// 视频倒放
++ (void)yd_upendAsset:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock {
+    
+    dispatch_async(dispatch_queue_create("UpendMovieQueue", DISPATCH_QUEUE_SERIAL), ^{
+        NSError *error;
+        AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:asset error:&error];
+        AVAssetTrack *videoTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+        NSDictionary *readerOutputSettings = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange], kCVPixelBufferPixelFormatTypeKey, nil];
+        AVAssetReaderTrackOutput *readerOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:videoTrack outputSettings:readerOutputSettings];
+        readerOutput.alwaysCopiesSampleData = NO;
+        // 在开始读取之前给reader指定一个output
+        [reader addOutput:readerOutput];
+        [reader startReading];
+        
+        NSString *outputPath = [YD_PathCache stringByAppendingString:@"upendMovie.mp4"];
+        // 删除当前该路径下的文件
+        unlink([outputPath UTF8String]);
+        NSURL *outputURL = [NSURL fileURLWithPath:outputPath];
+        
+        AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:outputURL fileType:AVFileTypeMPEG4 error:&error];
+        NSDictionary *videoCompressionProps = [NSDictionary dictionaryWithObjectsAndKeys:@(videoTrack.estimatedDataRate), AVVideoAverageBitRateKey, nil];
+        NSDictionary *writerOutputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                              AVVideoCodecH264, AVVideoCodecKey,
+                                              [NSNumber numberWithInt:videoTrack.naturalSize.width], AVVideoWidthKey,
+                                              [NSNumber numberWithInt:videoTrack.naturalSize.height], AVVideoHeightKey,
+                                              videoCompressionProps, AVVideoCompressionPropertiesKey, nil];
+        AVAssetWriterInput *writerInput = [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeVideo outputSettings:writerOutputSettings sourceFormatHint:(__bridge CMFormatDescriptionRef)[videoTrack.formatDescriptions lastObject]];
+        [writerInput setExpectsMediaDataInRealTime:NO];
+        writerInput.transform = videoTrack.preferredTransform;
+        
+        AVAssetWriterInputPixelBufferAdaptor *pixelBufferAdaptor = [[AVAssetWriterInputPixelBufferAdaptor alloc] initWithAssetWriterInput:writerInput sourcePixelBufferAttributes:nil];
+        [writer addInput:writerInput];
+        [writer startWriting];
+        
+        CMSampleBufferRef sample = [readerOutput copyNextSampleBuffer];
+        [writer startSessionAtSourceTime:CMSampleBufferGetPresentationTimeStamp(sample)];
+        
+        CMTime time = asset.duration;
+        NSUInteger totalFrameCount = CMTimeGetSeconds(time) * [asset yd_getFPS];
+        NSUInteger i = 10;
+        
+        NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
+        while ((sample = [readerOutput copyNextSampleBuffer])) {
+            
+            i++;
+            i = MIN(i, totalFrameCount);
+            
+            CMTime timeFrame = CMTimeMake(i * 20, 600);
+            
+            CMTime presentationTime = CMSampleBufferGetPresentationTimeStamp(sample);
+            
+            NSValue *value1 = [NSValue valueWithCMTime:presentationTime];
+            NSValue *value2 = [NSValue valueWithCMTime:timeFrame];
+            
+            NSLog(@"---- %@", value1);
+            NSLog(@"---===== %@", value2);
+            
+            [array addObject:@(0)];
+            
+            CVPixelBufferRef imageBufferRef = CMSampleBufferGetImageBuffer(sample);
+            while (!writerInput.readyForMoreMediaData) {
+                [NSThread sleepForTimeInterval:0.1];
+            }
+            [pixelBufferAdaptor appendPixelBuffer:imageBufferRef withPresentationTime:timeFrame];
+            CFRelease(sample);
+        }
+        
+        NSLog(@"!!!!!!!!!!!----- %ld", array.count);
+        NSLog(@"!!!!!!!!!!!----- %ld", totalFrameCount);
+        
+        //        while ((sample = [readerOutput copyNextSampleBuffer])) {
+        //            CMTime presentationTime = CMSampleBufferGetPresentationTimeStamp(sample);
+        //            CVPixelBufferRef imageBufferRef = CMSampleBufferGetImageBuffer(sample);
+        //            while (!writerInput.readyForMoreMediaData) {
+        //                [NSThread sleepForTimeInterval:0.1];
+        //            }
+        //            [pixelBufferAdaptor appendPixelBuffer:imageBufferRef withPresentationTime:presentationTime];
+        //
+        //            CFRelease(sample);
+        //        }
+        
+        [writer finishWritingWithCompletionHandler:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (finishBlock) {
+                    finishBlock(!error, outputPath);
+                    if (error) {  NSLog(@"----- %@", error); }
+                }
+            });
+        }];
+    });
+}
+
+
+
+
+
+
+
+
 
 - (void)nativeTransferMovie:(AVAsset *)asset {
 

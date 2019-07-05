@@ -52,6 +52,7 @@
 		04C80D0F22CDE83E0021BF23 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D0B22CDE83E0021BF23 /* SDAVAssetExportSession.m */; };
 		04C80D1222CDE91D0021BF23 /* YD_AssetHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D1122CDE91D0021BF23 /* YD_AssetHandle.m */; };
 		04D4EFA222CB3E1A00004781 /* YD_PreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D4EFA122CB3E1A00004781 /* YD_PreViewController.m */; };
+		04DE522422CF5F6F00421A55 /* YD_UpendManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE522322CF5F6F00421A55 /* YD_UpendManager.m */; };
 		559022E831A9DF8B390FB6C0 /* libPods-YD_VideoEidtManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A89DFC027EACF199D1CC3F /* libPods-YD_VideoEidtManager.a */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +144,8 @@
 		04C80D1122CDE91D0021BF23 /* YD_AssetHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_AssetHandle.m; sourceTree = "<group>"; };
 		04D4EFA022CB3E1A00004781 /* YD_PreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_PreViewController.h; sourceTree = "<group>"; };
 		04D4EFA122CB3E1A00004781 /* YD_PreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_PreViewController.m; sourceTree = "<group>"; };
+		04DE522222CF5F6F00421A55 /* YD_UpendManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_UpendManager.h; sourceTree = "<group>"; };
+		04DE522322CF5F6F00421A55 /* YD_UpendManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_UpendManager.m; sourceTree = "<group>"; };
 		24A89DFC027EACF199D1CC3F /* libPods-YD_VideoEidtManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YD_VideoEidtManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71116BD90830EE257FF48990 /* Pods-YD_VideoEidtManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YD_VideoEidtManager.debug.xcconfig"; path = "Target Support Files/Pods-YD_VideoEidtManager/Pods-YD_VideoEidtManager.debug.xcconfig"; sourceTree = "<group>"; };
 		863A968A4417094A52237F0B /* Pods-YD_VideoEidtManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YD_VideoEidtManager.release.xcconfig"; path = "Target Support Files/Pods-YD_VideoEidtManager/Pods-YD_VideoEidtManager.release.xcconfig"; sourceTree = "<group>"; };
@@ -428,6 +431,8 @@
 				04C80D0A22CDE83E0021BF23 /* YD_AssetManager.m */,
 				04C80D1022CDE91D0021BF23 /* YD_AssetHandle.h */,
 				04C80D1122CDE91D0021BF23 /* YD_AssetHandle.m */,
+				04DE522222CF5F6F00421A55 /* YD_UpendManager.h */,
+				04DE522322CF5F6F00421A55 /* YD_UpendManager.m */,
 			);
 			path = YD_Export;
 			sourceTree = "<group>";
@@ -585,6 +590,7 @@
 				04C697A922C9E04500035132 /* YD_BasePlayControlView.m in Sources */,
 				0408EC1F22CCBD8B00D66241 /* YD_VolumeSlider.m in Sources */,
 				04C80CDC22CD97FB0021BF23 /* YD_CompressViewController.m in Sources */,
+				04DE522422CF5F6F00421A55 /* YD_UpendManager.m in Sources */,
 				04C697A822C9E04500035132 /* YD_PlayerView.m in Sources */,
 				0408EC1922CCA9EC00D66241 /* YD_VolumeViewController.m in Sources */,
 				04C80CFB22CDA09F0021BF23 /* YD_CompressItem.m in Sources */,

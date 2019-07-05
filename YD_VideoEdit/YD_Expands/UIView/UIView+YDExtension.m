@@ -116,6 +116,12 @@
     self.YD_y = YD_bottom - self.YD_height;
 }
 
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    if (newSuperview) {
+        self.exclusiveTouch = YES;
+    }
+}
+
 @end
 
 

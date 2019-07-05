@@ -9,6 +9,7 @@
 #import "YD_UpendViewController.h"
 #import "YD_PlayerView.h"
 #import "YD_DefaultPlayControlView.h"
+#import "YD_UpendManager.h"
 
 @interface YD_UpendViewController ()
 
@@ -19,7 +20,8 @@
 
 @property (nonatomic, weak) UIImageView *imgView;
 
-@property (nonatomic, strong) AVAsset *upendAsset;
+//@property (nonatomic, strong) NSURL *upendVideoURL;
+@property (nonatomic, strong) NSString *upendVideoPath;
 /// 是否是倒放
 @property (nonatomic, assign) BOOL isUpend;
 
@@ -40,24 +42,31 @@
         self.containView = view;
         [self.view addSubview:view];
         
-        UIButton *rotateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.upendBtn = rotateBtn;
-        rotateBtn.backgroundColor = self.model.themeColor;
-        rotateBtn.layer.masksToBounds = YES;
-        rotateBtn.layer.cornerRadius = 5;
-        [rotateBtn setTitle:@"立即倒放" forState:UIControlStateNormal];
-        [rotateBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        rotateBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-        [rotateBtn addTarget:self action:@selector(yd_upendAction) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:rotateBtn];
+        UIButton *upendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.upendBtn = upendBtn;
+        upendBtn.selected = NO;
+        upendBtn.backgroundColor = UIColor.clearColor;
+        upendBtn.layer.masksToBounds = YES;
+        upendBtn.layer.cornerRadius = 5;
+        upendBtn.layer.borderWidth = 1.0;
+        upendBtn.layer.borderColor = self.model.themeColor.CGColor;
+        [upendBtn setTitle:@"立即倒放" forState:UIControlStateNormal];
+        [upendBtn setTitleColor:UIColor.whiteColor forState:UIControlStateSelected];
+        [upendBtn setTitleColor:self.model.themeColor forState:UIControlStateNormal];
+        upendBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+        [upendBtn addTarget:self action:@selector(yd_upendAction) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:upendBtn];
         
         UIButton *restoreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.restoreBtn = restoreBtn;
+        restoreBtn.selected = YES;
+        restoreBtn.backgroundColor = self.model.themeColor;
         restoreBtn.layer.borderWidth = 1.0;
         restoreBtn.layer.borderColor = self.model.themeColor.CGColor;
         restoreBtn.layer.masksToBounds = YES;
         restoreBtn.layer.cornerRadius = 5;
         [restoreBtn setTitle:@"复 原" forState:UIControlStateNormal];
+        [restoreBtn setTitleColor:UIColor.whiteColor forState:UIControlStateSelected];
         [restoreBtn setTitleColor:self.model.themeColor forState:UIControlStateNormal];
         restoreBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16];
         [restoreBtn addTarget:self action:@selector(yd_restoreAction) forControlEvents:UIControlEventTouchUpInside];
@@ -123,17 +132,8 @@
     
     @weakify(self);
     if (self.isUpend) {
-        @weakify(self);
-        [YD_AssetManager yd_upendAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
-            @strongify(self);
-            [YD_ProgressHUD yd_hideHUD];
-            if (isSuccess) {
-                [self yd_pushPreview:exportPath];
-            }else {
-                [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
-            }
-        }];
-        
+        [YD_ProgressHUD yd_hideHUD];
+        [self yd_pushPreview:self.upendVideoPath];
     }else {
         [YD_AssetManager yd_exporter:self.model.asset fileName:@"upend.mp4" finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
             @strongify(self);
@@ -150,6 +150,10 @@
 #pragma mark - UI事件
 - (void)yd_restoreAction {
     self.isUpend = NO;
+    self.restoreBtn.backgroundColor = self.model.themeColor;
+    self.upendBtn.backgroundColor = UIColor.clearColor;
+    self.restoreBtn.selected = YES;
+    self.upendBtn.selected = NO;
     [self.player yd_pause];
     [self yd_playWithAsset:self.model.asset];
 }
@@ -163,110 +167,56 @@
 - (void)yd_upendAction {
     
     self.isUpend = YES;
+    self.restoreBtn.backgroundColor = UIColor.clearColor;
+    self.upendBtn.backgroundColor = self.model.themeColor;
+    self.restoreBtn.selected = NO;
+    self.upendBtn.selected = YES;
+    
     [self.player yd_pause];
     
-    if (self.upendAsset) {
-        [self yd_playWithAsset:self.upendAsset];
+    if (self.upendVideoPath) {
+        AVAsset *upendAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:self.upendVideoPath]];
+        [self yd_playWithAsset:upendAsset];
         return;
     }
 
     [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
-
+    
     @weakify(self);
-    [YD_AssetManager yd_upendAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+    [self yd_demo:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
         @strongify(self);
         [YD_ProgressHUD yd_hideHUD];
         if (isSuccess) {
-            self.upendAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:exportPath]];
-            [self yd_playWithAsset:self.upendAsset];
+            self.upendVideoPath = exportPath;
+            AVAsset *upendAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:self.upendVideoPath]];
+            [self yd_playWithAsset:upendAsset];
         }else {
             [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
         }
     }];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- (void)yd_demo:(YD_ExportFinishBlock)block {
     
-//    dispatch_async(dispatch_queue_create("UpendMovieQueue", DISPATCH_QUEUE_SERIAL), ^{
-//
-//        AVAsset *asset = self.model.asset;
-//
-//        NSError *error;
-//        AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:asset error:&error];
-//        AVAssetTrack *videoTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
-//        NSDictionary *readerOutputSettings = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange], kCVPixelBufferPixelFormatTypeKey, nil];
-//        AVAssetReaderTrackOutput *readerOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:videoTrack outputSettings:readerOutputSettings];
-//        readerOutput.alwaysCopiesSampleData = NO;
-//        // 在开始读取之前给reader指定一个output
-//        [reader addOutput:readerOutput];
-//        [reader startReading];
-//
-//        NSString *outputPath = [YD_PathCache stringByAppendingString:@"upendMovie.mp4"];
-//        // 删除当前该路径下的文件
-//        unlink([outputPath UTF8String]);
-//        NSURL *outputURL = [NSURL fileURLWithPath:outputPath];
-//
-//        AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:outputURL fileType:AVFileTypeMPEG4 error:&error];
-//        NSDictionary *videoCompressionProps = [NSDictionary dictionaryWithObjectsAndKeys:@(videoTrack.estimatedDataRate), AVVideoAverageBitRateKey, nil];
-//
-//        CGFloat width = YD_ScreenWidth;
-//        CGFloat height = videoTrack.naturalSize.height / videoTrack.naturalSize.width * width;
-//        NSDictionary *writerOutputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
-//                                              AVVideoCodecH264, AVVideoCodecKey,
-//                                              [NSNumber numberWithInt:width], AVVideoWidthKey,
-//                                              [NSNumber numberWithInt:height], AVVideoHeightKey,
-//                                              videoCompressionProps, AVVideoCompressionPropertiesKey, nil];
-//        AVAssetWriterInput *writerInput = [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeVideo outputSettings:writerOutputSettings sourceFormatHint:(__bridge CMFormatDescriptionRef)[videoTrack.formatDescriptions lastObject]];
-//        [writerInput setExpectsMediaDataInRealTime:NO];
-//        writerInput.transform = videoTrack.preferredTransform;
-//
-//        AVAssetWriterInputPixelBufferAdaptor *pixelBufferAdaptor = [[AVAssetWriterInputPixelBufferAdaptor alloc] initWithAssetWriterInput:writerInput sourcePixelBufferAttributes:nil];
-//        [writer addInput:writerInput];
-//        [writer startWriting];
-//
-//        Float64 seconds = [asset yd_getSeconds];
-//        float fps = [asset yd_getFPS];
-//        Float64 totalFrames = seconds * fps; //获得视频总帧数
-//
-//        AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-//        gen.requestedTimeToleranceAfter = kCMTimeZero;
-//        gen.requestedTimeToleranceBefore = kCMTimeZero;
-//        gen.appliesPreferredTrackTransform = YES;
-//
-//        [writer startSessionAtSourceTime:kCMTimeZero];
-//
-//        for (int i = 1; i < totalFrames; i++) {
-//            @autoreleasepool {
-//                CMTime time = CMTimeMake(i * 20, 600);
-//                UIImage *img = [self yd_getVideoImage:time gen:gen];
-//                CVPixelBufferRef imageBufferRef = [self pixelBufferFromCGImage:img.CGImage size:img.size];
-//
-//                while (!writerInput.readyForMoreMediaData) {
-//                    [NSThread sleepForTimeInterval:0.1];
-//                }
-//                [pixelBufferAdaptor appendPixelBuffer:imageBufferRef withPresentationTime:time];
-//            }
-//        }
-//
-//        @weakify(self);
-//        [writer finishWritingWithCompletionHandler:^{
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                @strongify(self);
-//                [YD_ProgressHUD yd_hideHUD];
-//                 self.upendAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:outputPath]];
-//                [self yd_playWithAsset:self.upendAsset];
-//            });
-//        }];
-//    });
-}
-
-- (UIImage *)yd_getVideoImage:(CMTime)time gen:(AVAssetImageGenerator *)gen {
-    CMTime actualTime;
-    CGImageRef imageRef = [gen copyCGImageAtTime:time actualTime:&actualTime error:nil];
-    UIImage *img = imageRef ? [[UIImage alloc] initWithCGImage:imageRef] : nil;
-    CGImageRelease(imageRef);
-    return img;
-}
-
-+ (void)yd_upendAsset:(AVAsset *)asset finish:(YD_ExportFinishBlock)finishBlock {
     dispatch_async(dispatch_queue_create("UpendMovieQueue", DISPATCH_QUEUE_SERIAL), ^{
+        
+        AVAsset *asset = self.model.asset;
+        
         NSError *error;
         AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:asset error:&error];
         AVAssetTrack *videoTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
@@ -284,10 +234,13 @@
         
         AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:outputURL fileType:AVFileTypeMPEG4 error:&error];
         NSDictionary *videoCompressionProps = [NSDictionary dictionaryWithObjectsAndKeys:@(videoTrack.estimatedDataRate), AVVideoAverageBitRateKey, nil];
+        
+        CGFloat width = YD_ScreenWidth;
+        CGFloat height = videoTrack.naturalSize.height / videoTrack.naturalSize.width * width;
         NSDictionary *writerOutputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
                                               AVVideoCodecH264, AVVideoCodecKey,
-                                              [NSNumber numberWithInt:videoTrack.naturalSize.width], AVVideoWidthKey,
-                                              [NSNumber numberWithInt:videoTrack.naturalSize.height], AVVideoHeightKey,
+                                              [NSNumber numberWithInt:width], AVVideoWidthKey,
+                                              [NSNumber numberWithInt:height], AVVideoHeightKey,
                                               videoCompressionProps, AVVideoCompressionPropertiesKey, nil];
         AVAssetWriterInput *writerInput = [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeVideo outputSettings:writerOutputSettings sourceFormatHint:(__bridge CMFormatDescriptionRef)[videoTrack.formatDescriptions lastObject]];
         [writerInput setExpectsMediaDataInRealTime:NO];
@@ -297,33 +250,52 @@
         [writer addInput:writerInput];
         [writer startWriting];
         
-        NSMutableArray *samples = [[NSMutableArray alloc] init];
-        CMSampleBufferRef sample;
-        while ((sample = [readerOutput copyNextSampleBuffer])) {
-            [samples addObject:(__bridge id)sample];
-            CFRelease(sample);
-        }
+        Float64 seconds = [asset yd_getSeconds];
+        float fps = [asset yd_getFPS];
+        Float64 totalFrames = seconds * fps; //获得视频总帧数
         
-        [writer startSessionAtSourceTime:CMSampleBufferGetPresentationTimeStamp((__bridge CMSampleBufferRef)samples[0])];
+        AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+        gen.requestedTimeToleranceAfter = kCMTimeZero;
+        gen.requestedTimeToleranceBefore = kCMTimeZero;
+        gen.appliesPreferredTrackTransform = YES;
         
-        for (NSInteger i = 0; i < samples.count; i ++) {
-            CMTime presentationTime = CMSampleBufferGetPresentationTimeStamp((__bridge CMSampleBufferRef)samples[i]);
-            CVPixelBufferRef imageBufferRef = CMSampleBufferGetImageBuffer((__bridge CMSampleBufferRef)samples[samples.count - i - 1]);
-            while (!writerInput.readyForMoreMediaData) {
-                [NSThread sleepForTimeInterval:0.1];
+        [writer startSessionAtSourceTime:kCMTimeZero];
+        
+        for (int i = 0; i < totalFrames; i++) {
+            @autoreleasepool {
+                NSInteger j = totalFrames - 1 - i;
+                CMTime time = CMTimeMake(i * 20, 600);
+                CMTime imgTime = CMTimeMake(j * 20, 600);
+                
+                UIImage *img = [self yd_getVideoImage:imgTime gen:gen];
+                CVPixelBufferRef imageBufferRef = [self pixelBufferFromCGImage:img.CGImage size:img.size];
+                
+                while (!writerInput.readyForMoreMediaData) {
+                    [NSThread sleepForTimeInterval:0.01];
+                }
+                [pixelBufferAdaptor appendPixelBuffer:imageBufferRef withPresentationTime:time];
+                
+                if (imageBufferRef) CFRelease(imageBufferRef);
             }
-            [pixelBufferAdaptor appendPixelBuffer:imageBufferRef withPresentationTime:presentationTime];
         }
         
         [writer finishWritingWithCompletionHandler:^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (finishBlock) {
-                    finishBlock(!error, outputPath);
+                if (block) {
+                    block(!error, outputPath);
                     if (error) {  NSLog(@"----- %@", error); }
                 }
             });
         }];
     });
+}
+
+- (UIImage *)yd_getVideoImage:(CMTime)time gen:(AVAssetImageGenerator *)gen {
+    CMTime actualTime;
+    CGImageRef imageRef = [gen copyCGImageAtTime:time actualTime:&actualTime error:nil];
+    UIImage *img = imageRef ? [[UIImage alloc] initWithCGImage:imageRef] : nil;
+    CGImageRelease(imageRef);
+    return img;
 }
 
 - (CVPixelBufferRef)pixelBufferFromCGImage:(CGImageRef)image size:(CGSize)size {

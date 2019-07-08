@@ -11,6 +11,64 @@
 #import "YD_PlayerView.h"
 
 @implementation YD_AssetManager
+
++ (AVMutableVideoComposition *)yd_videoComposition:(AVAsset *)asset {
+    
+    AVAssetTrack *videoAssetTrack = nil;
+    if ([asset tracksWithMediaType:AVMediaTypeVideo].count) {
+        videoAssetTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+    }
+    
+    // 3.1 - Create AVMutableVideoCompositionInstruction
+    AVMutableVideoCompositionInstruction *mainInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+    mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, videoAssetTrack.asset.duration);
+    
+    // 3.2 - Create an AVMutableVideoCompositionLayerInstruction for the video track and fix the orientation.
+    AVMutableVideoCompositionLayerInstruction *videolayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoAssetTrack];
+    
+    UIImageOrientation videoAssetOrientation_  = UIImageOrientationUp;
+    BOOL isVideoAssetPortrait_  = NO;
+    CGAffineTransform videoTransform = videoAssetTrack.preferredTransform;
+    if (videoTransform.a == 0 && videoTransform.b == 1.0 && videoTransform.c == -1.0 && videoTransform.d == 0) {
+        videoAssetOrientation_ = UIImageOrientationRight;
+        isVideoAssetPortrait_ = YES;
+    }
+    if (videoTransform.a == 0 && videoTransform.b == -1.0 && videoTransform.c == 1.0 && videoTransform.d == 0) {
+        videoAssetOrientation_ =  UIImageOrientationLeft;
+        isVideoAssetPortrait_ = YES;
+    }
+    if (videoTransform.a == 1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == 1.0) {
+        videoAssetOrientation_ =  UIImageOrientationUp;
+    }
+    if (videoTransform.a == -1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == -1.0) {
+        videoAssetOrientation_ = UIImageOrientationDown;
+    }
+    
+    [videolayerInstruction setTransform:videoAssetTrack.preferredTransform atTime:kCMTimeZero];
+    [videolayerInstruction setOpacity:0.0 atTime:videoAssetTrack.asset.duration];
+    
+    // 3.3 - Add instructions
+    mainInstruction.layerInstructions = [NSArray arrayWithObjects:videolayerInstruction,nil];
+    
+    AVMutableVideoComposition *mainCompositionInst = [AVMutableVideoComposition videoComposition];
+    
+    CGSize naturalSize;
+    if(isVideoAssetPortrait_){
+        naturalSize = CGSizeMake(videoAssetTrack.naturalSize.height, videoAssetTrack.naturalSize.width);
+    } else {
+        naturalSize = videoAssetTrack.naturalSize;
+    }
+    
+    float renderWidth, renderHeight;
+    renderWidth = naturalSize.width;
+    renderHeight = naturalSize.height;
+    mainCompositionInst.renderSize = CGSizeMake(renderWidth, renderHeight);
+    mainCompositionInst.instructions = [NSArray arrayWithObject:mainInstruction];
+    mainCompositionInst.frameDuration = CMTimeMake(1, 30);
+    
+    return mainCompositionInst;
+}
+
 /// 调整播放速度
 + (AVAsset *)yd_speedAssetWithAsset:(AVAsset *)asset speed:(CGFloat)speed {
     
@@ -198,7 +256,7 @@
     mainInstruction.layerInstructions = [NSArray arrayWithObjects:videolayerInstruction, nil];
     videoComposition.instructions = [NSArray arrayWithObject:mainInstruction];
     
-    [self yd_exporter:mixComposition videoComposition:videoComposition finish:finishBlock];
+    [self yd_exporter:mixComposition fileName:@"rotateVideo.mp4" composition:videoComposition audioMix:nil finish:finishBlock];
 }
 
 /// 视频倒放
@@ -337,7 +395,7 @@
     // 单个画面播放
     videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
     
-    [self yd_exporter:mixComposition videoComposition:videoComposition finish:finishBlock];
+    [self yd_exporter:mixComposition fileName:@"aspect.mp4" composition:videoComposition audioMix:nil finish:finishBlock];
 }
 
 + (NSDictionary *)yd_volumeAsset:(AVAsset *)asset
@@ -401,16 +459,22 @@
               @"audioMix" : exportAudioMix};
 }
 
+#pragma mark - 视频导出
 + (void)yd_exporter:(AVAsset *)asset
+           fileName:(NSString *)fileName
+        composition:(AVMutableVideoComposition *)composition
            audioMix:(AVMutableAudioMix *)audioMix
              finish:(YD_ExportFinishBlock)finishBlock {
     
-    NSString *outputPath = [YD_PathCache stringByAppendingString:@"volume.mp4"];
+    NSString *outputPath = [YD_PathCache stringByAppendingString:fileName];
     unlink([outputPath UTF8String]);
     /// 导出
     AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetMediumQuality];
     if (audioMix) {
         exporter.audioMix = audioMix;
+    }
+    if (composition) {
+        exporter.videoComposition = composition;
     }
     exporter.outputURL = [NSURL fileURLWithPath:outputPath isDirectory:YES];
     exporter.outputFileType = AVFileTypeQuickTimeMovie;
@@ -429,58 +493,7 @@
     }];
 }
 
-+ (void)yd_exporter:(AVAsset *)asset
-   videoComposition:(AVMutableVideoComposition *)videoComposition
-             finish:(YD_ExportFinishBlock)finishBlock {
-    
-    NSString *outputPath = [YD_PathCache stringByAppendingString:@"rotateVideo.mp4"];
-    unlink([outputPath UTF8String]);
-    /// 导出
-    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetMediumQuality];
-    exporter.videoComposition = videoComposition;
-    exporter.outputURL = [NSURL fileURLWithPath:outputPath isDirectory:YES];
-    exporter.outputFileType = AVFileTypeQuickTimeMovie;
-    exporter.shouldOptimizeForNetworkUse = YES;
-    [exporter exportAsynchronouslyWithCompletionHandler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (finishBlock) {
-                BOOL isOk = (!exporter.error && exporter.status == AVAssetExportSessionStatusCompleted);
-                finishBlock(isOk, outputPath);
-                
-                if (exporter.error) {
-                    NSLog(@"----- %@", exporter.error);
-                }
-            }
-        });
-    }];
-}
-
-+ (void)yd_exporter:(AVAsset *)asset
-           fileName:(NSString *)fileName
-             finish:(YD_ExportFinishBlock)finishBlock {
- 
-    NSString *outputPath = [YD_PathCache stringByAppendingString:fileName];
-    unlink([outputPath UTF8String]);
-    /// 导出
-    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetMediumQuality];
-    
-    exporter.outputURL = [NSURL fileURLWithPath:outputPath isDirectory:YES];
-    exporter.outputFileType = AVFileTypeQuickTimeMovie;
-    exporter.shouldOptimizeForNetworkUse = YES;
-    [exporter exportAsynchronouslyWithCompletionHandler:^{
-    
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (finishBlock) {
-                BOOL isOk = (!exporter.error && exporter.status == AVAssetExportSessionStatusCompleted);
-                finishBlock(isOk, outputPath);
-                if (exporter.error) {
-                    NSLog(@"----- %@", exporter.error);
-                }
-            }
-        });
-    }];
-}
-
+#pragma mark - 保存到相册
 + (void)yd_saveToLibrary:(NSString *)savePath toView:(UIView *)view block:(void(^)(BOOL success))block {
     
     PHPhotoLibrary *photoLibrary = [PHPhotoLibrary sharedPhotoLibrary];

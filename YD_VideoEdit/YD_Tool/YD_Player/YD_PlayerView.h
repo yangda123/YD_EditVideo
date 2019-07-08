@@ -68,6 +68,7 @@ NS_ASSUME_NONNULL_END
 
 @property (nonatomic, strong, nonnull) AVAsset *asset;
 @property (nonatomic, strong, nonnull) AVMutableAudioMix *audioMix;
+@property (nonatomic, strong, nonnull) AVMutableVideoComposition *composition;
 @property (nonatomic, strong, nonnull) UIImage *coverImage;
 @property (nonatomic, strong, nonnull) UIImage *smallImage;
 @property (nonatomic, assign) CGSize naturalSize;

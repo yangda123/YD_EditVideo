@@ -16,7 +16,9 @@
 #import "YD_CompressViewController.h"
 #import "YD_CopyViewController.h"
 
-@interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+#import <TZImagePickerController.h>
+
+@interface ViewController () <TZImagePickerControllerDelegate>
 
 @property (nonatomic, weak) UIButton *currentBtn;
 
@@ -67,43 +69,57 @@
     
     self.currentBtn = btn;
     
-    UIImagePickerController *picker = [UIImagePickerController new];
-    picker.delegate = self;
-    picker.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    /// 录制的类型 下面为视频
-    picker.mediaTypes = @[(NSString*)kUTTypeMovie];
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    [self presentViewController:picker animated:YES completion:nil];
+    [self pushTZImagePickerController];
+}
+
+- (void)pushTZImagePickerController {
+    TZImagePickerController *imagePicker = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+    // 是否允许显示视频
+    imagePicker.allowPickingVideo = YES;
+    // 是否允许显示图片
+    imagePicker.allowPickingImage = NO;
+    // 是否显示可选原图按钮
+    imagePicker.allowPickingOriginalPhoto = NO;
+    // 在内部显示拍照按钮
+    imagePicker.allowTakePicture = NO;
+    // 在内部显示拍视频按
+    imagePicker.allowTakeVideo = NO;
+    // 这是一个navigation 只能present
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
 #pragma mark UIImagePickerControllerDelegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+// 选择视频的回调
+-(void)imagePickerController:(TZImagePickerController *)picker
+       didFinishPickingVideo:(UIImage *)coverImage
+                sourceAssets:(PHAsset *)asset {
+    [YD_ProgressHUD yd_showHUD:@"正在压缩视频"];
     
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    /// 返回的媒体类型是视频
-    if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]){
-        /// 视频的处理
-        [picker dismissViewControllerAnimated:YES completion:^() {
-            
-            NSURL *url = [info objectForKey:UIImagePickerControllerMediaURL];
-            
-            YD_ConfigModel *model = [YD_ConfigModel new];
-            model.videoURL = url;
-            
-            Class class = self.classArray[self.currentBtn.tag];
-            YD_BasePlayerViewController *playerVC = (YD_BasePlayerViewController *)[class new];
-            playerVC.model = model;
-            [self.navigationController pushViewController:playerVC animated:YES];
-            
-            playerVC.saveBlock = ^(UIViewController * _Nonnull controller, NSString * _Nonnull urlPaht) {
-                NSLog(@"--- 保存");
-            };
-            
-            playerVC.shareBlock = ^(UIViewController * _Nonnull controller, NSString * _Nonnull urlPaht) {
-                NSLog(@"--- 分享");
-            };
-        }];
-    }
+    [[TZImageManager manager] getVideoOutputPathWithAsset:asset presetName:AVAssetExportPresetMediumQuality success:^(NSString *outputPath) {
+        [YD_ProgressHUD yd_hideHUD];
+        
+        NSURL *url = [NSURL fileURLWithPath:outputPath];
+        
+        YD_ConfigModel *model = [YD_ConfigModel new];
+        model.videoURL = url;
+        
+        Class class = self.classArray[self.currentBtn.tag];
+        YD_BasePlayerViewController *playerVC = (YD_BasePlayerViewController *)[class new];
+        playerVC.model = model;
+        [self.navigationController pushViewController:playerVC animated:YES];
+        
+        playerVC.saveBlock = ^(UIViewController * _Nonnull controller, NSString * _Nonnull urlPaht) {
+            NSLog(@"--- 保存");
+        };
+        
+        playerVC.shareBlock = ^(UIViewController * _Nonnull controller, NSString * _Nonnull urlPaht) {
+            NSLog(@"--- 分享");
+        };
+        
+    } failure:^(NSString *errorMessage, NSError *error) {
+        [YD_ProgressHUD yd_hideHUD];
+        [YD_ProgressHUD yd_showMessage:@"视频导出失败"];
+    }];
 }
 
 @end

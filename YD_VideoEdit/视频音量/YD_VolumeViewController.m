@@ -118,7 +118,7 @@
     [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
     
     @weakify(self);
-    [YD_AssetManager yd_exporter:self.playModel.asset audioMix:self.playModel.audioMix finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+    [YD_AssetManager yd_exporter:self.playModel.asset fileName:@"volume.mp4" composition:nil audioMix:self.playModel.audioMix finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
         @strongify(self);
         [YD_ProgressHUD yd_hideHUD];
         if (isSuccess) {

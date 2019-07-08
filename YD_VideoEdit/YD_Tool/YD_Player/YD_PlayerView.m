@@ -144,6 +144,9 @@
     if (yd_model.audioMix) {
         item.audioMix = yd_model.audioMix;
     }
+    if (yd_model.composition) {
+        item.videoComposition = yd_model.composition;
+    }
     item.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
     [item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     self.player = [AVPlayer playerWithPlayerItem:item];

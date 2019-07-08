@@ -14,6 +14,8 @@ typedef void(^YD_ExportFinishBlock)(BOOL isSuccess, NSString * _Nonnull exportPa
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YD_AssetManager : NSObject
+/// 修正方向
++ (AVMutableVideoComposition *)yd_videoComposition:(AVAsset *)asset;
 /// 修改播放速度
 + (AVAsset *)yd_speedAssetWithAsset:(AVAsset *)asset speed:(CGFloat)speed;
 /// 修改视频方向
@@ -33,14 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)yd_compressAsset:(AVAsset *)asset exportPreset:(NSString *)exportPreset finish:(YD_ExportFinishBlock)finishBlock;
 
 
-
 /// 导出视频
 + (void)yd_exporter:(AVAsset *)asset
            fileName:(NSString *)fileName
-             finish:(YD_ExportFinishBlock)finishBlock;
-
-+ (void)yd_exporter:(AVAsset *)asset
-           audioMix:(AVMutableAudioMix *)audioMix
+        composition:(AVMutableVideoComposition * _Nullable)composition
+           audioMix:(AVMutableAudioMix *_Nullable)audioMix
              finish:(YD_ExportFinishBlock)finishBlock;
 
 /// 保存到相册

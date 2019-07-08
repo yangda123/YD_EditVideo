@@ -81,7 +81,7 @@
     [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
     
     @weakify(self);
-    [YD_AssetManager yd_exporter:self.currentAsset fileName:@"copy.mp4" finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+    [YD_AssetManager yd_exporter:self.currentAsset fileName:@"copy.mp4" composition:nil audioMix:nil finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
         @strongify(self);
         
         [YD_ProgressHUD yd_hideHUD];

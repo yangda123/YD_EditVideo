@@ -460,6 +460,7 @@
 				04072E5822C35FDB0045772E /* Sources */,
 				04072E5922C35FDB0045772E /* Frameworks */,
 				04072E5A22C35FDB0045772E /* Resources */,
+				2E20095218645D1FB3AD4FC8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -519,6 +520,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2E20095218645D1FB3AD4FC8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YD_VideoEidtManager/Pods-YD_VideoEidtManager-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YD_VideoEidtManager/Pods-YD_VideoEidtManager-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YD_VideoEidtManager/Pods-YD_VideoEidtManager-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9D7A695A3D1A246657CF08B9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

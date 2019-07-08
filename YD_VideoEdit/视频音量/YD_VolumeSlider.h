@@ -8,11 +8,12 @@
 
 #import "YD_BaseView.h"
 
+typedef void(^YD_EndChangeBlock)(CGFloat value);
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YD_VolumeSlider : YD_BaseView
 
-@property (nonatomic, assign) CGFloat currentValue;
+@property (nonatomic, copy) YD_EndChangeBlock endBlock;
 
 @end
 

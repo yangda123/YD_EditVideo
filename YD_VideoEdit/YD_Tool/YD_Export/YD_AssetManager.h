@@ -23,13 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 视频宽高比 ratio = 宽 / 高
 + (void)yd_aspectRatioAsset:(AVAsset *)asset ratio:(CGFloat)ratio finish:(YD_ExportFinishBlock)finishBlock;
 /// 设置音量
-+ (void)yd_volumeAsset:(AVAsset *)asset
-                volume:(CGFloat)volume
-                fadeIn:(BOOL)fadeIn
-               fadeOut:(BOOL)fadeOut
-                finish:(YD_ExportFinishBlock)finishBlock;
++ (NSDictionary *)yd_volumeAsset:(AVAsset *)asset
+                          volume:(CGFloat)volume
+                          fadeIn:(BOOL)fadeIn
+                         fadeOut:(BOOL)fadeOut;
 /// 视频复制拼接
-+ (void)yd_copyAsset:(NSArray *)array finish:(YD_ExportFinishBlock)finishBlock;
++ (AVMutableComposition *)yd_copyAsset:(NSArray *)array;
 /// 视频压缩
 + (void)yd_compressAsset:(AVAsset *)asset exportPreset:(NSString *)exportPreset finish:(YD_ExportFinishBlock)finishBlock;
 
@@ -39,6 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)yd_exporter:(AVAsset *)asset
            fileName:(NSString *)fileName
              finish:(YD_ExportFinishBlock)finishBlock;
+
++ (void)yd_exporter:(AVAsset *)asset
+           audioMix:(AVMutableAudioMix *)audioMix
+             finish:(YD_ExportFinishBlock)finishBlock;
+
 /// 保存到相册
 + (void)yd_saveToLibrary:(NSString *)savePath toView:(UIView *)view block:(void(^)(BOOL success))block;
 

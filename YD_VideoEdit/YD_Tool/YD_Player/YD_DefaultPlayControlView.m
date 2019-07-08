@@ -133,8 +133,6 @@
 - (void)yd_playBtnAction {
     if (self.player.yd_playStatus == YD_PlayStatusPlay) {
         [self.player yd_pause];
-    }else if (self.player.yd_playStatus == YD_PlayStatusFinish) {
-        [self.player yd_replay];
     }else {
         [self.player yd_play];
     }

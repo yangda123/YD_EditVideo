@@ -98,6 +98,10 @@
 
     [self.modelArray addObject:copyModel];
     [self.collectionView reloadData];
+    
+    if (self.copyBlock) {
+        self.copyBlock(self.modelArray);
+    }
 }
 
 - (void)yd_deleteAction:(YD_CopyCell *)cell {
@@ -107,6 +111,10 @@
     [self.modelArray removeObject:model];
     [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
     [self.collectionView reloadData];
+    
+    if (self.copyBlock) {
+        self.copyBlock(self.modelArray);
+    }
 }
 
 #pragma mark - tableView datasource && delegate

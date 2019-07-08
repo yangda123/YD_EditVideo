@@ -18,13 +18,21 @@
 @property (nonatomic, weak) YD_VolumeSwitchView *switchView_1;
 @property (nonatomic, weak) YD_VolumeSwitchView *switchView_2;
 
+@property (nonatomic, assign) CGFloat currentValue;
+
 @end
 
 @implementation YD_VolumeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+}
+
+- (void)yd_setupConfig {
+    [super yd_setupConfig];
+    
+    self.currentValue = 0.5;
+    [self yd_volumeAsset];
 }
 
 - (void)yd_layoutSubViews {
@@ -38,12 +46,14 @@
         YD_VolumeSwitchView *sw = [YD_VolumeSwitchView new];
         self.switchView_1 = sw;
         sw.titleLbl.text = @"淡入";
+        [sw.yd_switch addTarget:self action:@selector(yd_swichChange) forControlEvents:UIControlEventValueChanged];
         [self.containView addSubview:sw];
     }
     {
         YD_VolumeSwitchView *sw = [YD_VolumeSwitchView new];
         self.switchView_2 = sw;
         sw.titleLbl.text = @"淡出";
+        [sw.yd_switch addTarget:self action:@selector(yd_swichChange) forControlEvents:UIControlEventValueChanged];
         [self.containView addSubview:sw];
     }
     {
@@ -52,6 +62,15 @@
         slider.themeColor = self.model.themeColor;
         [self.view addSubview:slider];
     }
+    
+    @weakify(self);
+    self.volumeSlider.endBlock = ^(CGFloat value) {
+        @strongify(self);
+        self.currentValue = value;
+        
+        [self yd_volumeAsset];
+        self.player.yd_model = self.playModel;
+    };
 }
 
 - (void)yd_layoutConstraints {
@@ -90,18 +109,16 @@
 }
 
 - (UIImage *)yd_barIconImage {
-    
     return self.model.barIconImage ?: [UIImage yd_imageWithName:@"yd_volume@3x"];
 }
 
 - (void)yd_completeItemAction {
-    
     [self.player yd_pause];
 
     [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
     
     @weakify(self);
-    [YD_AssetManager yd_volumeAsset:self.model.asset volume:self.volumeSlider.currentValue fadeIn:self.switchView_1.yd_switch.isOn fadeOut:self.switchView_2.yd_switch.isOn finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+    [YD_AssetManager yd_exporter:self.playModel.asset audioMix:self.playModel.audioMix finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
         @strongify(self);
         [YD_ProgressHUD yd_hideHUD];
         if (isSuccess) {
@@ -110,6 +127,23 @@
             [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
         }
     }];
+}
+
+#pragma mark - 修改声音
+- (void)yd_volumeAsset {
+    NSDictionary *dict = [YD_AssetManager yd_volumeAsset:self.model.asset volume:self.currentValue fadeIn:self.switchView_1.yd_switch.isOn fadeOut:self.switchView_2.yd_switch.isOn];
+    
+    AVAsset *asset = dict[@"asset"];
+    AVMutableAudioMix *audioMix = dict[@"audioMix"];
+
+    self.playModel.asset = asset;
+    self.playModel.audioMix = audioMix;
+}
+
+#pragma mark - UI事件
+- (void)yd_swichChange {
+    [self yd_volumeAsset];
+    self.player.yd_model = self.playModel;
 }
 
 @end

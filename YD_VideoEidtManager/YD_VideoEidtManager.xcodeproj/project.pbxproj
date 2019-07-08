@@ -50,7 +50,6 @@
 		04C80D0522CDE4570021BF23 /* NSString+YD_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D0322CDE4570021BF23 /* NSString+YD_Extension.m */; };
 		04C80D0E22CDE83E0021BF23 /* YD_AssetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D0A22CDE83E0021BF23 /* YD_AssetManager.m */; };
 		04C80D0F22CDE83E0021BF23 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D0B22CDE83E0021BF23 /* SDAVAssetExportSession.m */; };
-		04C80D1222CDE91D0021BF23 /* YD_AssetHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D1122CDE91D0021BF23 /* YD_AssetHandle.m */; };
 		04D4EFA222CB3E1A00004781 /* YD_PreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D4EFA122CB3E1A00004781 /* YD_PreViewController.m */; };
 		04DE522422CF5F6F00421A55 /* YD_UpendManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE522322CF5F6F00421A55 /* YD_UpendManager.m */; };
 		559022E831A9DF8B390FB6C0 /* libPods-YD_VideoEidtManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A89DFC027EACF199D1CC3F /* libPods-YD_VideoEidtManager.a */; };
@@ -140,8 +139,6 @@
 		04C80D0B22CDE83E0021BF23 /* SDAVAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAVAssetExportSession.m; sourceTree = "<group>"; };
 		04C80D0C22CDE83E0021BF23 /* YD_AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_AssetManager.h; sourceTree = "<group>"; };
 		04C80D0D22CDE83E0021BF23 /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAVAssetExportSession.h; sourceTree = "<group>"; };
-		04C80D1022CDE91D0021BF23 /* YD_AssetHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_AssetHandle.h; sourceTree = "<group>"; };
-		04C80D1122CDE91D0021BF23 /* YD_AssetHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_AssetHandle.m; sourceTree = "<group>"; };
 		04D4EFA022CB3E1A00004781 /* YD_PreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_PreViewController.h; sourceTree = "<group>"; };
 		04D4EFA122CB3E1A00004781 /* YD_PreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_PreViewController.m; sourceTree = "<group>"; };
 		04DE522222CF5F6F00421A55 /* YD_UpendManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_UpendManager.h; sourceTree = "<group>"; };
@@ -429,8 +426,6 @@
 				04C80D0B22CDE83E0021BF23 /* SDAVAssetExportSession.m */,
 				04C80D0C22CDE83E0021BF23 /* YD_AssetManager.h */,
 				04C80D0A22CDE83E0021BF23 /* YD_AssetManager.m */,
-				04C80D1022CDE91D0021BF23 /* YD_AssetHandle.h */,
-				04C80D1122CDE91D0021BF23 /* YD_AssetHandle.m */,
 				04DE522222CF5F6F00421A55 /* YD_UpendManager.h */,
 				04DE522322CF5F6F00421A55 /* YD_UpendManager.m */,
 			);
@@ -556,7 +551,6 @@
 				04C697A622C9E04500035132 /* AVAsset+YD_Extension.m in Sources */,
 				04C697D822CA0DDD00035132 /* YD_RatioView.m in Sources */,
 				04C697D122CA004500035132 /* YD_ConfigModel.m in Sources */,
-				04C80D1222CDE91D0021BF23 /* YD_AssetHandle.m in Sources */,
 				04C80CE222CD9CFE0021BF23 /* YD_CompressView.m in Sources */,
 				04C697C222C9EC2000035132 /* YD_UpendViewController.m in Sources */,
 				04C80D0E22CDE83E0021BF23 /* YD_AssetManager.m in Sources */,

@@ -9,7 +9,6 @@
 #import "YD_UpendViewController.h"
 #import "YD_PlayerView.h"
 #import "YD_DefaultPlayControlView.h"
-#import "YD_UpendManager.h"
 
 @interface YD_UpendViewController ()
 
@@ -183,7 +182,7 @@
     [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
     
     @weakify(self);
-    [self yd_demo:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+    [YD_AssetManager yd_upendAsset:self.model.asset finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
         @strongify(self);
         [YD_ProgressHUD yd_hideHUD];
         if (isSuccess) {
@@ -194,6 +193,19 @@
             [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
         }
     }];
+//
+//    @weakify(self);
+//    [self yd_demo:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+//        @strongify(self);
+//        [YD_ProgressHUD yd_hideHUD];
+//        if (isSuccess) {
+//            self.upendVideoPath = exportPath;
+//            AVAsset *upendAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:self.upendVideoPath]];
+//            [self yd_playWithAsset:upendAsset];
+//        }else {
+//            [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
+//        }
+//    }];
 }
 
 
@@ -207,16 +219,12 @@
 
 
 
-
-
-
-
 - (void)yd_demo:(YD_ExportFinishBlock)block {
-    
+
     dispatch_async(dispatch_queue_create("UpendMovieQueue", DISPATCH_QUEUE_SERIAL), ^{
-        
+
         AVAsset *asset = self.model.asset;
-        
+
         NSError *error;
         AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:asset error:&error];
         AVAssetTrack *videoTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
@@ -226,15 +234,15 @@
         // 在开始读取之前给reader指定一个output
         [reader addOutput:readerOutput];
         [reader startReading];
-        
+
         NSString *outputPath = [YD_PathCache stringByAppendingString:@"upendMovie.mp4"];
         // 删除当前该路径下的文件
         unlink([outputPath UTF8String]);
         NSURL *outputURL = [NSURL fileURLWithPath:outputPath];
-        
+
         AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:outputURL fileType:AVFileTypeMPEG4 error:&error];
         NSDictionary *videoCompressionProps = [NSDictionary dictionaryWithObjectsAndKeys:@(videoTrack.estimatedDataRate), AVVideoAverageBitRateKey, nil];
-        
+
         CGFloat width = YD_ScreenWidth;
         CGFloat height = videoTrack.naturalSize.height / videoTrack.naturalSize.width * width;
         NSDictionary *writerOutputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -245,40 +253,40 @@
         AVAssetWriterInput *writerInput = [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeVideo outputSettings:writerOutputSettings sourceFormatHint:(__bridge CMFormatDescriptionRef)[videoTrack.formatDescriptions lastObject]];
         [writerInput setExpectsMediaDataInRealTime:NO];
         writerInput.transform = videoTrack.preferredTransform;
-        
+
         AVAssetWriterInputPixelBufferAdaptor *pixelBufferAdaptor = [[AVAssetWriterInputPixelBufferAdaptor alloc] initWithAssetWriterInput:writerInput sourcePixelBufferAttributes:nil];
         [writer addInput:writerInput];
         [writer startWriting];
-        
+
         Float64 seconds = [asset yd_getSeconds];
         float fps = [asset yd_getFPS];
         Float64 totalFrames = seconds * fps; //获得视频总帧数
-        
+
         AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
         gen.requestedTimeToleranceAfter = kCMTimeZero;
         gen.requestedTimeToleranceBefore = kCMTimeZero;
         gen.appliesPreferredTrackTransform = YES;
-        
+
         [writer startSessionAtSourceTime:kCMTimeZero];
-        
+
         for (int i = 0; i < totalFrames; i++) {
             @autoreleasepool {
                 NSInteger j = totalFrames - 1 - i;
                 CMTime time = CMTimeMake(i * 20, 600);
                 CMTime imgTime = CMTimeMake(j * 20, 600);
-                
+
                 UIImage *img = [self yd_getVideoImage:imgTime gen:gen];
                 CVPixelBufferRef imageBufferRef = [self pixelBufferFromCGImage:img.CGImage size:img.size];
-                
+
                 while (!writerInput.readyForMoreMediaData) {
                     [NSThread sleepForTimeInterval:0.01];
                 }
                 [pixelBufferAdaptor appendPixelBuffer:imageBufferRef withPresentationTime:time];
-                
+
                 if (imageBufferRef) CFRelease(imageBufferRef);
             }
         }
-        
+
         [writer finishWritingWithCompletionHandler:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (block) {
@@ -301,47 +309,28 @@
 - (CVPixelBufferRef)pixelBufferFromCGImage:(CGImageRef)image size:(CGSize)size {
     
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             
                              [NSNumber numberWithBool:YES],kCVPixelBufferCGImageCompatibilityKey,
-                             
                              [NSNumber numberWithBool:YES],kCVPixelBufferCGBitmapContextCompatibilityKey,nil];
-    
     CVPixelBufferRef pxbuffer = NULL;
     
     CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault,size.width,size.height,kCVPixelFormatType_32ARGB,(__bridge CFDictionaryRef) options,&pxbuffer);
-    
     NSParameterAssert(status == kCVReturnSuccess && pxbuffer != NULL);
-    
     CVPixelBufferLockBaseAddress(pxbuffer,0);
-    
     void *pxdata = CVPixelBufferGetBaseAddress(pxbuffer);
     
     NSParameterAssert(pxdata !=NULL);
-    
     CGColorSpaceRef rgbColorSpace=CGColorSpaceCreateDeviceRGB();
-    
     //    当你调用这个函数的时候，Quartz创建一个位图绘制环境，也就是位图上下文。当你向上下文中绘制信息时，Quartz把你要绘制的信息作为位图数据绘制到指定的内存块。一个新的位图上下文的像素格式由三个参数决定：每个组件的位数，颜色空间，alpha选项
-    
     CGContextRef context = CGBitmapContextCreate(pxdata,size.width,size.height,8,4*size.width,rgbColorSpace,kCGImageAlphaPremultipliedFirst);
     
     NSParameterAssert(context);
-    
-    //使用CGContextDrawImage绘制图片  这里设置不正确的话 会导致视频颠倒
-    
-    //    当通过CGContextDrawImage绘制图片到一个context中时，如果传入的是UIImage的CGImageRef，因为UIKit和CG坐标系y轴相反，所以图片绘制将会上下颠倒
-    
-    CGContextDrawImage(context,CGRectMake(0,0,CGImageGetWidth(image),CGImageGetHeight(image)), image);
-    
+    //   当通过CGContextDrawImage绘制图片到一个context中时，如果传入的是UIImage的CGImageRef，因为UIKit和CG坐标系y轴相反，所以图片绘制将会上下颠倒
+     CGContextDrawImage(context,CGRectMake(0,0,CGImageGetWidth(image),CGImageGetHeight(image)), image);
     // 释放色彩空间
-    
     CGColorSpaceRelease(rgbColorSpace);
-    
     // 释放context
-    
     CGContextRelease(context);
-    
     // 解锁pixel buffer
-    
     CVPixelBufferUnlockBaseAddress(pxbuffer,0);
     
     return pxbuffer;

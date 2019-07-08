@@ -13,6 +13,8 @@
 
 @property (nonatomic, weak) YD_CopyView *yd_copyView;
 
+@property (nonatomic, strong) AVAsset *currentAsset;
+
 @end
 
 @implementation YD_CopyViewController
@@ -21,14 +23,31 @@
     [super viewDidLoad];
 }
 
+- (void)yd_setupConfig {
+    [super yd_setupConfig];
+    self.currentAsset = self.model.asset;
+}
+
 - (void)yd_layoutSubViews {
     [super yd_layoutSubViews];
     
     YD_CopyView *view = [[YD_CopyView alloc] initWithModel:self.playModel];
     self.yd_copyView = view;
     view.themeColor = self.model.themeColor;
-    view.backgroundColor = [UIColor.orangeColor colorWithAlphaComponent:.4];
     [self.view addSubview:view];
+    
+    @weakify(self);
+    view.copyBlock = ^(NSArray * _Nonnull modelArr) {
+        @strongify(self);
+        self.currentAsset = [YD_AssetManager yd_copyAsset:modelArr];
+        
+        YD_PlayerModel *model = [YD_PlayerModel new];
+        model.asset = self.currentAsset;
+        model.coverImage = self.playModel.coverImage;
+        model.smallImage = self.playModel.smallImage;
+        
+        self.player.yd_model = model;
+    };
 }
 
 - (void)yd_layoutConstraints {
@@ -57,7 +76,7 @@
     [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
     
     @weakify(self);
-    [YD_AssetManager yd_copyAsset:self.yd_copyView.modelArray finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+    [YD_AssetManager yd_exporter:self.currentAsset fileName:@"copy.mp4" finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
         @strongify(self);
         
         [YD_ProgressHUD yd_hideHUD];

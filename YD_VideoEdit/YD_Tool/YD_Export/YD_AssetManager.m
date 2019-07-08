@@ -53,7 +53,7 @@
 }
 
 /// 视频复制拼接
-+ (void)yd_copyAsset:(NSArray *)array finish:(YD_ExportFinishBlock)finishBlock {
++ (AVMutableComposition *)yd_copyAsset:(NSArray *)array {
     
     AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
     //1 视频通道
@@ -101,7 +101,7 @@
         tmpDuration += CMTimeGetSeconds(asset.duration);
     }
     
-    [self yd_exporter:mixComposition fileName:@"copy.mp4" finish:finishBlock];
+    return mixComposition;
 }
 
 /// 视频压缩
@@ -235,6 +235,8 @@
         AVAssetWriterInputPixelBufferAdaptor *pixelBufferAdaptor = [[AVAssetWriterInputPixelBufferAdaptor alloc] initWithAssetWriterInput:writerInput sourcePixelBufferAttributes:nil];
         [writer addInput:writerInput];
         [writer startWriting];
+    
+        [writer startSessionAtSourceTime:kCMTimeZero];
         
         NSMutableArray *samples = [[NSMutableArray alloc] init];
         CMSampleBufferRef sample;
@@ -242,9 +244,9 @@
             [samples addObject:(__bridge id)sample];
             CFRelease(sample);
         }
-        
+
         [writer startSessionAtSourceTime:CMSampleBufferGetPresentationTimeStamp((__bridge CMSampleBufferRef)samples[0])];
-        
+
         for (NSInteger i = 0; i < samples.count; i ++) {
             CMTime presentationTime = CMSampleBufferGetPresentationTimeStamp((__bridge CMSampleBufferRef)samples[i]);
             CVPixelBufferRef imageBufferRef = CMSampleBufferGetImageBuffer((__bridge CMSampleBufferRef)samples[samples.count - i - 1]);
@@ -253,7 +255,7 @@
             }
             [pixelBufferAdaptor appendPixelBuffer:imageBufferRef withPresentationTime:presentationTime];
         }
-        
+
         [writer finishWritingWithCompletionHandler:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (finishBlock) {
@@ -338,12 +340,11 @@
     [self yd_exporter:mixComposition videoComposition:videoComposition finish:finishBlock];
 }
 
-+ (void)yd_volumeAsset:(AVAsset *)asset
-                volume:(CGFloat)volume
-                fadeIn:(BOOL)fadeIn
-               fadeOut:(BOOL)fadeOut
-                finish:(YD_ExportFinishBlock)finishBlock {
-  
++ (NSDictionary *)yd_volumeAsset:(AVAsset *)asset
+                          volume:(CGFloat)volume
+                          fadeIn:(BOOL)fadeIn
+                         fadeOut:(BOOL)fadeOut {
+    
     //创建可变的音频视频组合
     AVMutableComposition *mixComposition = [AVMutableComposition composition];
     //视频音频range
@@ -374,7 +375,7 @@
     
 #pragma mark - 设置音量大小和淡入淡出的效果
         if (fadeIn == NO && fadeOut == NO) {
-            [exportAudioMixInputParameters setVolumeRampFromStartVolume:volume toEndVolume:volume timeRange:range];
+            [exportAudioMixInputParameters setVolume:volume atTime:kCMTimeZero];
         }else {
             CGFloat length = [asset yd_getSeconds];
             NSInteger fade_length = MIN(6, length * 0.3);
@@ -396,7 +397,8 @@
         exportAudioMix.inputParameters = audioMixParameters;
     }
     
-    [self yd_exporter:mixComposition audioMix:exportAudioMix finish:finishBlock];
+    return  @{@"asset" : mixComposition,
+              @"audioMix" : exportAudioMix};
 }
 
 + (void)yd_exporter:(AVAsset *)asset

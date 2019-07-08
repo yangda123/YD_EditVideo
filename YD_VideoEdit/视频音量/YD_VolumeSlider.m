@@ -26,7 +26,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.currentValue = 1.0;
         [self yd_layoutSubViews];
         [self yd_layoutConstraints];
     }
@@ -114,14 +113,14 @@
 
 #pragma mark - YD_TwoWaySliderDelegate
 - (void)sliderValueChange:(YD_TwoWaySlider *)slider value:(CGFloat)value {
-
     NSInteger newValue = 200 * value;
     self.slider.progressText = [NSString stringWithFormat:@"%ld%@", newValue, @"%"];
-    self.currentValue = newValue / 100.0;
 }
 
 - (void)sliderDidEndChange:(YD_TwoWaySlider *)slider value:(CGFloat)value {
-    
+    if (self.endBlock) {
+        self.endBlock(value);
+    }
 }
 
 @end

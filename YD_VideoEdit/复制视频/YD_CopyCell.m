@@ -31,7 +31,8 @@
 #pragma mark - 子类重写方法
 /// cell的heigth
 + (CGSize)yd_cellSize {
-    return CGSizeMake(YD_IPhone7_Width(100), YD_IPhone7_Width(100));
+    NSInteger w_h = YD_IPhone7_Width(100);
+    return CGSizeMake(w_h, w_h);
 }
 
 /// 初始化UI

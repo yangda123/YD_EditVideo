@@ -83,7 +83,7 @@
 /// 获取当前播放视频总时长
 - (NSTimeInterval)yd_totalDuration {
     NSTimeInterval duration = CMTimeGetSeconds(self.player.currentItem.duration);
-    if (isnan(duration)) { duration = 0; }
+    if (isnan(duration)) { duration = MAXFLOAT; }
     return duration;
 }
 
@@ -133,6 +133,7 @@
     self.yd_playStatus = YD_PlayStatusPreplay;
     
     if (self.player.currentItem) {
+        [self.player pause];
         [self.player.currentItem removeObserver:self forKeyPath:@"status"];
     }
     
@@ -140,6 +141,9 @@
     self.imgView.image = yd_model.coverImage;
     
     AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:yd_model.asset];
+    if (yd_model.audioMix) {
+        item.audioMix = yd_model.audioMix;
+    }
     item.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
     [item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     self.player = [AVPlayer playerWithPlayerItem:item];
@@ -181,10 +185,6 @@
 - (void)yd_seekToTime:(CGFloat)value {
     /// 先暂停
     [self yd_pause];
-    /// 再设置
-    if (value == 1.0) {
-        _yd_playStatus = YD_PlayStatusFinish;
-    }
     
     NSTimeInterval time = [self yd_totalDuration] * value;
     [self.player seekToTime:CMTimeMakeWithSeconds(time, self.player.currentTime.timescale) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
@@ -192,8 +192,20 @@
 
 - (void)yd_play {
     self.yd_playStatus = YD_PlayStatusPlay;
+    
     if (self.player.rate == 0) {
-        [self.player play];
+        NSTimeInterval currentTime = CMTimeGetSeconds(self.player.currentItem.currentTime);
+        if (fabs(currentTime - [self yd_totalDuration]) < 0.01) {
+            @weakify(self);
+            [self.player.currentItem seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+                @strongify(self);
+                if (finished) {
+                    [self.player play];
+                }
+            }];
+        }else {
+            [self.player play];
+        }
     }
 }
 

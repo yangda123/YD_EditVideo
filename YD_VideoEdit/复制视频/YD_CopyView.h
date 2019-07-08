@@ -11,11 +11,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^YD_CopyBlock)(NSArray *modelArr);
 @interface YD_CopyView : YD_BaseView
 
 - (instancetype)initWithModel:(YD_PlayerModel *)model;
 
 @property (nonatomic, strong, readonly) NSMutableArray *modelArray;
+
+@property (nonatomic, copy) YD_CopyBlock copyBlock;
 
 @end
 

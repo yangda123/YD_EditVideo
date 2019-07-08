@@ -91,16 +91,23 @@
     
     YD_PlayerModel *model = self.modelArray.firstObject;
     
-    YD_PlayerModel *copyModel = [YD_PlayerModel new];
-    copyModel.asset = model.asset;
-    copyModel.coverImage = model.coverImage;
-    copyModel.smallImage = model.smallImage;
-
-    [self.modelArray addObject:copyModel];
-    [self.collectionView reloadData];
+    BOOL flag = NO;
+    if ([model.asset yd_getSeconds] * (self.modelArray.count + 1) < 3600) {
+        flag = YES;
+    }
+    
+    if (flag) {
+        YD_PlayerModel *copyModel = [YD_PlayerModel new];
+        copyModel.asset = model.asset;
+        copyModel.coverImage = model.coverImage;
+        copyModel.smallImage = model.smallImage;
+        
+        [self.modelArray addObject:copyModel];
+        [self.collectionView reloadData];
+    }
     
     if (self.copyBlock) {
-        self.copyBlock(self.modelArray);
+        self.copyBlock(self.modelArray, flag);
     }
 }
 
@@ -113,7 +120,7 @@
     [self.collectionView reloadData];
     
     if (self.copyBlock) {
-        self.copyBlock(self.modelArray);
+        self.copyBlock(self.modelArray, YES);
     }
 }
 

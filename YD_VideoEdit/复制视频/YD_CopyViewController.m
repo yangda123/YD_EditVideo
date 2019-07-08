@@ -37,10 +37,15 @@
     [self.view addSubview:view];
     
     @weakify(self);
-    view.copyBlock = ^(NSArray * _Nonnull modelArr) {
+    view.copyBlock = ^(NSArray * _Nonnull modelArr, BOOL flag) {
         @strongify(self);
-        self.currentAsset = [YD_AssetManager yd_copyAsset:modelArr];
         
+        if (flag == NO) {
+            [YD_ProgressHUD yd_showMessage:@"视频总时长不能超过一小时" toView:self.view];
+            return;
+        }
+        
+        self.currentAsset = [YD_AssetManager yd_copyAsset:modelArr];
         YD_PlayerModel *model = [YD_PlayerModel new];
         model.asset = self.currentAsset;
         model.coverImage = self.playModel.coverImage;

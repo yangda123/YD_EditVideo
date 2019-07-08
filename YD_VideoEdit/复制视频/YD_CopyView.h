@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^YD_CopyBlock)(NSArray *modelArr);
+typedef void(^YD_CopyBlock)(NSArray *modelArr, BOOL flag);
 @interface YD_CopyView : YD_BaseView
 
 - (instancetype)initWithModel:(YD_PlayerModel *)model;

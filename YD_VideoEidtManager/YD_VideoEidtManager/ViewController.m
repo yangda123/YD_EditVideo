@@ -73,7 +73,10 @@
 }
 
 - (void)pushTZImagePickerController {
+    
     TZImagePickerController *imagePicker = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+    // 修正方向
+    imagePicker.needFixComposition = YES;
     // 是否允许显示视频
     imagePicker.allowPickingVideo = YES;
     // 是否允许显示图片

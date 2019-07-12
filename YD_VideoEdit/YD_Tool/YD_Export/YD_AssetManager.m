@@ -455,8 +455,12 @@
         exportAudioMix.inputParameters = audioMixParameters;
     }
     
-    return  @{@"asset" : mixComposition,
-              @"audioMix" : exportAudioMix};
+    if (exportAudioMix) {
+        return  @{@"asset" : mixComposition,
+                  @"audioMix" : exportAudioMix};
+    }
+    
+    return @{@"asset" : mixComposition};
 }
 
 #pragma mark - 视频导出

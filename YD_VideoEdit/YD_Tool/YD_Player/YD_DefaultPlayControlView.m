@@ -154,9 +154,13 @@
 }
 
 - (void)yd_player:(YD_PlayerView *_Nonnull)player playStateChanged:(YD_PlayStatus)status {
-    BOOL isPlay = status == YD_PlayStatusPlay;
-    self.bigPlayBtn.selected = isPlay;
-    self.playBtn.selected = isPlay;
+    if (status == YD_PlayStatusFinish) {
+        [self.player yd_replay];
+    }else {
+        BOOL isPlay = status == YD_PlayStatusPlay;
+        self.bigPlayBtn.selected = isPlay;
+        self.playBtn.selected = isPlay;
+    }
 }
 
 @end

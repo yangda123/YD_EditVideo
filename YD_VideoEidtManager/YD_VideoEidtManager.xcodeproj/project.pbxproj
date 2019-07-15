@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,9 @@
 		0408EC1922CCA9EC00D66241 /* YD_VolumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408EC1822CCA9EC00D66241 /* YD_VolumeViewController.m */; };
 		0408EC1C22CCAB5700D66241 /* YD_TwoWaySlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408EC1B22CCAB5700D66241 /* YD_TwoWaySlider.m */; };
 		0408EC1F22CCBD8B00D66241 /* YD_VolumeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408EC1E22CCBD8B00D66241 /* YD_VolumeSlider.m */; };
+		045C110622DC9136001DB192 /* YD_ClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C110522DC9136001DB192 /* YD_ClipViewController.m */; };
+		045C110C22DC93A0001DB192 /* YD_RangeSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C110B22DC93A0001DB192 /* YD_RangeSliderView.m */; };
+		045C111322DC9B64001DB192 /* YD_ClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C111222DC9B64001DB192 /* YD_ClipView.m */; };
 		04970E6822C3822F001B3A68 /* DreamHouseClip.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */; };
 		04ADEC7622CC467B007D07BE /* UIImage+YD_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ADEC7522CC467B007D07BE /* UIImage+YD_Extension.m */; };
 		04C664C322CCCB0100A56500 /* YD_VolumeSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C664C222CCCB0100A56500 /* YD_VolumeSwitchView.m */; };
@@ -72,6 +75,12 @@
 		0408EC1B22CCAB5700D66241 /* YD_TwoWaySlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_TwoWaySlider.m; sourceTree = "<group>"; };
 		0408EC1D22CCBD8B00D66241 /* YD_VolumeSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_VolumeSlider.h; sourceTree = "<group>"; };
 		0408EC1E22CCBD8B00D66241 /* YD_VolumeSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_VolumeSlider.m; sourceTree = "<group>"; };
+		045C110422DC9136001DB192 /* YD_ClipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_ClipViewController.h; sourceTree = "<group>"; };
+		045C110522DC9136001DB192 /* YD_ClipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_ClipViewController.m; sourceTree = "<group>"; };
+		045C110A22DC93A0001DB192 /* YD_RangeSliderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_RangeSliderView.h; sourceTree = "<group>"; };
+		045C110B22DC93A0001DB192 /* YD_RangeSliderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_RangeSliderView.m; sourceTree = "<group>"; };
+		045C111122DC9B64001DB192 /* YD_ClipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_ClipView.h; sourceTree = "<group>"; };
+		045C111222DC9B64001DB192 /* YD_ClipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_ClipView.m; sourceTree = "<group>"; };
 		04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DreamHouseClip.mp4; sourceTree = "<group>"; };
 		04ADEC7422CC467B007D07BE /* UIImage+YD_Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+YD_Extension.h"; sourceTree = "<group>"; };
 		04ADEC7522CC467B007D07BE /* UIImage+YD_Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YD_Extension.m"; sourceTree = "<group>"; };
@@ -209,6 +218,19 @@
 			path = "视频音量";
 			sourceTree = "<group>";
 		};
+		045C110322DC910E001DB192 /* 视频剪切 */ = {
+			isa = PBXGroup;
+			children = (
+				045C110422DC9136001DB192 /* YD_ClipViewController.h */,
+				045C110522DC9136001DB192 /* YD_ClipViewController.m */,
+				045C111122DC9B64001DB192 /* YD_ClipView.h */,
+				045C111222DC9B64001DB192 /* YD_ClipView.m */,
+				045C110A22DC93A0001DB192 /* YD_RangeSliderView.h */,
+				045C110B22DC93A0001DB192 /* YD_RangeSliderView.m */,
+			);
+			path = "视频剪切";
+			sourceTree = "<group>";
+		};
 		04ADEC7322CC4669007D07BE /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +254,7 @@
 				0408EC1622CCA9C100D66241 /* 视频音量 */,
 				04C80CD922CD97DB0021BF23 /* 压缩视频 */,
 				04C80CD822CD97D30021BF23 /* 复制视频 */,
+				045C110322DC910E001DB192 /* 视频剪切 */,
 			);
 			name = YD_VideoEdit;
 			path = ../../YD_VideoEdit;
@@ -577,6 +600,7 @@
 				04C697B122C9E04500035132 /* YD_SliderView.m in Sources */,
 				04C697A322C9E04500035132 /* UIButton+YD_Extension.m in Sources */,
 				04C697A522C9E04500035132 /* UIView+YDExtension.m in Sources */,
+				045C110622DC9136001DB192 /* YD_ClipViewController.m in Sources */,
 				04C697AF22C9E04500035132 /* YD_Slider.m in Sources */,
 				04D4EFA222CB3E1A00004781 /* YD_PreViewController.m in Sources */,
 				04C664C322CCCB0100A56500 /* YD_VolumeSwitchView.m in Sources */,
@@ -602,6 +626,8 @@
 				04C697A922C9E04500035132 /* YD_BasePlayControlView.m in Sources */,
 				0408EC1F22CCBD8B00D66241 /* YD_VolumeSlider.m in Sources */,
 				04C80CDC22CD97FB0021BF23 /* YD_CompressViewController.m in Sources */,
+				045C110C22DC93A0001DB192 /* YD_RangeSliderView.m in Sources */,
+				045C111322DC9B64001DB192 /* YD_ClipView.m in Sources */,
 				04DE522422CF5F6F00421A55 /* YD_UpendManager.m in Sources */,
 				04C697A822C9E04500035132 /* YD_PlayerView.m in Sources */,
 				0408EC1922CCA9EC00D66241 /* YD_VolumeViewController.m in Sources */,

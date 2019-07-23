@@ -20,6 +20,8 @@
 		045C110C22DC93A0001DB192 /* YD_RangeSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C110B22DC93A0001DB192 /* YD_RangeSliderView.m */; };
 		045C111322DC9B64001DB192 /* YD_ClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C111222DC9B64001DB192 /* YD_ClipView.m */; };
 		04970E6822C3822F001B3A68 /* DreamHouseClip.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */; };
+		049D684522E70C750097D251 /* YD_Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 049D684422E70C750097D251 /* YD_Images.bundle */; };
+		049D684822E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 049D684722E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		04ADEC7622CC467B007D07BE /* UIImage+YD_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ADEC7522CC467B007D07BE /* UIImage+YD_Extension.m */; };
 		04C664C322CCCB0100A56500 /* YD_VolumeSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C664C222CCCB0100A56500 /* YD_VolumeSwitchView.m */; };
 		04C697A322C9E04500035132 /* UIButton+YD_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6976422C9E04400035132 /* UIButton+YD_Extension.m */; };
@@ -46,7 +48,6 @@
 		04C80CDC22CD97FB0021BF23 /* YD_CompressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80CDB22CD97FB0021BF23 /* YD_CompressViewController.m */; };
 		04C80CDF22CD98120021BF23 /* YD_CopyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80CDE22CD98120021BF23 /* YD_CopyViewController.m */; };
 		04C80CE222CD9CFE0021BF23 /* YD_CompressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80CE122CD9CFE0021BF23 /* YD_CompressView.m */; };
-		04C80CF822CD9F560021BF23 /* YD_Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04C80CF722CD9F560021BF23 /* YD_Images.bundle */; };
 		04C80CFB22CDA09F0021BF23 /* YD_CompressItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80CFA22CDA09F0021BF23 /* YD_CompressItem.m */; };
 		04C80CFE22CDC68D0021BF23 /* YD_CopyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80CFD22CDC68D0021BF23 /* YD_CopyView.m */; };
 		04C80D0122CDC7EB0021BF23 /* YD_CopyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D0022CDC7EB0021BF23 /* YD_CopyCell.m */; };
@@ -82,6 +83,9 @@
 		045C111122DC9B64001DB192 /* YD_ClipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_ClipView.h; sourceTree = "<group>"; };
 		045C111222DC9B64001DB192 /* YD_ClipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_ClipView.m; sourceTree = "<group>"; };
 		04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DreamHouseClip.mp4; sourceTree = "<group>"; };
+		049D684422E70C750097D251 /* YD_Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YD_Images.bundle; sourceTree = "<group>"; };
+		049D684622E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
+		049D684722E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		04ADEC7422CC467B007D07BE /* UIImage+YD_Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+YD_Extension.h"; sourceTree = "<group>"; };
 		04ADEC7522CC467B007D07BE /* UIImage+YD_Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YD_Extension.m"; sourceTree = "<group>"; };
 		04C664C122CCCB0100A56500 /* YD_VolumeSwitchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_VolumeSwitchView.h; sourceTree = "<group>"; };
@@ -135,7 +139,6 @@
 		04C80CDE22CD98120021BF23 /* YD_CopyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_CopyViewController.m; sourceTree = "<group>"; };
 		04C80CE022CD9CFE0021BF23 /* YD_CompressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_CompressView.h; sourceTree = "<group>"; };
 		04C80CE122CD9CFE0021BF23 /* YD_CompressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_CompressView.m; sourceTree = "<group>"; };
-		04C80CF722CD9F560021BF23 /* YD_Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YD_Images.bundle; sourceTree = "<group>"; };
 		04C80CF922CDA09F0021BF23 /* YD_CompressItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_CompressItem.h; sourceTree = "<group>"; };
 		04C80CFA22CDA09F0021BF23 /* YD_CompressItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_CompressItem.m; sourceTree = "<group>"; };
 		04C80CFC22CDC68D0021BF23 /* YD_CopyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_CopyView.h; sourceTree = "<group>"; };
@@ -193,6 +196,8 @@
 				04C6975022C9E04400035132 /* YD_VideoEdit */,
 				04072E5F22C35FDB0045772E /* AppDelegate.h */,
 				04072E6022C35FDB0045772E /* AppDelegate.m */,
+				049D684622E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.h */,
+				049D684722E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.m */,
 				04072E6222C35FDB0045772E /* ViewController.h */,
 				04072E6322C35FDB0045772E /* ViewController.m */,
 				04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */,
@@ -263,7 +268,6 @@
 		04C6975122C9E04400035132 /* YD_Resource */ = {
 			isa = PBXGroup;
 			children = (
-				04C80CF722CD9F560021BF23 /* YD_Images.bundle */,
 			);
 			path = YD_Resource;
 			sourceTree = "<group>";
@@ -271,6 +275,7 @@
 		04C6976222C9E04400035132 /* YD_Expands */ = {
 			isa = PBXGroup;
 			children = (
+				049D684422E70C750097D251 /* YD_Images.bundle */,
 				04C80D0222CDE4570021BF23 /* NSString */,
 				04ADEC7322CC4669007D07BE /* UIImage */,
 				04C6976322C9E04400035132 /* UIButton */,
@@ -535,7 +540,7 @@
 				04072E6C22C35FDD0045772E /* LaunchScreen.storyboard in Resources */,
 				04072E6922C35FDD0045772E /* Assets.xcassets in Resources */,
 				04970E6822C3822F001B3A68 /* DreamHouseClip.mp4 in Resources */,
-				04C80CF822CD9F560021BF23 /* YD_Images.bundle in Resources */,
+				049D684522E70C750097D251 /* YD_Images.bundle in Resources */,
 				04072E6722C35FDB0045772E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -603,6 +608,7 @@
 				045C110622DC9136001DB192 /* YD_ClipViewController.m in Sources */,
 				04C697AF22C9E04500035132 /* YD_Slider.m in Sources */,
 				04D4EFA222CB3E1A00004781 /* YD_PreViewController.m in Sources */,
+				049D684822E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				04C664C322CCCB0100A56500 /* YD_VolumeSwitchView.m in Sources */,
 				04C80D0522CDE4570021BF23 /* NSString+YD_Extension.m in Sources */,
 				04C80CFE22CDC68D0021BF23 /* YD_CopyView.m in Sources */,

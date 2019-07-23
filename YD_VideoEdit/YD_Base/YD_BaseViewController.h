@@ -10,6 +10,8 @@
 #import "YD_VideoEditManager.h"
 #import "YD_BottomBar.h"
 
+#import "UINavigationController+FDFullscreenPopGesture.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YD_BaseViewController : UIViewController

@@ -105,7 +105,7 @@
 - (Float64)yd_getSeconds {
     CMTime cmtime = self.duration; //视频时间信息结构体
     Float64 duration = CMTimeGetSeconds(cmtime);
-    if (isnan(duration)) { duration = 0; }
+    if (isnan(duration)) { duration = 0.001; }
     return duration; //视频总秒数
 }
 

@@ -9,7 +9,7 @@
 #import "YD_ClipView.h"
 #import "YD_RangeSliderView.h"
 
-@interface YD_ClipView ()
+@interface YD_ClipView () <YD_RangeSliderViewDelegate>
 
 @property (nonatomic, strong) AVAsset *currentAsset;
 
@@ -18,7 +18,9 @@
 @property (nonatomic, weak) UILabel *startTimeLbl;
 @property (nonatomic, weak) UILabel *endTimeLbl;
 
-@property (nonatomic, weak) UIView *backView;
+@property (nonatomic, assign) CGFloat startTime;
+@property (nonatomic, assign) CGFloat endTime;
+
 @property (nonatomic, weak) YD_RangeSliderView *sliderView;
 
 @property (nonatomic, assign) NSInteger count;
@@ -31,14 +33,17 @@
     self = [super init];
     if (self) {
         self.currentAsset = asset;
+        self.startTime = 0;
+        self.endTime = [asset yd_getSeconds];
+        
         [self yd_layoutSubViews];
         [self yd_layoutConstraints];
-        [self yd_updateImage];
     }
     return self;
 }
 
 - (void)yd_layoutSubViews {
+    NSString *totalTime = [NSString timeToString:self.endTime format:@"%02zd:%02zd"];
     {
         UILabel *label = [UILabel new];
         self.titleLbl = label;
@@ -52,27 +57,22 @@
         UILabel *label = [UILabel new];
         self.clipTimeLbl = label;
         label.textAlignment = 1;
-        label.text = @"总共 0:04.9";
+        label.text = [NSString stringWithFormat:@"总共 %@", totalTime];
         label.textColor = [UIColor colorWithHexString:@"#000000"];
         label.font = [UIFont systemFontOfSize:12];
         [self addSubview:label];
     }
     {
-        UIView *view = [UIView new];
-        self.backView = view;
-        view.layer.masksToBounds = YES;
-        [self addSubview:view];
-    }
-    {
-        YD_RangeSliderView *sliderView = [YD_RangeSliderView new];
+        YD_RangeSliderView *sliderView = [[YD_RangeSliderView alloc] initWithAsset:self.currentAsset];
         self.sliderView = sliderView;
+        sliderView.delegate = self;
         [self addSubview:sliderView];
     }
     {
         UILabel *label = [UILabel new];
         self.startTimeLbl = label;
         label.textAlignment = 1;
-        label.text = @"0:00.0";
+        label.text = @"00:00";
         label.textColor = [UIColor colorWithHexString:@"#000000"];
         label.font = [UIFont systemFontOfSize:10];
         [self addSubview:label];
@@ -81,35 +81,18 @@
         UILabel *label = [UILabel new];
         self.endTimeLbl = label;
         label.textAlignment = 1;
-        label.text = @"0:04.0";
+        label.text = totalTime;
         label.textColor = [UIColor colorWithHexString:@"#000000"];
         label.font = [UIFont systemFontOfSize:10];
         [self addSubview:label];
     }
-    
-    for (int i = 0; i < totalCount; i++) {
-        UIImageView *imgView = [UIImageView new];
-        imgView.layer.masksToBounds = YES;
-        imgView.contentMode = UIViewContentModeScaleAspectFill;
-        [self.backView addSubview:imgView];
-    }
 }
 
 - (void)yd_layoutConstraints {
-    
-    [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_centerY);
-        make.left.right.inset(15);
-        make.height.mas_equalTo(YD_IPhone7_Width(45));
-    }];
-    
-    [self.backView.subviews mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:0 leadSpacing:0 tailSpacing:0];
-    [self.backView.subviews mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(self.backView);
-    }];
-
     [self.sliderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.height.equalTo(self.backView);
+        make.top.equalTo(self.mas_centerY).offset(-5);
+        make.left.right.inset(15);
+        make.height.mas_equalTo(YD_IPhone7_Width(50));
     }];
     
     [self.clipTimeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -133,18 +116,35 @@
     }];
 }
 
-- (void)yd_updateImage {
-    @weakify(self);
-    [self.currentAsset yd_getImagesCount:totalCount imageBackBlock:^(UIImage * _Nonnull image, CMTime actualTime) {
-        @strongify(self);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.count >= totalCount) { return; }
-            UIImage *scaleImg = [UIImage scaleImageWith:image targetWidth:YD_ScreenWidth / 10.0];
-            UIImageView *imgView = self.backView.subviews[self.count];
-            imgView.image = scaleImg;
-            self.count++;
-        });
-    }];
+#pragma mark - YD_RangeSliderViewDelegate
+- (void)leftValueChange:(YD_RangeSliderView *_Nonnull)sliderView
+                   time:(CGFloat)startTime {
+    self.startTime = startTime;
+    NSString *time = [NSString timeToString:startTime format:@"%02zd:%02zd"];
+    self.startTimeLbl.text = time;
+}
+
+- (void)rightValueChange:(YD_RangeSliderView *_Nonnull)sliderView
+                    time:(CGFloat)endTime {
+    self.endTime = endTime;
+    NSString *time = [NSString timeToString:endTime format:@"%02zd:%02zd"];
+    self.endTimeLbl.text = time;
+}
+
+- (void)leftDidEndChange:(YD_RangeSliderView *_Nonnull)sliderView
+                    time:(CGFloat)startTime {
+    self.startTime = startTime;
+    if (self.completeBlock) {
+        self.completeBlock(self.startTime, self.endTime);
+    }
+}
+
+- (void)rightDidEndChange:(YD_RangeSliderView *_Nonnull)sliderView
+                     time:(CGFloat)endTime {
+    self.endTime = endTime;
+    if (self.completeBlock) {
+        self.completeBlock(self.startTime, self.endTime);
+    }
 }
 
 @end

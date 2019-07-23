@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YD_AssetManager : NSObject
 /// 修正方向
 + (AVMutableVideoComposition *)yd_videoComposition:(AVAsset *)asset;
+/// 视频裁切
++ (AVAsset *)yd_clipAssetWithUrl:(NSURL *)url startTime:(CGFloat)startTime endTime:(CGFloat)endTime;
 /// 修改播放速度
 + (AVAsset *)yd_speedAssetWithAsset:(AVAsset *)asset speed:(CGFloat)speed;
 /// 修改视频方向

@@ -14,6 +14,8 @@
 @property (nonatomic, weak) YD_ClipView *clipView;
 @property (nonatomic, assign) CGFloat selectRatio;
 
+@property (nonatomic, strong) AVAsset *currentAsset;
+
 @end
 
 @implementation YD_ClipViewController
@@ -24,7 +26,7 @@
 
 - (void)yd_setupConfig {
     [super yd_setupConfig];
-    
+    self.currentAsset = self.model.asset;
     CGSize size = [self.model.asset yd_naturalSize];
     self.selectRatio = size.height == 0 ? 1.0 : size.width / size.height;
 }
@@ -36,6 +38,18 @@
         YD_ClipView *clipView = [[YD_ClipView alloc] initWithAsset:self.model.asset];
         self.clipView = clipView;
         [self.view addSubview:clipView];
+        
+        @weakify(self);
+        clipView.completeBlock = ^(CGFloat start, CGFloat end) {
+            @strongify(self);
+            AVAsset *asset = [YD_AssetManager yd_clipAssetWithUrl:self.model.videoURL startTime:start endTime:end];
+            self.currentAsset = asset;
+            YD_PlayerModel *model = [YD_PlayerModel new];
+            model.asset = asset;
+            model.coverImage = [asset yd_getVideoImage:0];
+            self.player.yd_model = model;
+            [self.player yd_play];
+        };
     }
 }
 
@@ -60,10 +74,20 @@
 }
 
 - (void)yd_completeItemAction {
-    
     [self.player yd_pause];
     
-   
+    [YD_ProgressHUD yd_showHUD:@"正在处理视频，请不要锁屏或者切到后台"];
+    
+    @weakify(self);
+    [YD_AssetManager yd_exporter:self.currentAsset fileName:@"clipVideo.mp4" composition:nil audioMix:nil finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+        @strongify(self);
+        [YD_ProgressHUD yd_hideHUD];
+        if (isSuccess) {
+            [self yd_pushPreview:exportPath];
+        }else {
+            [YD_ProgressHUD yd_showMessage:@"视频处理取消" toView:self.view];
+        }
+    }];
 }
 
 @end

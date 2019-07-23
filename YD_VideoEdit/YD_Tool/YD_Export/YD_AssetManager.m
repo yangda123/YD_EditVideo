@@ -12,6 +12,46 @@
 
 @implementation YD_AssetManager
 
++ (AVAsset *)yd_clipAssetWithUrl:(NSURL *)url startTime:(CGFloat)startTime endTime:(CGFloat)endTime {
+    
+    AVAsset *asset = [AVAsset assetWithURL:url];
+    
+    CMTime star_time = CMTimeMakeWithSeconds(startTime, asset.duration.timescale);
+    CMTime dutation = CMTimeMakeWithSeconds(endTime - startTime, asset.duration.timescale);
+    
+    CMTimeRange range = CMTimeRangeMake(star_time, dutation);
+    
+    AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
+    
+    AVAssetTrack *videoAssetTrack = nil;
+    AVAssetTrack *audioAssetTrack = nil;
+    
+    if ([asset tracksWithMediaType:AVMediaTypeVideo].count) {
+        videoAssetTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+    }
+    if ([asset tracksWithMediaType:AVMediaTypeAudio].count) {
+        audioAssetTrack = [asset tracksWithMediaType:AVMediaTypeAudio].firstObject;
+    }
+    
+    //1 视频通道
+    AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    if (videoAssetTrack) {
+        [videoTrack insertTimeRange:range
+                            ofTrack:videoAssetTrack
+                             atTime:kCMTimeZero error:nil];
+    }
+    
+    //2 音频通道
+    if (audioAssetTrack) {
+        AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+        [audioTrack insertTimeRange:range
+                            ofTrack:audioAssetTrack
+                             atTime:kCMTimeZero error:nil];
+    }
+    
+    return mixComposition;
+}
+
 + (AVMutableVideoComposition *)yd_videoComposition:(AVAsset *)asset {
     
     AVAssetTrack *videoAssetTrack = nil;
@@ -473,7 +513,7 @@
     NSString *outputPath = [YD_PathCache stringByAppendingString:fileName];
     unlink([outputPath UTF8String]);
     /// 导出
-    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetMediumQuality];
+    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
     if (audioMix) {
         exporter.audioMix = audioMix;
     }

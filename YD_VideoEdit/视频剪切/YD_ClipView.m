@@ -120,6 +120,10 @@
 - (void)leftValueChange:(YD_RangeSliderView *_Nonnull)sliderView
                    time:(CGFloat)startTime {
     self.startTime = startTime;
+    CGFloat clipTime = self.endTime - self.startTime;
+    NSString *timeStr = [NSString timeToString:clipTime format:@"%02zd:%02zd"];
+    self.clipTimeLbl.text = [NSString stringWithFormat:@"总共 %@", timeStr];
+    
     NSString *time = [NSString timeToString:startTime format:@"%02zd:%02zd"];
     self.startTimeLbl.text = time;
 }
@@ -127,6 +131,9 @@
 - (void)rightValueChange:(YD_RangeSliderView *_Nonnull)sliderView
                     time:(CGFloat)endTime {
     self.endTime = endTime;
+    CGFloat clipTime = self.endTime - self.startTime;
+    NSString *timeStr = [NSString timeToString:clipTime format:@"%02zd:%02zd"];
+    self.clipTimeLbl.text = [NSString stringWithFormat:@"总共 %@", timeStr];
     NSString *time = [NSString timeToString:endTime format:@"%02zd:%02zd"];
     self.endTimeLbl.text = time;
 }

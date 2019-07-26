@@ -19,8 +19,8 @@
 		045C110622DC9136001DB192 /* YD_ClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C110522DC9136001DB192 /* YD_ClipViewController.m */; };
 		045C110C22DC93A0001DB192 /* YD_RangeSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C110B22DC93A0001DB192 /* YD_RangeSliderView.m */; };
 		045C111322DC9B64001DB192 /* YD_ClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C111222DC9B64001DB192 /* YD_ClipView.m */; };
+		0466417022E80B9F007E17C0 /* YD_Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0466416F22E80B9F007E17C0 /* YD_Images.bundle */; };
 		04970E6822C3822F001B3A68 /* DreamHouseClip.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */; };
-		049D684522E70C750097D251 /* YD_Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 049D684422E70C750097D251 /* YD_Images.bundle */; };
 		049D684822E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 049D684722E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		04ADEC7622CC467B007D07BE /* UIImage+YD_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ADEC7522CC467B007D07BE /* UIImage+YD_Extension.m */; };
 		04C664C322CCCB0100A56500 /* YD_VolumeSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C664C222CCCB0100A56500 /* YD_VolumeSwitchView.m */; };
@@ -82,8 +82,8 @@
 		045C110B22DC93A0001DB192 /* YD_RangeSliderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_RangeSliderView.m; sourceTree = "<group>"; };
 		045C111122DC9B64001DB192 /* YD_ClipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_ClipView.h; sourceTree = "<group>"; };
 		045C111222DC9B64001DB192 /* YD_ClipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_ClipView.m; sourceTree = "<group>"; };
+		0466416F22E80B9F007E17C0 /* YD_Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YD_Images.bundle; sourceTree = "<group>"; };
 		04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DreamHouseClip.mp4; sourceTree = "<group>"; };
-		049D684422E70C750097D251 /* YD_Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YD_Images.bundle; sourceTree = "<group>"; };
 		049D684622E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		049D684722E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		04ADEC7422CC467B007D07BE /* UIImage+YD_Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+YD_Extension.h"; sourceTree = "<group>"; };
@@ -268,6 +268,7 @@
 		04C6975122C9E04400035132 /* YD_Resource */ = {
 			isa = PBXGroup;
 			children = (
+				0466416F22E80B9F007E17C0 /* YD_Images.bundle */,
 			);
 			path = YD_Resource;
 			sourceTree = "<group>";
@@ -275,7 +276,6 @@
 		04C6976222C9E04400035132 /* YD_Expands */ = {
 			isa = PBXGroup;
 			children = (
-				049D684422E70C750097D251 /* YD_Images.bundle */,
 				04C80D0222CDE4570021BF23 /* NSString */,
 				04ADEC7322CC4669007D07BE /* UIImage */,
 				04C6976322C9E04400035132 /* UIButton */,
@@ -540,7 +540,7 @@
 				04072E6C22C35FDD0045772E /* LaunchScreen.storyboard in Resources */,
 				04072E6922C35FDD0045772E /* Assets.xcassets in Resources */,
 				04970E6822C3822F001B3A68 /* DreamHouseClip.mp4 in Resources */,
-				049D684522E70C750097D251 /* YD_Images.bundle in Resources */,
+				0466417022E80B9F007E17C0 /* YD_Images.bundle in Resources */,
 				04072E6722C35FDB0045772E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

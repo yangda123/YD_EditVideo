@@ -205,7 +205,7 @@
 /// 视频压缩
 + (void)yd_compressAsset:(AVAsset *)asset exportPreset:(NSString *)exportPreset finish:(YD_ExportFinishBlock)finishBlock {
     
-    NSString *outputPath = [YD_PathCache stringByAppendingString:@"compress.mp4"];
+    NSString *outputPath = [self videoOutputPath:@"compress"];
     unlink([outputPath UTF8String]);
     /// 导出
     AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:exportPreset];
@@ -296,7 +296,7 @@
     mainInstruction.layerInstructions = [NSArray arrayWithObjects:videolayerInstruction, nil];
     videoComposition.instructions = [NSArray arrayWithObject:mainInstruction];
     
-    [self yd_exporter:mixComposition fileName:@"rotateVideo.mp4" composition:videoComposition audioMix:nil finish:finishBlock];
+    [self yd_exporter:mixComposition fileName:@"rotateVideo" composition:videoComposition audioMix:nil finish:finishBlock];
 }
 
 /// 视频倒放
@@ -313,7 +313,7 @@
         [reader addOutput:readerOutput];
         [reader startReading];
         
-        NSString *outputPath = [YD_PathCache stringByAppendingString:@"upendMovie.mp4"];
+        NSString *outputPath = [self videoOutputPath:@"upendMovie"];
         // 删除当前该路径下的文件
         unlink([outputPath UTF8String]);
         NSURL *outputURL = [NSURL fileURLWithPath:outputPath];
@@ -435,7 +435,7 @@
     // 单个画面播放
     videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
     
-    [self yd_exporter:mixComposition fileName:@"aspect.mp4" composition:videoComposition audioMix:nil finish:finishBlock];
+    [self yd_exporter:mixComposition fileName:@"aspect" composition:videoComposition audioMix:nil finish:finishBlock];
 }
 
 + (NSDictionary *)yd_volumeAsset:(AVAsset *)asset
@@ -509,8 +509,8 @@
         composition:(AVVideoComposition *)composition
            audioMix:(AVMutableAudioMix *)audioMix
              finish:(YD_ExportFinishBlock)finishBlock {
-    
-    NSString *outputPath = [YD_PathCache stringByAppendingString:fileName];
+
+    NSString *outputPath = [self videoOutputPath:fileName];
     unlink([outputPath UTF8String]);
     /// 导出
     AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
@@ -535,6 +535,20 @@
             }
         });
     }];
+}
+
++ (NSString *)videoOutputPath:(NSString *)fileName {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *folderPath = [NSString stringWithFormat:@"%@/video", YD_PathDocument];
+    NSString *outputPath = [NSString stringWithFormat:@"%@/%@.mp4", folderPath, fileName];
+    if ([manager fileExistsAtPath:outputPath]) {
+        [manager removeItemAtPath:outputPath error:nil];
+    }
+    
+    if (![manager fileExistsAtPath:folderPath]) {
+        [manager createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return outputPath;
 }
 
 #pragma mark - 保存到相册

@@ -16,19 +16,16 @@
 		0408EC1922CCA9EC00D66241 /* YD_VolumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408EC1822CCA9EC00D66241 /* YD_VolumeViewController.m */; };
 		0408EC1C22CCAB5700D66241 /* YD_TwoWaySlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408EC1B22CCAB5700D66241 /* YD_TwoWaySlider.m */; };
 		0408EC1F22CCBD8B00D66241 /* YD_VolumeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408EC1E22CCBD8B00D66241 /* YD_VolumeSlider.m */; };
-		040923B922FA9B40004FB208 /* YD_PlayerFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040923B722FA9B40004FB208 /* YD_PlayerFilterController.m */; };
-		040923BC22FA9B6B004FB208 /* YD_PlayerFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 040923BB22FA9B6B004FB208 /* YD_PlayerFilterModel.m */; };
-		040923BF22FA9BB8004FB208 /* YD_PlayerFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040923BE22FA9BB8004FB208 /* YD_PlayerFilterView.m */; };
-		040923C222FA9BCE004FB208 /* YD_PlayerFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 040923C122FA9BCE004FB208 /* YD_PlayerFilterCell.m */; };
 		040923C722FAB30E004FB208 /* cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040923C622FAB30E004FB208 /* cover.jpg */; };
 		040923CA22FABF71004FB208 /* YD_AVFilterLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 040923C922FABF71004FB208 /* YD_AVFilterLayer.m */; };
 		040923CD22FAC9C2004FB208 /* YYWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 040923CB22FAC9C2004FB208 /* YYWeakProxy.m */; };
-		0409357D22F96373000CD95E /* YD_FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0409357C22F96373000CD95E /* YD_FilterViewController.m */; };
-		0409358022F9680A000CD95E /* YD_FilterCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0409357F22F9680A000CD95E /* YD_FilterCollectionView.m */; };
-		0409358322F9689C000CD95E /* YD_FilterCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0409358222F9689C000CD95E /* YD_FilterCollectionCell.m */; };
 		045C110622DC9136001DB192 /* YD_ClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C110522DC9136001DB192 /* YD_ClipViewController.m */; };
 		045C110C22DC93A0001DB192 /* YD_RangeSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C110B22DC93A0001DB192 /* YD_RangeSliderView.m */; };
 		045C111322DC9B64001DB192 /* YD_ClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C111222DC9B64001DB192 /* YD_ClipView.m */; };
+		045CEF2322FAE0C900BC73BB /* YD_PlayerFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045CEF1B22FAE0C900BC73BB /* YD_PlayerFilterModel.m */; };
+		045CEF2422FAE0C900BC73BB /* YD_PlayerFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045CEF1C22FAE0C900BC73BB /* YD_PlayerFilterController.m */; };
+		045CEF2522FAE0C900BC73BB /* YD_PlayerFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 045CEF1D22FAE0C900BC73BB /* YD_PlayerFilterView.m */; };
+		045CEF2622FAE0C900BC73BB /* YD_PlayerFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 045CEF2022FAE0C900BC73BB /* YD_PlayerFilterCell.m */; };
 		0466417022E80B9F007E17C0 /* YD_Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0466416F22E80B9F007E17C0 /* YD_Images.bundle */; };
 		04970E6822C3822F001B3A68 /* DreamHouseClip.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */; };
 		049D684822E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 049D684722E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.m */; };
@@ -66,7 +63,6 @@
 		04C80D0F22CDE83E0021BF23 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C80D0B22CDE83E0021BF23 /* SDAVAssetExportSession.m */; };
 		04D4EFA222CB3E1A00004781 /* YD_PreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D4EFA122CB3E1A00004781 /* YD_PreViewController.m */; };
 		04DE522422CF5F6F00421A55 /* YD_UpendManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE522322CF5F6F00421A55 /* YD_UpendManager.m */; };
-		04E74D3322F9710F0016F2B5 /* YD_FilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E74D3222F9710F0016F2B5 /* YD_FilterModel.m */; };
 		04E74D3922F980C80016F2B5 /* YD_PlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E74D3822F980C80016F2B5 /* YD_PlayerModel.m */; };
 		04E74D3B22F983600016F2B5 /* abcd.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 04E74D3A22F9835F0016F2B5 /* abcd.mp4 */; };
 		559022E831A9DF8B390FB6C0 /* libPods-YD_VideoEidtManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A89DFC027EACF199D1CC3F /* libPods-YD_VideoEidtManager.a */; };
@@ -89,31 +85,25 @@
 		0408EC1B22CCAB5700D66241 /* YD_TwoWaySlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_TwoWaySlider.m; sourceTree = "<group>"; };
 		0408EC1D22CCBD8B00D66241 /* YD_VolumeSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_VolumeSlider.h; sourceTree = "<group>"; };
 		0408EC1E22CCBD8B00D66241 /* YD_VolumeSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_VolumeSlider.m; sourceTree = "<group>"; };
-		040923B722FA9B40004FB208 /* YD_PlayerFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_PlayerFilterController.m; sourceTree = "<group>"; };
-		040923B822FA9B40004FB208 /* YD_PlayerFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_PlayerFilterController.h; sourceTree = "<group>"; };
-		040923BA22FA9B6B004FB208 /* YD_PlayerFilterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_PlayerFilterModel.h; sourceTree = "<group>"; };
-		040923BB22FA9B6B004FB208 /* YD_PlayerFilterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_PlayerFilterModel.m; sourceTree = "<group>"; };
-		040923BD22FA9BB8004FB208 /* YD_PlayerFilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_PlayerFilterView.h; sourceTree = "<group>"; };
-		040923BE22FA9BB8004FB208 /* YD_PlayerFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_PlayerFilterView.m; sourceTree = "<group>"; };
-		040923C022FA9BCE004FB208 /* YD_PlayerFilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_PlayerFilterCell.h; sourceTree = "<group>"; };
-		040923C122FA9BCE004FB208 /* YD_PlayerFilterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_PlayerFilterCell.m; sourceTree = "<group>"; };
 		040923C622FAB30E004FB208 /* cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpg; sourceTree = "<group>"; };
 		040923C822FABF71004FB208 /* YD_AVFilterLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_AVFilterLayer.h; sourceTree = "<group>"; };
 		040923C922FABF71004FB208 /* YD_AVFilterLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_AVFilterLayer.m; sourceTree = "<group>"; };
 		040923CB22FAC9C2004FB208 /* YYWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYWeakProxy.m; sourceTree = "<group>"; };
 		040923CC22FAC9C2004FB208 /* YYWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYWeakProxy.h; sourceTree = "<group>"; };
-		0409357B22F96373000CD95E /* YD_FilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_FilterViewController.h; sourceTree = "<group>"; };
-		0409357C22F96373000CD95E /* YD_FilterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_FilterViewController.m; sourceTree = "<group>"; };
-		0409357E22F9680A000CD95E /* YD_FilterCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_FilterCollectionView.h; sourceTree = "<group>"; };
-		0409357F22F9680A000CD95E /* YD_FilterCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_FilterCollectionView.m; sourceTree = "<group>"; };
-		0409358122F9689C000CD95E /* YD_FilterCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_FilterCollectionCell.h; sourceTree = "<group>"; };
-		0409358222F9689C000CD95E /* YD_FilterCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_FilterCollectionCell.m; sourceTree = "<group>"; };
 		045C110422DC9136001DB192 /* YD_ClipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_ClipViewController.h; sourceTree = "<group>"; };
 		045C110522DC9136001DB192 /* YD_ClipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_ClipViewController.m; sourceTree = "<group>"; };
 		045C110A22DC93A0001DB192 /* YD_RangeSliderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_RangeSliderView.h; sourceTree = "<group>"; };
 		045C110B22DC93A0001DB192 /* YD_RangeSliderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_RangeSliderView.m; sourceTree = "<group>"; };
 		045C111122DC9B64001DB192 /* YD_ClipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_ClipView.h; sourceTree = "<group>"; };
 		045C111222DC9B64001DB192 /* YD_ClipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_ClipView.m; sourceTree = "<group>"; };
+		045CEF1B22FAE0C900BC73BB /* YD_PlayerFilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_PlayerFilterModel.m; sourceTree = "<group>"; };
+		045CEF1C22FAE0C900BC73BB /* YD_PlayerFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_PlayerFilterController.m; sourceTree = "<group>"; };
+		045CEF1D22FAE0C900BC73BB /* YD_PlayerFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_PlayerFilterView.m; sourceTree = "<group>"; };
+		045CEF1E22FAE0C900BC73BB /* YD_PlayerFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_PlayerFilterView.h; sourceTree = "<group>"; };
+		045CEF1F22FAE0C900BC73BB /* YD_PlayerFilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_PlayerFilterCell.h; sourceTree = "<group>"; };
+		045CEF2022FAE0C900BC73BB /* YD_PlayerFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YD_PlayerFilterCell.m; sourceTree = "<group>"; };
+		045CEF2122FAE0C900BC73BB /* YD_PlayerFilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_PlayerFilterModel.h; sourceTree = "<group>"; };
+		045CEF2222FAE0C900BC73BB /* YD_PlayerFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YD_PlayerFilterController.h; sourceTree = "<group>"; };
 		0466416F22E80B9F007E17C0 /* YD_Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YD_Images.bundle; sourceTree = "<group>"; };
 		04970E6722C3822F001B3A68 /* DreamHouseClip.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DreamHouseClip.mp4; sourceTree = "<group>"; };
 		049D684622E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
@@ -187,8 +177,6 @@
 		04D4EFA122CB3E1A00004781 /* YD_PreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_PreViewController.m; sourceTree = "<group>"; };
 		04DE522222CF5F6F00421A55 /* YD_UpendManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_UpendManager.h; sourceTree = "<group>"; };
 		04DE522322CF5F6F00421A55 /* YD_UpendManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_UpendManager.m; sourceTree = "<group>"; };
-		04E74D3122F9710F0016F2B5 /* YD_FilterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_FilterModel.h; sourceTree = "<group>"; };
-		04E74D3222F9710F0016F2B5 /* YD_FilterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_FilterModel.m; sourceTree = "<group>"; };
 		04E74D3722F980C80016F2B5 /* YD_PlayerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YD_PlayerModel.h; sourceTree = "<group>"; };
 		04E74D3822F980C80016F2B5 /* YD_PlayerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YD_PlayerModel.m; sourceTree = "<group>"; };
 		04E74D3A22F9835F0016F2B5 /* abcd.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = abcd.mp4; sourceTree = "<group>"; };
@@ -262,32 +250,17 @@
 			path = "视频音量";
 			sourceTree = "<group>";
 		};
-		040923B622FA9B2C004FB208 /* 本地滤镜 */ = {
-			isa = PBXGroup;
-			children = (
-				040923BA22FA9B6B004FB208 /* YD_PlayerFilterModel.h */,
-				040923BB22FA9B6B004FB208 /* YD_PlayerFilterModel.m */,
-				040923B822FA9B40004FB208 /* YD_PlayerFilterController.h */,
-				040923B722FA9B40004FB208 /* YD_PlayerFilterController.m */,
-				040923BD22FA9BB8004FB208 /* YD_PlayerFilterView.h */,
-				040923BE22FA9BB8004FB208 /* YD_PlayerFilterView.m */,
-				040923C022FA9BCE004FB208 /* YD_PlayerFilterCell.h */,
-				040923C122FA9BCE004FB208 /* YD_PlayerFilterCell.m */,
-			);
-			path = "本地滤镜";
-			sourceTree = "<group>";
-		};
 		0409357A22F9634F000CD95E /* 视频滤镜 */ = {
 			isa = PBXGroup;
 			children = (
-				04E74D3122F9710F0016F2B5 /* YD_FilterModel.h */,
-				04E74D3222F9710F0016F2B5 /* YD_FilterModel.m */,
-				0409357B22F96373000CD95E /* YD_FilterViewController.h */,
-				0409357C22F96373000CD95E /* YD_FilterViewController.m */,
-				0409357E22F9680A000CD95E /* YD_FilterCollectionView.h */,
-				0409357F22F9680A000CD95E /* YD_FilterCollectionView.m */,
-				0409358122F9689C000CD95E /* YD_FilterCollectionCell.h */,
-				0409358222F9689C000CD95E /* YD_FilterCollectionCell.m */,
+				045CEF2122FAE0C900BC73BB /* YD_PlayerFilterModel.h */,
+				045CEF1B22FAE0C900BC73BB /* YD_PlayerFilterModel.m */,
+				045CEF2222FAE0C900BC73BB /* YD_PlayerFilterController.h */,
+				045CEF1C22FAE0C900BC73BB /* YD_PlayerFilterController.m */,
+				045CEF1E22FAE0C900BC73BB /* YD_PlayerFilterView.h */,
+				045CEF1D22FAE0C900BC73BB /* YD_PlayerFilterView.m */,
+				045CEF1F22FAE0C900BC73BB /* YD_PlayerFilterCell.h */,
+				045CEF2022FAE0C900BC73BB /* YD_PlayerFilterCell.m */,
 			);
 			path = "视频滤镜";
 			sourceTree = "<group>";
@@ -330,7 +303,6 @@
 				04C80CD822CD97D30021BF23 /* 复制视频 */,
 				045C110322DC910E001DB192 /* 视频剪切 */,
 				0409357A22F9634F000CD95E /* 视频滤镜 */,
-				040923B622FA9B2C004FB208 /* 本地滤镜 */,
 			);
 			name = YD_VideoEdit;
 			path = ../../YD_VideoEdit;
@@ -673,7 +645,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				040923B922FA9B40004FB208 /* YD_PlayerFilterController.m in Sources */,
 				04C697A622C9E04500035132 /* AVAsset+YD_Extension.m in Sources */,
 				04C697D822CA0DDD00035132 /* YD_RatioView.m in Sources */,
 				04C697D122CA004500035132 /* YD_ConfigModel.m in Sources */,
@@ -691,10 +662,10 @@
 				049D684822E71E370097D251 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				04C664C322CCCB0100A56500 /* YD_VolumeSwitchView.m in Sources */,
 				04C80D0522CDE4570021BF23 /* NSString+YD_Extension.m in Sources */,
-				0409357D22F96373000CD95E /* YD_FilterViewController.m in Sources */,
+				045CEF2322FAE0C900BC73BB /* YD_PlayerFilterModel.m in Sources */,
 				04C80CFE22CDC68D0021BF23 /* YD_CopyView.m in Sources */,
-				040923BF22FA9BB8004FB208 /* YD_PlayerFilterView.m in Sources */,
 				04C80D0F22CDE83E0021BF23 /* SDAVAssetExportSession.m in Sources */,
+				045CEF2422FAE0C900BC73BB /* YD_PlayerFilterController.m in Sources */,
 				04C697AB22C9E04500035132 /* YD_ProgressHUD.m in Sources */,
 				04C697C522C9EDB100035132 /* YD_BasePlayerViewController.m in Sources */,
 				04072E6422C35FDB0045772E /* ViewController.m in Sources */,
@@ -706,10 +677,9 @@
 				04ADEC7622CC467B007D07BE /* UIImage+YD_Extension.m in Sources */,
 				04072E6F22C35FDD0045772E /* main.m in Sources */,
 				040923CA22FABF71004FB208 /* YD_AVFilterLayer.m in Sources */,
-				04E74D3322F9710F0016F2B5 /* YD_FilterModel.m in Sources */,
+				045CEF2522FAE0C900BC73BB /* YD_PlayerFilterView.m in Sources */,
 				0408EC1C22CCAB5700D66241 /* YD_TwoWaySlider.m in Sources */,
 				040923CD22FAC9C2004FB208 /* YYWeakProxy.m in Sources */,
-				040923C222FA9BCE004FB208 /* YD_PlayerFilterCell.m in Sources */,
 				04C697AC22C9E04500035132 /* YD_BaseViewController.m in Sources */,
 				04C697A422C9E04500035132 /* UIColor+YDColorChange.m in Sources */,
 				04C697D522CA0CC600035132 /* YD_AspectRatioViewController.m in Sources */,
@@ -718,14 +688,12 @@
 				04C697A922C9E04500035132 /* YD_BasePlayControlView.m in Sources */,
 				0408EC1F22CCBD8B00D66241 /* YD_VolumeSlider.m in Sources */,
 				04C80CDC22CD97FB0021BF23 /* YD_CompressViewController.m in Sources */,
-				0409358322F9689C000CD95E /* YD_FilterCollectionCell.m in Sources */,
 				045C110C22DC93A0001DB192 /* YD_RangeSliderView.m in Sources */,
 				04E74D3922F980C80016F2B5 /* YD_PlayerModel.m in Sources */,
 				045C111322DC9B64001DB192 /* YD_ClipView.m in Sources */,
+				045CEF2622FAE0C900BC73BB /* YD_PlayerFilterCell.m in Sources */,
 				04DE522422CF5F6F00421A55 /* YD_UpendManager.m in Sources */,
 				04C697A822C9E04500035132 /* YD_PlayerView.m in Sources */,
-				040923BC22FA9B6B004FB208 /* YD_PlayerFilterModel.m in Sources */,
-				0409358022F9680A000CD95E /* YD_FilterCollectionView.m in Sources */,
 				0408EC1922CCA9EC00D66241 /* YD_VolumeViewController.m in Sources */,
 				04C80CFB22CDA09F0021BF23 /* YD_CompressItem.m in Sources */,
 			);

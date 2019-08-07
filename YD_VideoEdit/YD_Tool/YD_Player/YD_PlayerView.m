@@ -31,6 +31,20 @@
     [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.layerType = YD_PlayerLayerTypeNormal;
+        
+        [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
+        [AVAudioSession.sharedInstance setActive:true error:NULL];
+        
+        [self yd_addObserver];
+        [self yd_layoutSubViews];
+    }
+    return self;
+}
+
 - (instancetype)initWithType:(YD_PlayerLayerType)type {
     self = [super init];
     if (self) {

@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
                          fadeOut:(BOOL)fadeOut;
 /// 视频复制拼接
 + (AVMutableComposition *)yd_copyAsset:(NSArray *)array;
-/// 视频压缩
+///// 视频压缩
 + (void)yd_compressAsset:(AVAsset *)asset exportPreset:(NSString *)exportPreset finish:(YD_ExportFinishBlock)finishBlock;
 
 

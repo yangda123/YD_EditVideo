@@ -7,7 +7,6 @@ pod 'JPImageresizerView'
 pod 'ReactiveObjC'
 pod 'MBProgressHUD'
 pod 'Masonry'
-pod 'GPUImage'
 pod 'TZImagePickerController'
 
 end

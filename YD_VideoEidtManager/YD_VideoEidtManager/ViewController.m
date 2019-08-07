@@ -16,7 +16,6 @@
 #import "YD_CompressViewController.h"
 #import "YD_CopyViewController.h"
 #import "YD_ClipViewController.h"
-#import "YD_FilterViewController.h"
 
 #import "YD_PlayerFilterController.h"
 

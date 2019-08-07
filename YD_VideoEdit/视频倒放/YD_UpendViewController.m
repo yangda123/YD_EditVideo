@@ -134,7 +134,7 @@
         [YD_ProgressHUD yd_hideHUD];
         [self yd_pushPreview:self.upendVideoPath];
     }else {
-        [YD_AssetManager yd_exporter:self.model.asset fileName:@"upend.mp4" composition:nil audioMix:nil finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+        [YD_AssetManager yd_exporter:self.model.asset fileName:@"upend" composition:nil audioMix:nil finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
             @strongify(self);
             [YD_ProgressHUD yd_hideHUD];
             if (isSuccess) {

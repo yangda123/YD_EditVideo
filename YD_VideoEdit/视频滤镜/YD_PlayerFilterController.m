@@ -75,7 +75,7 @@
     }];
     
     @weakify(self);
-    [YD_AssetManager yd_exporter:self.model.asset fileName:@"filterVideo.mp4" composition:composition audioMix:nil finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+    [YD_AssetManager yd_exporter:self.model.asset fileName:@"filterVideo" composition:composition audioMix:nil finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
         @strongify(self);
         [YD_ProgressHUD yd_hideHUD];
         if (isSuccess) {

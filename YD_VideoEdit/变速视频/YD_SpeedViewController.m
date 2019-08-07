@@ -77,7 +77,7 @@
     @weakify(self);
     AVAsset *asset = [YD_AssetManager yd_speedAssetWithAsset:self.model.asset speed:self.sliderView.currentSpeed];
     
-    [YD_AssetManager yd_exporter:asset fileName:@"speedVideo.mp4" composition:nil audioMix:nil finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
+    [YD_AssetManager yd_exporter:asset fileName:@"speedVideo" composition:nil audioMix:nil finish:^(BOOL isSuccess, NSString * _Nonnull exportPath) {
         @strongify(self);
         [YD_ProgressHUD yd_hideHUD];
         if (isSuccess) {

@@ -87,6 +87,29 @@
     
     return newImage;
 }
+
+/// 滤镜图片
+- (UIImage *)filterName:(NSString *)filterName {
+    CIImage *ciImage = [[CIImage alloc] initWithImage:self];
+    
+    CIFilter *filter = [CIFilter filterWithName:filterName];
+    [filter setDefaults];
+    [filter setValue:ciImage forKey:kCIInputImageKey];
+    
+    // 获取绘制上下文
+    CIContext *context = [CIContext contextWithOptions:nil];
+    // 渲染并输出CIImage
+    CIImage *outputImage = [filter outputImage];
+    // 创建CGImage句柄
+    CGImageRef cgImage = [context createCGImage:outputImage
+                                       fromRect:[outputImage extent]];
+    UIImage *image = [UIImage imageWithCGImage:cgImage];
+    // 释放CGImage句柄
+    CGImageRelease(cgImage);
+    
+    return image;
+}
+
 // 返回正确方向图片
 + (UIImage *)fixOrientation:(UIImage *)aImage {
     if (aImage.imageOrientation == UIImageOrientationUp) return aImage;

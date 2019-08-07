@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) YD_ShareBlock shareBlock;
 
 #pragma mark - 子类需要重写的方法
+/// 播放layer的类型
+- (YD_PlayerLayerType)playerLayerType;
 /// 标题
 - (NSString *)yd_title;
 /// 底部bar图标名称

@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)imageWithOriginalName:(NSString *)imageName;
 // 压缩图片到指定大小
 + (UIImage *)scaleImageWith:(UIImage *)image targetWidth:(CGFloat)width;
+/// 滤镜图片
+- (UIImage *)filterName:(NSString *)filterName;
 
 @end
 

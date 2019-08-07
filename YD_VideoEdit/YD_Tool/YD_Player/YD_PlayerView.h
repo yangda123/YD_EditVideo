@@ -7,7 +7,7 @@
 //
 
 #import "YD_BaseView.h"
-#import <AVFoundation/AVFoundation.h>
+#import "YD_PlayerModel.h"
 
 typedef NS_ENUM(NSInteger, YD_PlayStatus) {
     YD_PlayStatusPreplay,
@@ -17,10 +17,19 @@ typedef NS_ENUM(NSInteger, YD_PlayStatus) {
     YD_PlayStatusFinish
 };
 
+typedef NS_ENUM(NSInteger, YD_PlayerMode) {
+    YD_PlayerModeFit,
+    YD_PlayerModeFill
+};
+
+typedef NS_ENUM(NSInteger, YD_PlayerLayerType) {
+    YD_PlayerLayerTypeNormal, // 普通模式
+    YD_PlayerLayerTypeFilter  // 滤镜模式
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class YD_PlayerView;
-@class YD_PlayerModel;
 @class YD_BasePlayControlView;
 
 @protocol YD_PlayerViewDelegate <NSObject>
@@ -34,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YD_PlayerView : YD_BaseView
 
+- (instancetype)initWithType:(YD_PlayerLayerType)type;
+
 @property (nonatomic, weak, readonly) UIView *containView;;
 /// 播放状态
 @property (assign, nonatomic, readonly) YD_PlayStatus yd_playStatus;
@@ -41,12 +52,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) YD_BasePlayControlView *yd_controlView;
 /// 播放界面layer
 @property (nonatomic, weak, readonly) AVPlayerLayer *playerLayer;
+/// 模式
+@property(nonatomic, assign) YD_PlayerMode playerMode;
 /// 代理
 @property (nonatomic, weak) id<YD_PlayerViewDelegate> delegate;
 /// 注意：：：在controller显示和消失的时候设置 
 @property (nonatomic, assign) BOOL yd_viewControllerAppear;
 
 @property (nonatomic, strong) YD_PlayerModel *yd_model;
+/// 滤镜名称 - 在设置yd_model前设置
+@property (nonatomic, copy, nullable) NSString *filterName;
 
 
 /// 0 - 1
@@ -63,15 +78,3 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-
-@interface YD_PlayerModel : NSObject
-
-@property (nonatomic, strong, nonnull) AVAsset *asset;
-@property (nonatomic, strong, nonnull) AVMutableAudioMix *audioMix;
-@property (nonatomic, strong, nonnull) AVMutableVideoComposition *composition;
-@property (nonatomic, strong, nonnull) UIImage *coverImage;
-@property (nonatomic, strong, nonnull) UIImage *smallImage;
-@property (nonatomic, assign) CGSize naturalSize;
-@property (nonatomic, copy,   nonnull) AVLayerVideoGravity videoGravity;
-
-@end

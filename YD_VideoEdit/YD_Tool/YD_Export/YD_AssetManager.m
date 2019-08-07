@@ -506,7 +506,7 @@
 #pragma mark - 视频导出
 + (void)yd_exporter:(AVAsset *)asset
            fileName:(NSString *)fileName
-        composition:(AVMutableVideoComposition *)composition
+        composition:(AVVideoComposition *)composition
            audioMix:(AVMutableAudioMix *)audioMix
              finish:(YD_ExportFinishBlock)finishBlock {
     

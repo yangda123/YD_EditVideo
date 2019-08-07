@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 底部bar图标: 默认有图标，如果需要修改，自己传入Image
 @property (nonatomic, strong) UIImage *barIconImage;
-/// 返回首页b图标: 默认有图标，如果需要修改，自己传入Image
+/// 返回首页图标: 默认有图标，如果需要修改，自己传入Image
 @property (nonatomic, strong) UIImage *backHomeImage;
 
 /// 视频播放（注意:这个我自己使用的）

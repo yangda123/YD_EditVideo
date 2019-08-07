@@ -16,6 +16,9 @@
 #import "YD_CompressViewController.h"
 #import "YD_CopyViewController.h"
 #import "YD_ClipViewController.h"
+#import "YD_FilterViewController.h"
+
+#import "YD_PlayerFilterController.h"
 
 #import <TZImagePickerController.h>
 
@@ -44,7 +47,8 @@
                         YD_CompressViewController.class,
                         YD_VolumeViewController.class,
                         
-                        YD_ClipViewController.class];
+                        YD_ClipViewController.class,
+                        YD_PlayerFilterController.class];
     
     [self yd_createButton:@"旋转" index:0];
     [self yd_createButton:@"变速" index:1];
@@ -56,6 +60,7 @@
     [self yd_createButton:@"音量" index:6];
     
     [self yd_createButton:@"裁剪" index:7];
+    [self yd_createButton:@"滤镜" index:8];
 }
 
 - (void)yd_createButton:(NSString *)title index:(NSInteger)index {

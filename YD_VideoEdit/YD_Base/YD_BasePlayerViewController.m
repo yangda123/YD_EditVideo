@@ -63,20 +63,19 @@
         UIBarButtonItem *okItem = [[UIBarButtonItem alloc] initWithCustomView:button];
         self.navigationItem.rightBarButtonItem = okItem;
     }
-    {
-        YD_DefaultPlayControlView *playControl = [YD_DefaultPlayControlView new];
-        playControl.themeColor = self.model.themeColor;
-        self.playControl = playControl;
+    YD_DefaultPlayControlView *playControl = [YD_DefaultPlayControlView new];
+    playControl.themeColor = self.model.themeColor;
+    self.playControl = playControl;
     
-        YD_PlayerView *player = [YD_PlayerView new];
-        self.player = player;
-        player.backgroundColor = self.model.playerBackColor;
-        player.yd_model = self.playModel;
-        player.yd_controlView = playControl;
-        [self.view addSubview:player];
-        
-        [player yd_play];
-    }
+    YD_PlayerView *player = [[YD_PlayerView alloc] initWithType:[self playerLayerType]];
+    self.player = player;
+    player.backgroundColor = self.model.playerBackColor;
+    self.player.filterName = @"CIPhotoEffectInstant";
+    player.yd_model = self.playModel;
+    player.yd_controlView = playControl;
+    [self.view addSubview:player];
+    
+    [player yd_play];
     {
         YD_BottomBar *bar = [YD_BottomBar addBar:[self yd_title] image:[self yd_barIconImage]];
         self.bottomBar = bar;
@@ -101,6 +100,10 @@
 }
 
 #pragma mark - 子类需要重写的方法
+- (YD_PlayerLayerType)playerLayerType {
+    return YD_PlayerLayerTypeNormal;
+}
+
 - (NSString *)yd_title {
     return @"";
 }

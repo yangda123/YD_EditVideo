@@ -8,14 +8,17 @@
 
 #import "YD_PlayerView.h"
 #import "YD_BasePlayControlView.h"
+#import "YD_AVFilterLayer.h"
 
 @interface YD_PlayerView ()
 
 @property (nonatomic, weak)   UIImageView *imgView;
 @property (nonatomic, weak)   UIView *containView;
 @property (nonatomic, weak)   AVPlayerLayer *playerLayer;
+@property (nonatomic, weak)   YD_AVFilterLayer *filterLayer;
 @property (nonatomic, weak)   AVPlayer *player;
 @property (nonatomic, assign) YD_PlayStatus yd_playStatus;
+@property (nonatomic, assign) YD_PlayerLayerType layerType;
 
 @end
 
@@ -25,13 +28,13 @@
     if (self.player.currentItem) {
         [self.player.currentItem removeObserver:self forKeyPath:@"status"];
     }
-    
     [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
-- (instancetype)init {
+- (instancetype)initWithType:(YD_PlayerLayerType)type {
     self = [super init];
     if (self) {
+        self.layerType = type;
         
         [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
         [AVAudioSession.sharedInstance setActive:true error:NULL];
@@ -55,11 +58,16 @@
         self.containView = view;
         [self addSubview:view];
     }
-    {
+    if (self.layerType == YD_PlayerLayerTypeNormal) {
         AVPlayerLayer *playerLayer = [[AVPlayerLayer alloc] init];
         self.playerLayer = playerLayer;
         playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
         [self.containView.layer addSublayer:playerLayer];
+    }else {
+        YD_AVFilterLayer *filterLayer = [YD_AVFilterLayer new];
+        self.filterLayer = filterLayer;
+        filterLayer.contentsGravity = kCAGravityResizeAspect;
+        [self.containView.layer addSublayer:filterLayer];
     }
     {
         UIImageView *imgView = [[UIImageView alloc] init];
@@ -77,6 +85,7 @@
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
     self.playerLayer.frame = self.containView.bounds;
+    self.filterLayer.frame = self.containView.bounds;
     [CATransaction commit];
 }
 
@@ -88,6 +97,22 @@
 }
 
 #pragma mark - setter
+- (void)setPlayerMode:(YD_PlayerMode)playerMode {
+    if (playerMode == YD_PlayerModeFit) {
+        self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+        self.filterLayer.contentsGravity = kCAGravityResizeAspect;
+        self.imgView.contentMode = UIViewContentModeScaleAspectFit;
+    }else {
+        self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        self.filterLayer.contentsGravity = kCAGravityResizeAspectFill;
+        self.imgView.contentMode = UIViewContentModeScaleAspectFill;
+    }
+}
+
+- (void)setFilterName:(NSString *)filterName {
+    self.filterLayer.filterName = filterName;
+}
+
 - (void)setYd_controlView:(YD_BasePlayControlView *)yd_controlView {
     if (!yd_controlView) { return; }
     _yd_controlView = yd_controlView;
@@ -113,8 +138,8 @@
 }
 
 - (void)setYd_viewControllerAppear:(BOOL)yd_viewControllerAppear {
+    _yd_viewControllerAppear = yd_viewControllerAppear;
     if (yd_viewControllerAppear) {
-        
         [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(yd_playToEndTimeNotification) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
         
         if (self.yd_playStatus == YD_PlayStatusPlay) {
@@ -148,10 +173,11 @@
         item.videoComposition = yd_model.composition;
     }
     item.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
+    
     [item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     self.player = [AVPlayer playerWithPlayerItem:item];
     self.playerLayer.player = self.player;
-    self.playerLayer.videoGravity = yd_model.videoGravity;
+    self.filterLayer.player = self.player;
 
     @weakify(self);
     [self.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.1, NSEC_PER_SEC) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
@@ -254,7 +280,7 @@
     @weakify(self);
     [[[NSNotificationCenter.defaultCenter rac_addObserverForName:UIApplicationDidBecomeActiveNotification object:nil] takeUntil:[self rac_willDeallocSignal]] subscribeNext:^(NSNotification * _Nullable x) {
         @strongify(self);
-        if (self.yd_playStatus == YD_PlayStatusPlay) {
+        if (self.yd_playStatus == YD_PlayStatusPlay && self.yd_viewControllerAppear == YES) {
             [self.player play];
         }
     }];
@@ -273,14 +299,3 @@
 
 @end
 
-@implementation YD_PlayerModel
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.videoGravity = AVLayerVideoGravityResizeAspect;
-    }
-    return self;
-}
-
-@end

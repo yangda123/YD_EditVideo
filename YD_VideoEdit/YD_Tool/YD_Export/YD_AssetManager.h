@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 导出视频
 + (void)yd_exporter:(AVAsset *)asset
            fileName:(NSString *)fileName
-        composition:(AVMutableVideoComposition * _Nullable)composition
+        composition:(AVVideoComposition * _Nullable)composition
            audioMix:(AVMutableAudioMix *_Nullable)audioMix
              finish:(YD_ExportFinishBlock)finishBlock;
 

@@ -25,6 +25,19 @@
     return img;
 }
 
+- (UIImage *)yd_getVideoImage:(NSTimeInterval)time targetWidth:(CGFloat)targetWidth {
+    AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:self];
+    gen.requestedTimeToleranceAfter = kCMTimeZero;
+    gen.requestedTimeToleranceBefore = kCMTimeZero;
+    gen.appliesPreferredTrackTransform = YES;
+    NSError *error = nil;
+    CMTime actualTime;
+    CGImageRef imageRef = [gen copyCGImageAtTime:CMTimeMakeWithSeconds(time, 600) actualTime:&actualTime error:&error];
+    UIImage *img = imageRef ? [[UIImage alloc] initWithCGImage:imageRef] : nil;
+    CGImageRelease(imageRef);
+    return img;
+}
+
 - (void)yd_getImagesCount:(NSUInteger)imageCount imageBackBlock:(void (^)(UIImage *image, CMTime actualTime))imageBackBlock {
     Float64 durationSeconds = [self yd_getSeconds];
     

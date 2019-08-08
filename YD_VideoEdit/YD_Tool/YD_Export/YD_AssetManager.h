@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
+#import "SDAVAssetExportSession.h"
 
 typedef void(^YD_ExportFinishBlock)(BOOL isSuccess, NSString * _Nonnull exportPath);
 NS_ASSUME_NONNULL_BEGIN

@@ -71,6 +71,21 @@
     }
 }
 
+#pragma mark - setter
+- (void)setFilterName:(NSString *)filterName {
+    if (_filterName == filterName) {
+        return;
+    }
+    _filterName = filterName;
+    
+    if (self.playLink.paused == NO) {
+        return;
+    }
+    
+    CMTime itemTime = [self.videoOutPut itemTimeForHostTime:CACurrentMediaTime()];
+    [self reloadLayerContents:itemTime];
+}
+
 #pragma mark - 定时器相关
 - (void)initDisplayLink {
     /// 释放定时器
@@ -94,25 +109,29 @@
         @weakify(self);
         dispatch_async(self.renderQueue, ^{
             @strongify(self);
-            
-            CVPixelBufferRef pixelBuffer = [self.videoOutPut copyPixelBufferForItemTime:itemTime itemTimeForDisplay:nil];
-            
-            CIImage *ciImage = [CIImage imageWithCVPixelBuffer:pixelBuffer];
-            CIFilter *filter = [CIFilter filterWithName:self.filterName];
-            [filter setDefaults];
-            [filter setValue:ciImage forKey:kCIInputImageKey];
-            // 渲染并输出CIImage
-            CIImage *outputImage = [filter outputImage];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                CGImageRef cgImage = [self.context createCGImage:outputImage fromRect:[ciImage extent]];
-                self.contents = (__bridge id)(cgImage);
-                CGImageRelease(cgImage);
-            });
-            
-            CVBufferRelease(pixelBuffer);
+            [self reloadLayerContents:itemTime];
         });
     }
+}
+/// 实时刷新界面
+- (void)reloadLayerContents:(CMTime)itemTime {
+    
+    CVPixelBufferRef pixelBuffer = [self.videoOutPut copyPixelBufferForItemTime:itemTime itemTimeForDisplay:nil];
+    
+    CIImage *ciImage = [CIImage imageWithCVPixelBuffer:pixelBuffer];
+    CIFilter *filter = [CIFilter filterWithName:self.filterName];
+    [filter setDefaults];
+    [filter setValue:ciImage forKey:kCIInputImageKey];
+    // 渲染并输出CIImage
+    CIImage *outputImage = [filter outputImage];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CGImageRef cgImage = [self.context createCGImage:outputImage fromRect:[ciImage extent]];
+        self.contents = (__bridge id)(cgImage);
+        CGImageRelease(cgImage);
+    });
+    
+    CVBufferRelease(pixelBuffer);
 }
 
 @end

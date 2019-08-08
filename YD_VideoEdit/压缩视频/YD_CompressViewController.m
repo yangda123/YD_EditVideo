@@ -8,7 +8,6 @@
 
 #import "YD_CompressViewController.h"
 #import "YD_CompressView.h"
-#import "SDAVAssetExportSession.h"
 
 @interface YD_CompressViewController ()
 

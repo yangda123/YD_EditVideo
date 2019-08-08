@@ -124,6 +124,7 @@
 }
 
 - (void)setFilterName:(NSString *)filterName {
+    _filterName = filterName;
     self.filterLayer.filterName = filterName;
 }
 
